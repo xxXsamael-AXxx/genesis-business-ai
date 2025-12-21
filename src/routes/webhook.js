@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const fetch = require("node-fetch"); // 🔥 FALTABA ESTO
 const { runBrain } = require("../core/brain");
 const fs = require("fs");
 const path = require("path");
 
-// cargar perfil
 const businessProfile = JSON.parse(
   fs.readFileSync(
     path.join(__dirname, "../data/business.profile.json"),
@@ -13,7 +11,9 @@ const businessProfile = JSON.parse(
   )
 );
 
-// 🔐 Verificación inicial de Meta
+// ================================
+// ✅ VERIFICACIÓN META
+// ================================
 router.get("/", (req, res) => {
   const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
 
@@ -26,25 +26,26 @@ router.get("/", (req, res) => {
     return res.status(200).send(challenge);
   }
 
+  console.log("❌ Verificación fallida", { mode, token });
   return res.sendStatus(403);
 });
 
-// 📩 Mensajes entrantes
+// ================================
+// 📩 MENSAJES ENTRANTES
+// ================================
 router.post("/", async (req, res) => {
   try {
     const entry = req.body.entry?.[0];
     const change = entry?.changes?.[0];
-    const value = change?.value;
-    const message = value?.messages?.[0];
+    const message = change?.value?.messages?.[0];
 
     if (!message) return res.sendStatus(200);
 
     const from = message.from;
     const text = message.text?.body;
-
     if (!text) return res.sendStatus(200);
 
-    console.log("📩 Mensaje entrante:", from, text);
+    console.log("📩 Entrante:", from, text);
 
     const reply = await runBrain({
       message: text,

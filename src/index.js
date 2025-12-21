@@ -4,15 +4,12 @@ const fs = require("fs");
 const path = require("path");
 
 const { runBrain } = require("./core/brain");
-const whatsappRoutes = require("./routes/whatsapp");
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 
 // ================================
-// 🧠 Cargar perfil del negocio
+// 🧠 Perfil negocio
 // ================================
 const businessProfile = JSON.parse(
   fs.readFileSync(
@@ -22,15 +19,12 @@ const businessProfile = JSON.parse(
 );
 
 // ================================
-// 🧠 Endpoint del cerebro (API interna / web / pruebas)
+// 🧠 API cerebro
 // ================================
 app.post("/message", async (req, res) => {
   try {
     const { message, userId = "anon" } = req.body;
-
-    if (!message) {
-      return res.status(400).json({ error: "Mensaje vacío" });
-    }
+    if (!message) return res.status(400).json({ error: "Mensaje vacío" });
 
     const reply = await runBrain({
       message,
@@ -41,27 +35,26 @@ app.post("/message", async (req, res) => {
     res.json({ reply });
   } catch (err) {
     console.error("❌ Error cerebro:", err);
-    res.status(500).json({ error: "Error interno del cerebro" });
+    res.sendStatus(500);
   }
 });
 
 // ================================
-// 📲 Rutas WhatsApp
+// 📲 WhatsApp (send manual)
 // ================================
-app.use("/whatsapp", whatsappRoutes);
+app.use("/whatsapp", require("./routes/whatsapp"));
 
 // ================================
-// ❤️ Health check
+// 🔔 Webhook Meta (SOLO UNO)
 // ================================
-app.get("/", (req, res) => {
-  res.send("🧠 Genesis Business AI — cerebro activo");
+app.use("/webhook/whatsapp", require("./routes/webhook"));
+
+// ================================
+app.get("/", (_, res) => {
+  res.send("🧠 Genesis Business AI activo");
 });
 
-const webhookRoutes = require("./routes/webhook");
-app.use("/webhook/whatsapp", webhookRoutes);
-
-// ================================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Genesis Business AI corriendo en puerto ${PORT}`);
+  console.log(`🚀 Corriendo en puerto ${PORT}`);
 });
