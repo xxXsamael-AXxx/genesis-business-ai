@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const fetch = require("node-fetch"); // ⬅️ FALTABA ESTO
 const { runBrain } = require("../core/brain");
 const fs = require("fs");
 const path = require("path");
@@ -25,7 +26,7 @@ router.get("/", (req, res) => {
     return res.status(200).send(challenge);
   }
 
-  res.sendStatus(403);
+  return res.sendStatus(403);
 });
 
 // 📩 Mensajes entrantes
@@ -36,12 +37,13 @@ router.post("/", async (req, res) => {
     const value = change?.value;
     const message = value?.messages?.[0];
 
-    if (!message) return res.sendStatus(200);
+    // ignorar eventos raros
+    if (!message || message.type !== "text") {
+      return res.sendStatus(200);
+    }
 
-    const from = message.from; // número del usuario
-    const text = message.text?.body;
-
-    if (!text) return res.sendStatus(200);
+    const from = message.from;
+    const text = message.text.body;
 
     console.log("📩 Mensaje entrante:", from, text);
 
@@ -51,13 +53,12 @@ router.post("/", async (req, res) => {
       business: businessProfile
     });
 
-    // responder
     await fetch(
-      `https://graph.facebook.com/v22.0/${process.env.WHATSAPP_PHONE_ID}/messages`,
+      `https://graph.facebook.com/v22.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`,
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.WHATSAPP_TOKEN}`,
+          Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
