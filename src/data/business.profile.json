@@ -1,0 +1,14 @@
+{
+  "id": "genesis-business-ai",
+  "name": "Genesis Business AI",
+  "description": "Genesis Business AI es una plataforma de inteligencia artificial que automatiza la atención al cliente para negocios digitales y físicos, ofreciendo respuestas humanas, precisas y orientadas a conversión.",
+  "products": [
+    "Automatización de atención al cliente",
+    "Bots inteligentes para WhatsApp y Telegram",
+    "Asistencia comercial 24/7",
+    "Soporte pre y post venta",
+    "Generación de cotizaciones",
+    "Respuestas personalizadas con IA"
+  ],
+  "goal": "Atender clientes de forma inmediata, resolver dudas, guiar al usuario a comprar o contactar al negocio y reducir la carga humana sin perder calidad."
+}
