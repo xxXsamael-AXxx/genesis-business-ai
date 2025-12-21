@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const fetch = require("node-fetch"); // ⬅️ FALTABA ESTO
+const fetch = require("node-fetch"); // 🔥 FALTABA ESTO
 const { runBrain } = require("../core/brain");
 const fs = require("fs");
 const path = require("path");
@@ -37,20 +37,19 @@ router.post("/", async (req, res) => {
     const value = change?.value;
     const message = value?.messages?.[0];
 
-    // ignorar eventos raros
-    if (!message || message.type !== "text") {
-      return res.sendStatus(200);
-    }
+    if (!message) return res.sendStatus(200);
 
     const from = message.from;
-    const text = message.text.body;
+    const text = message.text?.body;
+
+    if (!text) return res.sendStatus(200);
 
     console.log("📩 Mensaje entrante:", from, text);
 
     const reply = await runBrain({
       message: text,
       userId: from,
-      business: businessProfile
+      business: businessProfile,
     });
 
     await fetch(
@@ -59,13 +58,13 @@ router.post("/", async (req, res) => {
         method: "POST",
         headers: {
           Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           messaging_product: "whatsapp",
           to: from,
-          text: { body: reply }
-        })
+          text: { body: reply },
+        }),
       }
     );
 
