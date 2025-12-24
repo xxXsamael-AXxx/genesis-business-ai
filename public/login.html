@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Entrar — Génesis Business AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- CSS SOLO DE LOGIN -->
+  <link rel="stylesheet" href="./login.css" />
+</head>
+
+<body class="landing-login-body">
+
+  <main class="landing-login">
+    <div class="landing-login-card">
+
+      <!-- BRAND -->
+      <div class="landing-login-brand">
+        <img
+          src="./assets/img/logo-genesis.png"
+          alt="Génesis Business AI"
+          class="landing-login-logo"
+        />
+        <h1>Génesis Business AI</h1>
+        <p>Acceso a tu panel</p>
+      </div>
+
+      <!-- FORM -->
+      <form class="landing-login-form" id="landingLoginForm">
+
+        <!-- EMAIL -->
+        <div class="landing-field">
+          <label class="landing-login-label">
+            Correo electrónico con el que se realizó el pago
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="correo@email.com"
+            required
+            class="landing-login-input"
+          />
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="landing-field">
+          <label class="landing-login-label">Contraseña</label>
+
+          <div class="landing-password-field">
+            <input
+              type="password"
+              name="password"
+              id="landingPassword"
+              placeholder="••••••••"
+              required
+              class="landing-login-input"
+            />
+
+            <button
+              type="button"
+              class="landing-password-toggle"
+              id="landingTogglePassword"
+              aria-label="Mostrar u ocultar contraseña"
+            >
+              <img
+                src="./assets/img/eye-closed.svg"
+                alt="Mostrar contraseña"
+                id="landingEyeIcon"
+              />
+            </button>
+          </div>
+        </div>
+
+        <!-- SUBMIT -->
+        <button type="submit" class="landing-btn-primary">
+          Entrar
+        </button>
+
+        <!-- ERROR SISTEMA -->
+        <p id="loginError" class="login-status error" style="display:none;"></p>
+
+        <!-- ACCIÓN CONTEXTUAL (planes / recuperar) -->
+        <div id="forgotPassword" class="login-action" style="display:none;"></div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <!-- JS -->
+  <script src="./login.js" defer></script>
+
+</body>
+</html>

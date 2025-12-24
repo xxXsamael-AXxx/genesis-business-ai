@@ -1,0 +1,893 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #050507;
+  color: #ffffff;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background:
+    /* glow izquierdo (azul) */
+    radial-gradient(
+      circle at left,
+      rgba(0,140,255,0.22),
+      transparent 55%
+    ),
+    /* glow derecho (verde) */
+    radial-gradient(
+      circle at right,
+      rgba(0,255,170,0.22),
+      transparent 55%
+    ),
+    /* base oscura */
+    linear-gradient(
+      to bottom,
+      rgba(5, 5, 7, 0.96),
+      rgba(5, 5, 7, 0.88)
+    );
+
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ================= INNER ================= */
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 6vw;        /* ⬅️ SIN padding vertical */
+  height: 83px;         /* ⬅️ ALTURA FIJA */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* ================= BRAND ================= */
+.nav-brand {
+  margin-left: -82px;  
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-brand img {
+  max-height: 100px;    /* 🔥 VISUALMENTE GRANDE */
+  height: auto;
+  width: auto;
+
+  position: relative;
+  top: 4px;             /* ajuste visual */
+  filter: drop-shadow(0 0 12px rgba(0,255,170,0.45));
+}
+
+
+.nav-brand span {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* ================= LINKS ================= */
+.nav-links {
+  display: flex;
+  gap: 22px;
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.nav-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 16px;
+  position: relative;
+  transition: color .25s ease;
+}
+
+.nav-links a:hover {
+  color: #00ffa6;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00ffa6, #00b3ff);
+  transition: width .25s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ================= LOGIN BTN ================= */
+.btn-login {
+  color: #e5e7eb;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+
+  padding: 8px 14px;
+  margin-right: 14px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+
+  background: transparent;
+  transition:
+    color .25s ease,
+    border-color .25s ease,
+    background .25s ease;
+}
+
+.btn-login:hover {
+  color: #00ffa6;
+  border-color: rgba(0,255,170,0.6);
+  background: rgba(0,255,170,0.08);
+}
+
+
+/* ================= CTA ================= */
+.btn-whatsapp {
+  background: linear-gradient(135deg, #00ffa6, #00b3ff);
+  color: #000;
+  padding: 12px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  box-shadow:
+    0 0 22px rgba(0,255,170,0.45),
+    inset 0 0 12px rgba(255,255,255,0.15);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.btn-whatsapp:hover {
+  transform: scale(1.07);
+  box-shadow:
+    0 0 40px rgba(0,255,170,0.7),
+    inset 0 0 18px rgba(255,255,255,0.2);
+}
+
+
+
+
+/* ================= HERO ================= */
+.hero {
+  height: 100vh;
+  scroll-margin-top: 85px; /* 👈 BAJA EL HERO AL HACER CLICK EN "INICIO" */
+
+  background:
+    radial-gradient(circle at right, rgba(0,255,170,0.15), transparent 60%),
+    radial-gradient(circle at left, rgba(0,140,255,0.2), transparent 55%),
+    #050507;
+
+  padding: 28px 6vw 40px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ================= HERO CONTENT ================= */
+.hero-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 32px;
+
+  margin-top: -80px; /* se queda igual */
+}
+
+
+/* ================= TEXTO ================= */
+.hero-text h1 {
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-text h1 span {
+  color: #00ffa6;
+}
+
+.hero-text p {
+  max-width: 520px;
+  font-size: 17px;
+  color: #d1d5db;
+  margin-bottom: 32px;
+}
+
+/* ================= BUTTONS ================= */
+.hero-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00ffa6, #00b3ff);
+  color: #000;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  padding: 14px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+/* ================= VISUAL ================= */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: visible;
+}
+
+.hero-image {
+  width: 150%;
+  max-width: none;
+  height: auto;
+
+  transform: translateX(80px) translateY(10px);
+
+  filter:
+    drop-shadow(0 0 40px rgba(0, 255, 170, 0.45))
+    drop-shadow(0 0 90px rgba(0, 140, 255, 0.45));
+
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ================= ANIMACIÓN ================= */
+@keyframes float {
+  0%   { transform: translateX(80px) translateY(10px); }
+  50%  { transform: translateX(80px) translateY(-12px); }
+  100% { transform: translateX(80px) translateY(10px); }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .hero-visual {
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .hero-image {
+    width: 100%;
+    transform: none;
+    animation: none;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* ================= QUIÉNES SOMOS ================= */
+.about {
+  position: relative;
+  scroll-margin-top: 85px;
+
+  /* ⬇️ peso real ABAJO */
+  padding: 120px 0 240px;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at left, rgba(0,140,255,0.14), transparent 55%),
+    radial-gradient(circle at right, rgba(0,255,170,0.12), transparent 55%),
+    #050507;
+}
+
+
+
+/* ================= CONTENEDOR INTERNO ================= */
+.about-inner {
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+
+  padding: 0 6vw; /* ⬅️ SOLO lateral */
+
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 96px;
+  align-items: center;
+}
+
+
+/* ================= TEXTO ================= */
+.about-text h2 {
+  font-size: clamp(36px, 4.5vw, 54px);
+  margin-bottom: 26px;
+  line-height: 1.1;
+}
+
+.about-text h2 span {
+  color: #00ffa6;
+  text-shadow:
+    0 0 14px rgba(0,255,170,0.45),
+    0 0 32px rgba(0,140,255,0.35);
+}
+
+.about-lead {
+  font-size: 18px;
+  font-weight: 500;
+  color: #e5e7eb;
+  margin-bottom: 22px;
+  max-width: 620px;
+}
+
+.about-text p {
+  font-size: 16px;
+  color: #cbd5e1;
+  line-height: 1.65;
+  margin-bottom: 18px;
+  max-width: 620px;
+}
+
+/* ================= CTA ================= */
+.about-text .btn-primary {
+  margin-top: 32px;
+  display: inline-block;
+}
+
+/* ================= VISUAL ================= */
+.about-visual {
+  position: relative;
+  height: 460px;            /* ⬅️ PANEL CON PRESENCIA */
+  border-radius: 32px;
+
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.06), transparent 60%),
+    rgba(10, 15, 25, 0.95);
+
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+/* ================= GLOW INTERNO ================= */
+.about-glow {
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle, rgba(0,255,170,0.25), transparent 60%);
+  filter: blur(90px);
+  opacity: 0.9;
+  animation: aboutGlow 6s ease-in-out infinite;
+}
+
+/* ================= ANIMACIÓN ================= */
+@keyframes aboutGlow {
+  0%   { transform: scale(1); opacity: 0.7; }
+  50%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .about {
+    padding: 140px 0;
+    min-height: auto;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 56px;
+  }
+
+  .about-text p,
+  .about-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-visual {
+    height: 300px;
+  }
+}
+
+
+
+
+/* ================= PLANES ================= */
+.plans {
+  padding: 120px 6vw;
+  background:
+    radial-gradient(circle at top, rgba(0,255,170,0.08), transparent 55%),
+    radial-gradient(circle at bottom, rgba(0,140,255,0.10), transparent 60%),
+    #050507;
+}
+
+/* ===== TÍTULO ===== */
+.plans h2 {
+  position: relative;
+  text-align: center;
+  font-size: clamp(34px, 4vw, 48px);
+  margin-bottom: 72px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: default;
+  text-shadow:
+    0 0 10px rgba(0,255,170,0.35),
+    0 0 24px rgba(0,140,255,0.25);
+}
+
+/* líneas laterales */
+.plans h2::before,
+.plans h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 380px;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0,255,170,0.9),
+    transparent
+  );
+  transform: translateY(-50%);
+  opacity: 0.7;
+  animation: plansLinePulse 3.5s ease-in-out infinite;
+}
+
+.plans h2::before { left: 100px; }
+.plans h2::after  { right: 100px; }
+
+@keyframes plansLinePulse {
+  0% { opacity: .25; }
+  50% { opacity: 1; }
+  100% { opacity: .25; }
+}
+
+/* ================= GRID ================= */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ================= CARD ================= */
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.06), transparent 60%),
+    rgba(10, 15, 25, 0.95);
+
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 22px;
+  padding: 36px 28px 42px;
+  backdrop-filter: blur(6px);
+
+  transition: transform .35s ease, box-shadow .35s ease, border .35s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0,255,170,0.45);
+  box-shadow:
+    0 20px 60px rgba(0,255,170,0.18),
+    inset 0 0 30px rgba(0,255,170,0.08);
+}
+
+/* ===== DESTACADO ===== */
+.plan-card.featured {
+  border-color: rgba(0,255,170,0.7);
+  box-shadow:
+    0 0 0 1px rgba(0,255,170,0.25),
+    0 30px 90px rgba(0,255,170,0.28);
+  transform: translateY(-14px);
+}
+
+.plan-card.featured:hover {
+  transform: translateY(-18px);
+}
+
+/* ================= TEXTOS ================= */
+.plan-card h3 {
+  font-size: 26px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.plan-card .price {
+  font-size: 32px;
+  font-weight: 800;
+  color: #00ffa6;
+  margin-bottom: 22px;
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px; /* 🔥 separación REAL */
+}
+
+.plan-card ul li {
+  font-size: 15px;
+  color: #d1d5db;
+  margin-bottom: 12px;
+}
+
+
+/* ================= ACCIONES ================= */
+.plan-actions {
+  margin-top: auto;             /* 🔥 empuja botones abajo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;                    /* 🔥 separación entre botones */
+}
+
+/* ===== BOTÓN PRINCIPAL ===== */
+.plan-card .btn-primary {
+  background: linear-gradient(135deg, #00ffa6, #00b3ff);
+  color: #000;
+  padding: 12px 64px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+  margin-bottom: 16px; /* ⬅️ AJUSTA AQUÍ */
+}
+
+.plan-card .btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0,255,170,0.6);
+}
+
+/* ===== BOTÓN SECUNDARIO ===== */
+.btn-link {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8);
+  font-size: 13px;
+  padding: 10px 26px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.btn-link:hover {
+  color: #ffffff;
+  border-color: rgba(0,255,170,0.6);
+  background: rgba(0,255,170,0.08);
+  box-shadow: 0 0 18px rgba(0,255,170,0.35);
+}
+
+.btn-link:active {
+  transform: scale(0.96);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1000px) {
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-card.featured {
+    transform: none;
+  }
+}
+
+/* ================= MODAL PLANES ================= */
+.plans-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+
+.plans-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== Overlay ===== */
+.plans-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 8, 14, 0.82);
+  backdrop-filter: blur(10px);
+}
+
+/* ===== CONTENEDOR (SIN FRAME) ===== */
+.plans-modal-card {
+  position: relative;
+  max-width: 1400px; /* 🔥 MÁS ANCHO */
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ===== Close ===== */
+.plans-modal-close {
+  position: fixed;
+  top: 22px;
+  right: 26px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.plans-modal-close:hover {
+  background: rgba(0,255,170,0.25);
+  transform: scale(1.08);
+}
+
+/* ===== Title ===== */
+.plans-modal-title {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 34px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  pointer-events: none;
+  text-shadow:
+    0 0 18px rgba(0,255,170,0.35),
+    0 0 36px rgba(0,140,255,0.25);
+}
+
+/* ===== Grid ===== */
+.plans-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  padding: 0 32px;
+}
+
+/* ===== Plan Cards ===== */
+.plans-modal-plan {
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.05), transparent 65%),
+    rgba(15, 20, 35, 0.96);
+  border-radius: 22px;
+  padding: 30px 30px 32px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform .25s ease, box-shadow .25s ease, border .25s ease;
+}
+
+/* 🔥 HOVER RESTAURADO */
+.plans-modal-plan:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,255,170,0.45);
+  box-shadow:
+    0 18px 55px rgba(0,255,170,0.22),
+    inset 0 0 28px rgba(0,255,170,0.08);
+}
+
+/* ===== Featured ===== */
+.plans-modal-plan.featured {
+  border-color: rgba(0,255,170,0.65);
+  box-shadow:
+    0 0 0 1px rgba(0,255,170,0.25),
+    0 26px 70px rgba(0,255,170,0.30);
+}
+
+/* ===== Text ===== */
+.plans-modal-plan h4 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.modal-lead {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+.plans-modal-plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.plans-modal-plan ul li {
+  font-size: 14px;
+  color: #e5e7eb;
+  margin-bottom: 10px;
+  line-height: 1.45; /* 🔥 TEXTO FLUYE NORMAL */
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1100px) {
+  .plans-modal-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .plans-modal-card {
+    justify-content: flex-start;
+    padding-top: 96px;
+    overflow-y: auto;
+  }
+
+  .plans-modal-plan:first-child ul {
+    grid-template-columns: 1fr;
+  }
+
+  .plans-modal-title {
+    font-size: 26px;
+    top: 22px;
+  }
+}
+
+/* ===== Footer ===== */
+.plans-modal-footer {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 0 12px rgba(255,255,255,0.08);
+}
+
+
+/* ==================================== CONTACTO ======================================================*/
+.contact {
+  padding: 160px 6vw;
+  background:
+    radial-gradient(circle at top, rgba(0,255,170,0.16), transparent 55%),
+    radial-gradient(circle at bottom, rgba(0,140,255,0.14), transparent 55%),
+    #050507;
+}
+
+/* ================= CONTENEDOR ================= */
+.contact-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ================= TEXTO ================= */
+.contact h2 {
+  font-size: clamp(36px, 4.5vw, 56px);
+  margin-bottom: 26px;
+  line-height: 1.1;
+}
+
+.contact h2 span {
+  color: #00ffa6;
+  text-shadow:
+    0 0 14px rgba(0,255,170,0.45),
+    0 0 32px rgba(0,140,255,0.35);
+}
+
+.contact-lead {
+  font-size: 18px;
+  font-weight: 500;
+  color: #e5e7eb;
+  margin: 0 auto 34px;
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+/* ================= LISTA ================= */
+.contact-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 46px;
+  max-width: 520px;
+}
+
+.contact-points li {
+  font-size: 16px;
+  color: #cbd5e1;
+  margin-bottom: 14px;
+}
+
+/* ================= CTA ================= */
+.contact .btn-primary {
+  padding: 18px 42px;
+  font-size: 17px;
+  font-weight: 800;
+  border-radius: 999px;
+  box-shadow:
+    0 0 30px rgba(0,255,170,0.45),
+    inset 0 0 14px rgba(255,255,255,0.15);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.contact .btn-primary:hover {
+  transform: scale(1.07);
+  box-shadow:
+    0 0 45px rgba(0,255,170,0.75),
+    inset 0 0 20px rgba(255,255,255,0.25);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .contact {
+    padding: 120px 6vw;
+  }
+
+  .contact-points {
+    max-width: 100%;
+  }
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  padding: 22px 6vw;              /* 🔥 MÁS DELGADO */
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(0,255,170,0.12),
+      transparent 60%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(5, 10, 20, 0.9),
+      rgba(5, 5, 7, 0.98)
+    );
+
+  border-top: 1px solid rgba(0,255,170,0.25);
+  text-align: center;
+}
+
+.footer-legal {
+  font-size: 13px;
+  color: #9ca3af;
+  letter-spacing: 0.3px;
+}

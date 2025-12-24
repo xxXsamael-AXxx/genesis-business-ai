@@ -1,0 +1,205 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= BODY ================= */
+.pos-pago-body {
+  height: 100vh;
+  overflow: hidden; /* ❌ NO SCROLL */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #ffffff;
+
+  background:
+    radial-gradient(circle at left, rgba(90,0,255,0.25), transparent 55%),
+    radial-gradient(circle at right, rgba(0,255,170,0.28), transparent 55%),
+    #050507;
+}
+
+/* ================= HEADER ================= */
+.pos-pago-header {
+  display: flex;
+  justify-content: center;
+  padding: 32px 24px 20px;
+}
+
+.pos-pago-header-inner {
+  transform: translateX(-24px); /* ajuste visual fino */  
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* LOGO */
+.pos-pago-header img {
+  width: 180px; /* 🔥 GRANDE PERO VIABLE */
+  height: auto;
+
+  filter:
+    drop-shadow(0 0 22px rgba(0,255,170,1))
+    drop-shadow(0 0 48px rgba(0,180,255,0.9))
+    drop-shadow(0 0 90px rgba(0,255,170,0.65))
+    drop-shadow(0 0 140px rgba(0,180,255,0.45));
+}
+
+/* TEXTO — PROTAGONISTA ABSOLUTO */
+.pos-pago-header span {
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: #ffffff;
+
+  text-shadow:
+    0 0 18px rgba(255,255,255,0.55),
+    0 0 36px rgba(0,255,170,0.9),
+    0 0 70px rgba(0,255,170,0.75),
+    0 0 120px rgba(0,180,255,0.55),
+    0 0 180px rgba(0,255,170,0.35);
+}
+
+/* ================= HERO ================= */
+.pos-pago-hero {
+  min-height: calc(100vh - 140px); /* header + aire */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;   /* 🔥 SUBE TODO */
+  text-align: center;
+  padding: 32px 24px 0;
+}
+
+
+/* CHECK */
+.pos-pago-check {
+  width: 180px;
+  margin-bottom: 22px;
+
+  filter:
+    drop-shadow(0 0 22px rgba(0,255,170,0.9))
+    drop-shadow(0 0 50px rgba(0,180,255,0.6));
+}
+
+/* TITULO */
+.pos-pago-hero h1 {
+  font-size: 38px;
+  font-weight: 900;
+  margin-bottom: 16px;
+
+  text-shadow:
+    0 0 18px rgba(0,255,170,0.35),
+    0 12px 40px rgba(0,0,0,0.8);
+}
+
+/* ================= USER CREATED (FUERA DEL CARD) ================= */
+.pos-pago-user-created {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.55);
+}
+
+/* ================= USER CARD ================= */
+.pos-pago-user-card {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 34px;
+  padding: 18px 24px;
+  border-radius: 18px;
+
+  background: rgba(8, 14, 26, 0.72);
+  border: 1px solid rgba(255,255,255,0.14);
+
+  box-shadow:
+    inset 0 0 22px rgba(0,0,0,0.55),
+    0 0 28px rgba(0,255,170,0.28),
+    0 0 60px rgba(0,180,255,0.22);
+
+  text-align: left;
+}
+
+/* TITULO — USUARIO CREADO (afuera del card) */
+.pos-pago-user-created {
+  display: inline-block;          /* 🔥 CLAVE */
+  margin: 18px 0 8px;
+  transform: translateX(-140px);  /* 👈 AQUÍ LO MUEVES A TU ANTOJO */
+
+  font-size: 13px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+
+  color: rgba(160, 175, 190, 0.75);
+}
+
+
+
+/* EMAIL — SOLO INFORMATIVO */
+.pos-pago-user-email {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+
+  color: rgba(210, 225, 240, 0.9);   /* 🔥 NO VERDE */
+  word-break: break-all;
+
+  text-shadow:
+    0 0 6px rgba(0,180,255,0.25);
+}
+
+
+
+/* BOTÓN */
+.pos-pago-btn {
+  padding: 16px 48px;
+  border-radius: 999px;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #00ffc3, #00b3ff);
+  color: #000;
+  font-size: 16px;
+  font-weight: 900;
+
+  box-shadow:
+    0 0 34px rgba(0,255,170,0.7),
+    0 0 70px rgba(0,180,255,0.55),
+    inset 0 0 18px rgba(255,255,255,0.25);
+
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.pos-pago-btn:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 60px rgba(0,255,170,0.95),
+    0 0 110px rgba(0,180,255,0.8);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .pos-pago-header img {
+    width: 120px;
+  }
+
+  .pos-pago-header span {
+    font-size: 42px;
+  }
+
+  .pos-pago-check {
+    width: 140px;
+  }
+
+  .pos-pago-hero h1 {
+    font-size: 30px;
+  }
+
+  .pos-pago-hero p {
+    font-size: 16px;
+  }
+}
