@@ -1,8 +1,6 @@
 // public/pos-pago.js
-
 (async () => {
   try {
-    // 1️⃣ Leer session_id desde la URL
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get("session_id");
 
@@ -11,7 +9,6 @@
       return;
     }
 
-    // 2️⃣ Pedir al backend los datos reales del pago
     const res = await fetch(`/api/stripe/session?session_id=${sessionId}`);
 
     if (!res.ok) {
@@ -20,10 +17,11 @@
 
     const data = await res.json();
 
-    // 3️⃣ Pintar email real en pantalla
+    console.log("📦 Datos sesión:", data); // 👈 importante para debug
+
     const emailEl = document.getElementById("posPagoUserEmail");
-    if (emailEl && data.email) {
-      emailEl.textContent = data.email;
+    if (emailEl) {
+      emailEl.textContent = data.email || "—";
     }
 
   } catch (err) {
