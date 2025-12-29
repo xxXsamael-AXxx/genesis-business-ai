@@ -130,8 +130,9 @@ if (form) {
 
       // 🔁 Sync final con backend (una sola vez)
       setTimeout(() => {
-        location.reload();
-      }, 300);
+  window.location.replace(`/panel?email=${encodeURIComponent(email)}`);
+}, 300);
+
 
     } catch (err) {
       errorBox.textContent = err.message || "Error inesperado";

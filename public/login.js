@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ocultarMensajes();
 
-    const email = form.email.value.trim();
+    const email = form.email.value.trim().toLowerCase(); // 👈 FIX REAL
     const password = passwordInput.value;
 
     try {

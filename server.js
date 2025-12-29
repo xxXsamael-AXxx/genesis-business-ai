@@ -313,42 +313,72 @@ app.post("/api/set-password", async (req, res) => {
 
 
 // ================================
-// PANEL — REDIRECCIÓN SEGÚN PLAN
+// PANEL — REDIRECCIÓN SEGÚN PLAN (BLINDADO)
 // ================================
 app.get("/panel", async (req, res) => {
   try {
     const { email } = req.query;
-    if (!email) return res.redirect("/login");
+
+    // 1️⃣ Sin email → login
+    if (!email) {
+      return res.redirect("/login");
+    }
 
     const user = await prisma.user.findUnique({
       where: { email },
       include: { subscription: true },
     });
 
-    if (!user || !user.subscription) {
+    // 2️⃣ Usuario no existe → login
+    if (!user) {
       return res.redirect("/login");
     }
 
+    // 3️⃣ Usuario SIN contraseña → login
+    // (esto evita entrar pegando la URL)
+    if (!user.passwordHash) {
+      return res.redirect("/login");
+    }
+
+    // 4️⃣ Suscripción inválida o vencida → login
+    if (
+      !user.subscription ||
+      user.subscription.status !== "ACTIVE" ||
+      user.subscription.expiresAt < new Date()
+    ) {
+      return res.redirect("/login");
+    }
+
+    // 5️⃣ Redirigir según plan
     const plan = user.subscription.plan;
 
     if (plan === "BUSINESS") {
-      return res.sendFile(path.join(__dirname, "public", "panelcorp.html"));
+      return res.sendFile(
+        path.join(__dirname, "public", "panelcorp.html")
+      );
     }
 
     if (plan === "PREMIUM") {
-      return res.sendFile(path.join(__dirname, "public", "panelbusi.html"));
+      return res.sendFile(
+        path.join(__dirname, "public", "panelbusi.html")
+      );
     }
 
     if (plan === "BASIC") {
-      return res.sendFile(path.join(__dirname, "public", "panelbasi.html"));
+      return res.sendFile(
+        path.join(__dirname, "public", "panelbasi.html")
+      );
     }
 
+    // Fallback de seguridad
     return res.redirect("/login");
+
   } catch (err) {
     console.error("❌ Error panel:", err);
     return res.redirect("/login");
   }
 });
+
 
 // ================================
 // STRIPE CHECKOUT
