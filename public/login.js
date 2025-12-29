@@ -49,7 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // LOGIN OK
-      window.location.href = data.redirect;
+      window.location.href = `${data.redirect}?email=${encodeURIComponent(email)}`;
+
 
     } catch (err) {
       console.error(err);

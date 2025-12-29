@@ -55,82 +55,90 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // MODAL — CREAR CONTRASEÑA (POST-PAGO)
-  // ===============================
-  const modal = document.getElementById("create-password-modal");
-  const form = document.getElementById("create-password-form");
-  const newPass = document.getElementById("new-password");
-  const confirmPass = document.getElementById("confirm-password");
-  const errorBox = document.getElementById("create-password-error");
+// MODAL — CREAR CONTRASEÑA (POST-PAGO)
+// ===============================
+const modal = document.getElementById("create-password-modal");
+const form = document.getElementById("create-password-form");
+const newPass = document.getElementById("new-password");
+const confirmPass = document.getElementById("confirm-password");
+const errorBox = document.getElementById("create-password-error");
 
-  // Si vienes de post-pago y el backend marcó needsPassword
-  if (needsPassword === "true" && modal) {
-    modal.hidden = false;
-  }
+// Flag local para no reabrir el modal
+const passwordReady = sessionStorage.getItem("passwordReady");
 
-  // Toggle ojos (reutilizable)
-  document.querySelectorAll(".modal-password-toggle").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const targetId = btn.dataset.target;
-      const input = document.getElementById(targetId);
-      const img = btn.querySelector("img");
+// Si vienes de post-pago y NO se ha creado contraseña aún
+if (needsPassword === "true" && modal && !passwordReady) {
+  modal.hidden = false;
+  document.body.classList.add("modal-lock"); // si usas bloqueo visual
+}
 
-      if (!input || !img) return;
+// Toggle ojos
+document.querySelectorAll(".modal-password-toggle").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const targetId = btn.dataset.target;
+    const input = document.getElementById(targetId);
+    const img = btn.querySelector("img");
+    if (!input || !img) return;
 
-      if (input.type === "password") {
-        input.type = "text";
-        img.src = "/assets/img/eye-open.svg";
-      } else {
-        input.type = "password";
-        img.src = "/assets/img/eye-closed.svg";
-      }
-    });
+    if (input.type === "password") {
+      input.type = "text";
+      img.src = "/assets/img/eye-open.svg";
+    } else {
+      input.type = "password";
+      img.src = "/assets/img/eye-closed.svg";
+    }
   });
+});
 
-  // Submit crear contraseña
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+// Submit crear contraseña
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorBox.style.display = "none";
 
-      errorBox.style.display = "none";
+    if (newPass.value.length < 8) {
+      errorBox.textContent = "La contraseña debe tener al menos 8 caracteres.";
+      errorBox.style.display = "block";
+      return;
+    }
 
-      if (newPass.value.length < 8) {
-        errorBox.textContent = "La contraseña debe tener al menos 8 caracteres.";
-        errorBox.style.display = "block";
-        return;
-      }
+    if (newPass.value !== confirmPass.value) {
+      errorBox.textContent = "Las contraseñas no coinciden.";
+      errorBox.style.display = "block";
+      return;
+    }
 
-      if (newPass.value !== confirmPass.value) {
-        errorBox.textContent = "Las contraseñas no coinciden.";
-        errorBox.style.display = "block";
-        return;
-      }
+    try {
+      const res = await fetch("/api/set-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password: newPass.value
+        })
+      });
 
-      try {
-        const res = await fetch("/api/set-password", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email,
-            password: newPass.value
-          })
-        });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Error al guardar contraseña");
 
-        const data = await res.json();
+      // ✅ ÉXITO REAL
+      sessionStorage.setItem("passwordReady", "true");
 
-        if (!res.ok) {
-          throw new Error(data.message || "Error al guardar contraseña");
-        }
+      // Cerrar modal y desbloquear UI
+      modal.hidden = true;
+      document.body.classList.remove("modal-lock");
 
-        // Éxito → cerrar modal
-        modal.hidden = true;
+      // 🔁 Sync final con backend (una sola vez)
+      setTimeout(() => {
+        location.reload();
+      }, 300);
 
-      } catch (err) {
-        errorBox.textContent = err.message || "Error inesperado";
-        errorBox.style.display = "block";
-      }
-    });
-  }
+    } catch (err) {
+      errorBox.textContent = err.message || "Error inesperado";
+      errorBox.style.display = "block";
+    }
+  });
+}
 
   // ===============================
   // LOGOUT
