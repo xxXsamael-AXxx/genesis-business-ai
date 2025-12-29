@@ -178,7 +178,7 @@ body {
   user-select:none;
   -webkit-tap-highlight-color:transparent;
 
-  overflow:hidden;
+  overflow:visible;
   white-space:nowrap;
 
   transition:
