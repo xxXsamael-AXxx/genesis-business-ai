@@ -1,8 +1,9 @@
 // ==================================================
-// PANEL CORPORATIVO — JS BASE
+// PANEL CORPORATIVO — JS BASE (FIXED)
 // ==================================================
 
 document.addEventListener("DOMContentLoaded", () => {
+
   // ===============================
   // CAMBIO DE VISTAS
   // ===============================
@@ -10,9 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const views = document.querySelectorAll(".panelcorp-view");
 
   function activateView(viewId) {
-    views.forEach(v => {
-      v.classList.remove("active");
-    });
+    views.forEach(v => v.classList.remove("active"));
 
     const target = document.getElementById(viewId);
     if (target) target.classList.add("active");
@@ -28,6 +27,24 @@ document.addEventListener("DOMContentLoaded", () => {
       if (viewId) activateView(viewId);
     });
   });
+
+  // ===============================
+  // COLAPSO SIDEBAR ✅ (LO QUE FALTABA)
+  // ===============================
+  const sidebar = document.getElementById("panelcorp-sidebar");
+  const toggleBtn = document.getElementById("panelcorp-toggle-btn");
+
+  if (sidebar && toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      const collapsed = sidebar.classList.toggle("is-collapsed");
+
+      // Cambia icono
+      toggleBtn.textContent = collapsed ? "❯" : "❮";
+
+      // evita focus raro
+      toggleBtn.blur();
+    });
+  }
 
   // ===============================
   // EMAIL DEL USUARIO (DESDE URL)
@@ -49,4 +66,5 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "/login";
     });
   }
+
 });
