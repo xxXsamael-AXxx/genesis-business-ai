@@ -1,9 +1,12 @@
 /* ==========================================================
-   PANEL CORPORATIVO — GÉNESIS BUSINESS AI
-   (CSS + lógicas de colapso estilo Eclypssa, adaptado al HTML real)
+   PANELCORP — GÉNESIS
+   Basado en FAN (misma estética), prefijo panelcorp-
    ========================================================== */
 
-/* ===== RESET ===== */
+.panelcorp-panel-view { display: none; }
+.panelcorp-panel-view.panelcorp-panel-view--active { display: block; }
+
+/* RESET BÁSICO */
 *,
 *::before,
 *::after {
@@ -13,10 +16,17 @@
 html,
 body {
   height: 100%;
-  margin: 0;
   overflow: hidden;
 }
 
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #041f1a, #020617 60%, #000 100%);
+  color: #e5fdf6;
+}
+
+/* ===== MODO PANELCORP: SIN SCROLL GLOBAL ===== */
 html:has(.panelcorp-layout),
 body:has(.panelcorp-layout) {
   height: 100%;
@@ -25,283 +35,67 @@ body:has(.panelcorp-layout) {
   overflow-y: hidden;
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #041f1a, #020617 60%, #000 100%);
-  color: #e5fdf6;
+body:has(.panelcorp-layout) {
+  margin: 0;
+  padding: 0;
+  display: block;
 }
 
-/* ==================================================
-   LAYOUT GENERAL
-   ================================================== */
-
+/* ===== LAYOUT ===== */
 .panelcorp-layout {
   display: flex;
   min-height: 100vh;
   width: 100%;
-  padding: 24px;
-  gap: 28px;
+  padding: 24px 40px 24px 24px;
+  gap: 32px;
 }
 
-/* ==================================================
-   SIDEBAR IZQUIERDO
-   ================================================== */
-
-.panelcorp-sidebar {
-  position: relative;
-  flex: 0 0 300px;
-  width: 300px;
-  height: calc(100vh - 48px);
+/* ===== PANEL IZQUIERDO ===== */
+.panelcorp-panel-left {
+  position: sticky;
+  top: 16px;
+  flex: 0 0 320px;
+  height: calc(100vh - 32px);
+  max-height: calc(100vh - 32px);
 
   background: rgba(2, 20, 18, 0.98);
   border: 1px solid rgba(34, 211, 153, 0.55);
   border-radius: 24px;
-  padding: 22px 20px;
+  padding: 24px 22px 20px;
 
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 
   box-shadow:
-    0 0 35px rgba(34, 211, 153, 0.45),
-    0 0 90px rgba(16, 185, 129, 0.35);
+    0 0 35px rgba(34, 211, 153, 0.75),
+    0 0 90px rgba(16, 185, 129, 0.65);
 
   overflow: visible;
-
-  transition:
-    flex-basis 0.28s ease,
-    width 0.28s ease,
-    padding 0.28s ease,
-    box-shadow 0.28s ease,
-    border-color 0.28s ease;
 }
 
-/* ===== BOTÓN TOGGLE ===== */
-#panelcorp-toggle-btn {
-  position: absolute;
-  top: 22px;
-  right: -14px;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  border: 2px solid rgba(34, 211, 153, 0.9);
-  background: radial-gradient(circle at 30% 0%, #021f18, #022c22 70%, #000);
-  color: #ecfeff;
-  cursor: pointer;
-  z-index: 9999;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-shadow:
-    0 0 8px rgba(34, 211, 153, 0.55),
-    0 0 14px rgba(16, 185, 129, 0.45);
-
-  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+/* ===== COLAPSADO (usa is-collapsed del JS) ===== */
+.panelcorp-panel-left.is-collapsed {
+  flex: 0 0 68px;
+  width: 68px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
-#panelcorp-toggle-btn:hover {
-  background: radial-gradient(circle at 30% 0%, #10b981, #065f46 70%, #000);
-  box-shadow:
-    0 0 12px rgba(34, 211, 153, 0.8),
-    0 0 22px rgba(16, 185, 129, 0.65);
-}
-
-#panelcorp-toggle-btn:active {
-  transform: scale(0.96);
-}
-
-/* ==================================================
-   PERFIL
-   ================================================== */
-
-.panelcorp-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.25);
-}
-
-.panelcorp-avatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 0%, #34d399, #022c22 60%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #022c22;
-  box-shadow:
-    0 0 12px rgba(34, 211, 153, 0.6),
-    0 0 22px rgba(16, 185, 129, 0.45);
-  flex: 0 0 auto;
-  aspect-ratio: 1/1;
-}
-
-.panelcorp-profile-info {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.panelcorp-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #ecfeff;
-}
-
-.panelcorp-email {
-  font-size: 12px;
-  color: #99f6e4;
-  max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* ==================================================
-   NAVEGACIÓN
-   ================================================== */
-
-.panelcorp-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.panelcorp-nav button {
-  all: unset;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 9px 14px;
-  border-radius: 999px;
-
-  color: #ccfbf1;
-  font-size: 13px;
-
-  border: 1px solid transparent;
-
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: clip;
-
-  transition:
-    background 0.15s ease,
-    box-shadow 0.15s ease,
-    transform 0.12s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.panelcorp-nav button:hover {
-  background: rgba(16, 185, 129, 0.12);
-  border-color: rgba(34, 211, 153, 0.22);
-  box-shadow: 0 0 12px rgba(34, 211, 153, 0.45);
-  transform: translateX(2px);
-}
-
-.panelcorp-nav button.active {
-  background: rgba(16, 185, 129, 0.18);
-  border-color: rgba(34, 211, 153, 0.45);
-  box-shadow:
-    0 0 14px rgba(34, 211, 153, 0.85),
-    inset 0 0 8px rgba(34, 211, 153, 0.35);
-  color: #ecfeff;
-}
-
-/* ==================================================
-   LOGOUT
-   ================================================== */
-
-.panelcorp-logout {
-  margin-top: auto;
-
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 999px;
-
-  border: 1px solid rgba(34, 211, 153, 0.5);
-  background: transparent;
-  color: #ecfeff;
-
-  cursor: pointer;
-  text-align: center;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    width 0.28s ease,
-    height 0.28s ease,
-    padding 0.28s ease;
-}
-
-.panelcorp-logout:hover {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(248, 113, 113, 0.9);
-  box-shadow:
-    0 0 14px rgba(248, 113, 113, 0.55),
-    0 0 22px rgba(248, 113, 113, 0.35);
-}
-
-/* ==================================================
-   COLAPSO (CLASE QUE AGREGA EL JS)
-   .panelcorp-sidebar.is-collapsed
-   ================================================== */
-
-.panelcorp-sidebar.is-collapsed {
-  flex: 0 0 74px;
-  width: 74px;
-  padding: 18px 12px;
-
-  box-shadow:
-    0 0 28px rgba(34, 211, 153, 0.42),
-    0 0 70px rgba(16, 185, 129, 0.28);
-}
-
-/* Perfil: oculta texto */
-.panelcorp-sidebar.is-collapsed .panelcorp-profile {
-  justify-content: center;
-  padding-bottom: 12px;
-}
-
-.panelcorp-sidebar.is-collapsed .panelcorp-profile-info {
+.panelcorp-panel-left.is-collapsed .panelcorp-profile-text,
+.panelcorp-panel-left.is-collapsed .panelcorp-panel-title {
   display: none;
 }
 
-/* Menú: en colapsado, “se corta” el label y se ve el emoji (porque va al inicio) */
-.panelcorp-sidebar.is-collapsed .panelcorp-nav {
-  gap: 10px;
-}
-
-.panelcorp-sidebar.is-collapsed .panelcorp-nav button {
-  padding: 10px 12px;
-  justify-content: flex-start;   /* importante para que se vea el emoji al inicio */
-  transform: none;
-}
-
-/* Tooltip opcional (si luego le metes data-label a los botones) */
-.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label] {
+/* ============================
+PANELCORP — TOOLTIP AL COLAPSAR
+(sirve para <a> y <button>)
+============================ */
+.panelcorp-panel-left.is-collapsed [data-label]{
   position: relative;
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label]::after {
+.panelcorp-panel-left.is-collapsed [data-label]::after{
   content: attr(data-label);
 
   position: absolute;
@@ -317,12 +111,12 @@ body {
   white-space: nowrap;
 
   background: radial-gradient(circle at 30% 0%, #020617, #052018 60%, #020617);
-  border: 1px solid rgba(52, 211, 153, 0.85);
-  color: #f9fafb;
+  border: 1px solid rgba(52, 211, 153, 0.9);
+  color: #ecfeff;
 
   box-shadow:
-    0 0 10px rgba(34, 211, 153, 0.75),
-    0 0 20px rgba(16, 185, 129, 0.55);
+    0 0 10px rgba(34, 211, 153, 0.9),
+    0 0 20px rgba(16, 185, 129, 0.8);
 
   opacity: 0;
   pointer-events: none;
@@ -330,149 +124,395 @@ body {
   transition: opacity 0.16s ease, transform 0.16s ease;
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label]:hover::after {
+.panelcorp-panel-left.is-collapsed [data-label]:hover::after{
   opacity: 1;
   transform: translate(4px, -50%);
 }
 
-/* Logout en colapsado: botón redondo con icono fijo */
-.panelcorp-sidebar.is-collapsed .panelcorp-logout {
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 6px;
+/* Menú comprimido: solo iconos */
+.panelcorp-panel-left.is-collapsed .panelcorp-panel-menu{
+  align-items: center;
+}
+
+.panelcorp-panel-left.is-collapsed .panelcorp-panel-item{
+  justify-content: center;
+  padding: 8px 0;
+}
+
+/* Oculta labels en colapsado */
+.panelcorp-panel-left.is-collapsed .panelcorp-panel-item-label{
+  display: none;
+}
+
+.panelcorp-panel-left.is-collapsed .panelcorp-panel-item-icon{
+  font-size: 18px;
+}
+
+/* ===== FOOTER / LOGOUT ===== */
+.panelcorp-panel-left-footer{
+  margin-top: auto;
+  padding: 0 0 8px;
+  border-top: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+/* Normal (abierto) */
+.panelcorp-logout-btn{
+  width: 100%;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+
+  border: 1px solid rgba(34, 211, 153, 0.6);
+  background: transparent;
+  color: #e5fdf6;
+
+  cursor: pointer;
+  text-align: center;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    width 0.35s ease,
+    height 0.35s ease,
+    padding 0.35s ease;
+}
+
+.panelcorp-logout-icon{ font-size: 14px; }
+.panelcorp-logout-label{ font-size: 13px; }
+
+.panelcorp-panel-left:not(.is-collapsed) .panelcorp-logout-btn:hover{
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(248, 113, 113, 0.95);
+  color: #fecaca;
+  box-shadow:
+    0 0 16px rgba(248, 113, 113, 0.9),
+    0 0 26px rgba(248, 113, 113, 0.6);
+}
+
+/* Colapsado: botón redondo */
+.panelcorp-panel-left.is-collapsed .panelcorp-logout-btn{
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 0;
   padding: 0;
   border-radius: 999px;
 
   background: radial-gradient(circle at 30% 0%, #020617, #052018 60%, #020617);
-  border-color: rgba(34, 211, 153, 0.85);
+  border-color: rgba(34, 211, 153, 0.9);
 
-  font-size: 0; /* oculta texto completo */
-  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   box-shadow:
-    0 0 12px rgba(34, 211, 153, 0.75),
-    0 0 22px rgba(16, 185, 129, 0.55);
+    0 0 12px rgba(34, 211, 153, 0.9),
+    0 0 22px rgba(16, 185, 129, 0.8);
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-logout::before {
-  content: "⏻";
+.panelcorp-panel-left.is-collapsed .panelcorp-logout-label{ display: none; }
+
+.panelcorp-panel-left.is-collapsed .panelcorp-logout-icon{
   font-size: 18px;
-  line-height: 1;
   color: #99f6e4;
   text-shadow:
     0 0 6px rgba(153, 246, 228, 0.75),
     0 0 14px rgba(34, 211, 153, 0.65);
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-logout:hover {
-  background: radial-gradient(circle at 30% 0%, #ef4444, #991b1b 70%, #020617);
-  border-color: rgba(248, 113, 113, 0.95);
+.panelcorp-panel-left.is-collapsed .panelcorp-logout-btn:hover{
+  background: radial-gradient(circle at 30% 0%, #34d399, #0f766e 70%, #020617);
   box-shadow:
-    0 0 16px rgba(248, 113, 113, 0.85),
-    0 0 26px rgba(248, 113, 113, 0.6);
+    0 0 16px rgba(34, 211, 153, 1),
+    0 0 26px rgba(16, 185, 129, 1);
+}
+
+/* ===== BOTÓN TOGGLE ===== */
+.panelcorp-panel-toggle-btn {
+  position: absolute;
+  top: 80px;
+  right: -12px;
+  width: 27px;
+  height: 27px;
+  border-radius: 999px;
+  border: 2px solid rgba(34, 211, 153, 0.9);
+  background: radial-gradient(circle at 30% 0%, #022c22, #020617 70%, #000);
+  color: #ecfeff;
+  cursor: pointer;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 0 8px rgba(34, 211, 153, 0.9),
+    0 0 14px rgba(16, 185, 129, 0.75);
 }
 
 /* ==================================================
-   PANEL DERECHO (CONTENIDO)
+   PANELCORP — PERFIL SUPERIOR (avatar tipo creator) FIX
    ================================================== */
+.panelcorp-panel-profile{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(16, 185, 129, 0.35);
+}
 
-.panelcorp-content {
+/* WRAPPER clickeable — FULL RESET */
+.panelcorp-panel-avatar-btn{
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  border-radius: 999px;
+  margin-left: -2px;
+
+  background: transparent;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .18s ease;
+}
+
+.panelcorp-panel-avatar-btn:focus,
+.panelcorp-panel-avatar-btn:focus-visible{
+  outline: none;
+  box-shadow: none;
+}
+
+/* AVATAR base */
+.panelcorp-profile-avatar{
+  width:46px;
+  height:46px;
+  border-radius:999px;
+  background: radial-gradient(circle at 30% 0%, #34d399, #022c22 55%, #020617 100%);
+  box-shadow:
+    0 0 12px rgba(34, 211, 153, .45),
+    0 0 22px rgba(16, 185, 129, .35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+  font-size:18px;
+  color:#e5fdf6;
+  flex:0 0 auto;
+  aspect-ratio:1/1;
+  transition: box-shadow .18s ease, transform .12s ease;
+}
+
+.panelcorp-panel-avatar-btn:hover{
+  transform: scale(1.08);
+}
+
+.panelcorp-panel-avatar-btn:hover .panelcorp-profile-avatar{
+  box-shadow:
+    0 0 0 3px rgba(16, 185, 129, 0.55),
+    0 0 14px rgba(34, 211, 153, 0.45),
+    0 0 28px rgba(20, 184, 166, 0.55);
+}
+
+/* Active opcional */
+.panelcorp-panel-avatar-btn.panelcorp-active{
+  transform: scale(1.1);
+}
+
+.panelcorp-panel-avatar-btn.panelcorp-active .panelcorp-profile-avatar{
+  box-shadow:
+    0 0 0 3px rgba(16, 185, 129, 0.55),
+    0 0 20px rgba(34, 211, 153, 0.75),
+    0 0 40px rgba(20, 184, 166, 0.75);
+}
+
+/* Texto NO clickeable */
+.panelcorp-profile-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.2;
+}
+
+.panelcorp-profile-text p{ margin:0; padding:0; }
+
+.panelcorp-profile-name{
+  font-size:14px;
+  font-weight:600;
+  color:#ecfeff;
+}
+
+.panelcorp-profile-handle{
+  font-size:12px;
+  color:#99f6e4;
+}
+
+/* Subinfo con dot + email */
+.panelcorp-profile-subinfo{
+  margin-top: 6px;
+  font-size: 12px;
+  color: #99f6e4;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panelcorp-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.55);
+}
+
+/* ===== TÍTULO PANEL ===== */
+.panelcorp-panel-title {
+  margin: 4px 0 10px;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: #e5fdf6;
+  text-transform: uppercase;
+}
+
+/* ===== MENÚ ===== */
+.panelcorp-panel-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  position: relative;
+  z-index: 10;
+}
+
+.panelcorp-panel-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: #ccfbf1;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  position: relative;
+  z-index: 11;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    text-shadow 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease;
+}
+
+.panelcorp-panel-item:hover:not(.panelcorp-panel-item--active):not(.panelcorp-panel-item--disabled) {
+  background: rgba(2, 20, 18, 0.92);
+  color: #ecfeff;
+  text-shadow:
+    0 0 4px rgba(153, 246, 228, 0.45),
+    0 0 10px rgba(34, 211, 153, 0.45);
+  border-color: rgba(34, 211, 153, 0.55);
+  transform: translateX(2px);
+}
+
+.panelcorp-panel-item--active {
+  color: #ffffff;
+  text-shadow:
+    0 0 6px rgba(153, 246, 228, 0.75),
+    0 0 14px rgba(34, 211, 153, 0.65);
+  transform: translateX(2px);
+}
+
+.panelcorp-panel-item--disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ===== BOTÓN ABAJO (CONFIG) — IGUAL QUE ITEMS ===== */
+.panelcorp-panel-bottom-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 14px;
+  border-radius: 999px;
+
+  background: transparent;
+  border: 1px solid transparent;
+  color: #ccfbf1;
+
+  cursor: pointer;
+
+  outline: none;
+  text-align: left;
+}
+
+.panelcorp-panel-bottom-item:hover {
+  background: rgba(2, 20, 18, 0.92);
+}
+
+.panelcorp-panel-bottom-item.panelcorp-panel-item--active {
+  color: #fff;
+  text-shadow:
+    0 0 6px rgba(153, 246, 228, 0.75),
+    0 0 14px rgba(34, 211, 153, 0.65);
+}
+
+/* ===== PANEL DERECHO ===== */
+.panelcorp-panel-right {
   flex: 1;
-  height: calc(100vh - 48px);
+  height: calc(100vh - 40px);
   border-radius: 24px;
-  padding: 28px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
   background:
     radial-gradient(circle at top,
-      rgba(34, 211, 153, 0.18),
-      rgba(2, 20, 18, 0.95) 40%,
+      rgba(34, 211, 153, 0.22),
+      rgba(2, 20, 18, 0.96) 40%,
       rgba(0, 0, 0, 0.98)
     );
 
   border: 1px solid rgba(34, 211, 153, 0.45);
   box-shadow:
-    0 0 45px rgba(34, 211, 153, 0.55),
-    0 0 120px rgba(16, 185, 129, 0.65);
+    0 0 40px rgba(34, 211, 153, 0.65),
+    0 0 120px rgba(16, 185, 129, 0.75);
 
+  overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+.panelcorp-eclypssa-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.panelcorp-eclypssa-icon {
+  width: 82px;
+  height: 82px;
+}
+
+.panelcorp-eclypssa-text {
+  font-size: 30px;
+  letter-spacing: 0.7em;
+}
+
+/* ===== VISTAS ===== */
+.panelcorp-panel-views {
+  flex: 1;
   overflow-y: auto;
-}
-
-/* Scrollbar (Firefox) */
-.panelcorp-content {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(34, 211, 153, 0.9) rgba(0, 0, 0, 0.35);
-}
-
-/* Scrollbar (Chrome/Edge/Safari) */
-.panelcorp-content::-webkit-scrollbar {
-  width: 12px;
-}
-
-.panelcorp-content::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 999px;
-  margin: 10px 0;
-}
-
-.panelcorp-content::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    rgba(34, 211, 153, 1),
-    rgba(16, 185, 129, 0.9)
-  );
-  border: 3px solid rgba(0, 0, 0, 0.55);
-  box-shadow:
-    0 0 16px rgba(34, 211, 153, 0.55),
-    inset 0 0 6px rgba(255, 255, 255, 0.12);
-}
-
-.panelcorp-content::-webkit-scrollbar-thumb:hover {
-  box-shadow:
-    0 0 22px rgba(34, 211, 153, 0.8),
-    inset 0 0 8px rgba(255, 255, 255, 0.18);
-}
-
-/* ==================================================
-   VISTAS
-   ================================================== */
-
-.panelcorp-view {
-  display: none;
-}
-
-.panelcorp-view.active {
-  display: block;
-}
-
-.panelcorp-view h1 {
-  margin: 0 0 6px;
-  font-size: 22px;
-  color: #ecfeff;
-}
-
-.panelcorp-view p {
-  margin: 0;
-  font-size: 14px;
-  color: #99f6e4;
-}
-
-/* ==================================================
-   RESPONSIVE MÍNIMO
-   ================================================== */
-
-@media (max-width: 980px) {
-  .panelcorp-layout {
-    padding: 18px;
-    gap: 18px;
-  }
-
-  .panelcorp-sidebar {
-    flex: 0 0 280px;
-    width: 280px;
-  }
-
-  .panelcorp-content {
-    padding: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }

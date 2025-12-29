@@ -1,47 +1,63 @@
 // ==================================================
-// PANEL CORPORATIVO — JS BASE (FIXED)
+// PANEL CORPORATIVO — JS (COMPATIBLE CON EL HTML NUEVO)
+// - Colapso sidebar (is-collapsed)
+// - Tooltips (ya los trae data-label en HTML)
+// - Cambio de vistas (panelcorp-panel-view--active + panelcorp-panel-item--active)
+// - Email desde query ?email=
+// - Logout a landing
 // ==================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-
   // ===============================
-  // CAMBIO DE VISTAS
-  // ===============================
-  const buttons = document.querySelectorAll(".panelcorp-nav button");
-  const views = document.querySelectorAll(".panelcorp-view");
-
-  function activateView(viewId) {
-    views.forEach(v => v.classList.remove("active"));
-
-    const target = document.getElementById(viewId);
-    if (target) target.classList.add("active");
-
-    buttons.forEach(b => b.classList.remove("active"));
-    const btn = document.querySelector(`[data-view="${viewId}"]`);
-    if (btn) btn.classList.add("active");
-  }
-
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const viewId = btn.dataset.view;
-      if (viewId) activateView(viewId);
-    });
-  });
-
-  // ===============================
-  // COLAPSO SIDEBAR ✅ (LO QUE FALTABA)
+  // ELEMENTOS BASE
   // ===============================
   const sidebar = document.getElementById("panelcorp-sidebar");
   const toggleBtn = document.getElementById("panelcorp-toggle-btn");
 
+  // Botones del menú (HTML nuevo)
+  const menuButtons = document.querySelectorAll(".panelcorp-panel-menu .panelcorp-panel-item");
+  const views = document.querySelectorAll(".panelcorp-panel-view");
+
+  // ===============================
+  // CAMBIO DE VISTAS
+  // ===============================
+  function activateView(viewId) {
+    if (!viewId) return;
+
+    // Oculta/activa vistas
+    views.forEach(v => v.classList.remove("panelcorp-panel-view--active"));
+    const target = document.getElementById(viewId);
+    if (target) target.classList.add("panelcorp-panel-view--active");
+
+    // Activo en menú
+    menuButtons.forEach(b => b.classList.remove("panelcorp-panel-item--active"));
+    const btn = document.querySelector(`.panelcorp-panel-item[data-view="${viewId}"]`);
+    if (btn) btn.classList.add("panelcorp-panel-item--active");
+  }
+
+  menuButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const viewId = btn.dataset.view;
+      activateView(viewId);
+    });
+  });
+
+  // Si el HTML trae una vista activa, sincroniza el botón.
+  // Si no, activa corp-home por default.
+  const currentActiveView = document.querySelector(".panelcorp-panel-view.panelcorp-panel-view--active");
+  if (currentActiveView && currentActiveView.id) {
+    activateView(currentActiveView.id);
+  } else {
+    activateView("corp-home");
+  }
+
+  // ===============================
+  // COLAPSO SIDEBAR
+  // ===============================
   if (sidebar && toggleBtn) {
     toggleBtn.addEventListener("click", () => {
       const collapsed = sidebar.classList.toggle("is-collapsed");
-
-      // Cambia icono
       toggleBtn.textContent = collapsed ? "❯" : "❮";
-
-      // evita focus raro
       toggleBtn.blur();
     });
   }
@@ -53,18 +69,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const email = params.get("email");
 
-  if (email && emailSpan) {
-    emailSpan.textContent = email;
+  if (emailSpan) {
+    emailSpan.textContent = email ? email : "—";
   }
 
   // ===============================
-  // LOGOUT
+  // LOGOUT (A LANDING)
   // ===============================
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
-      window.location.href = "/index.html";
+      // Recomendado: landing en "/"
+      window.location.href = "/";
+      // Si tu server NO sirve / como index, usa:
+      // window.location.href = "/index.html";
     });
   }
-
 });
