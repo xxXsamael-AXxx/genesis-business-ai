@@ -241,6 +241,44 @@ app.post("/api/login", async (req, res) => {
 });
 
 // ================================
+// PANEL — REDIRECCIÓN SEGÚN PLAN
+// ================================
+app.get("/panel", async (req, res) => {
+  try {
+    const { email } = req.query;
+    if (!email) return res.redirect("/login");
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+      include: { subscription: true },
+    });
+
+    if (!user || !user.subscription) {
+      return res.redirect("/login");
+    }
+
+    const plan = user.subscription.plan;
+
+    if (plan === "BUSINESS") {
+      return res.sendFile(path.join(__dirname, "public", "panelcorp.html"));
+    }
+
+    if (plan === "PREMIUM") {
+      return res.sendFile(path.join(__dirname, "public", "panelbusi.html"));
+    }
+
+    if (plan === "BASIC") {
+      return res.sendFile(path.join(__dirname, "public", "panelbasi.html"));
+    }
+
+    return res.redirect("/login");
+  } catch (err) {
+    console.error("❌ Error panel:", err);
+    return res.redirect("/login");
+  }
+});
+
+// ================================
 // STRIPE CHECKOUT
 // ================================
 app.post("/api/stripe/checkout", async (req, res) => {
