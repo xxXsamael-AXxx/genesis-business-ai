@@ -1,5 +1,5 @@
 // ==================================================
-// PANEL CORPORATIVO — JS BASE (FIXED)
+// PANEL CORPORATIVO — JS BASE + MODAL PASSWORD
 // ==================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // COLAPSO SIDEBAR ✅ (LO QUE FALTABA)
+  // COLAPSO SIDEBAR
   // ===============================
   const sidebar = document.getElementById("panelcorp-sidebar");
   const toggleBtn = document.getElementById("panelcorp-toggle-btn");
@@ -37,11 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (sidebar && toggleBtn) {
     toggleBtn.addEventListener("click", () => {
       const collapsed = sidebar.classList.toggle("is-collapsed");
-
-      // Cambia icono
       toggleBtn.textContent = collapsed ? "❯" : "❮";
-
-      // evita focus raro
       toggleBtn.blur();
     });
   }
@@ -52,9 +48,88 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailSpan = document.getElementById("panel-user-email");
   const params = new URLSearchParams(window.location.search);
   const email = params.get("email");
+  const needsPassword = params.get("needsPassword"); // ← viene SOLO post-pago
 
   if (email && emailSpan) {
     emailSpan.textContent = email;
+  }
+
+  // ===============================
+  // MODAL — CREAR CONTRASEÑA (POST-PAGO)
+  // ===============================
+  const modal = document.getElementById("create-password-modal");
+  const form = document.getElementById("create-password-form");
+  const newPass = document.getElementById("new-password");
+  const confirmPass = document.getElementById("confirm-password");
+  const errorBox = document.getElementById("create-password-error");
+
+  // Si vienes de post-pago y el backend marcó needsPassword
+  if (needsPassword === "true" && modal) {
+    modal.hidden = false;
+  }
+
+  // Toggle ojos (reutilizable)
+  document.querySelectorAll(".modal-password-toggle").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.dataset.target;
+      const input = document.getElementById(targetId);
+      const img = btn.querySelector("img");
+
+      if (!input || !img) return;
+
+      if (input.type === "password") {
+        input.type = "text";
+        img.src = "/assets/img/eye-open.svg";
+      } else {
+        input.type = "password";
+        img.src = "/assets/img/eye-closed.svg";
+      }
+    });
+  });
+
+  // Submit crear contraseña
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      errorBox.style.display = "none";
+
+      if (newPass.value.length < 8) {
+        errorBox.textContent = "La contraseña debe tener al menos 8 caracteres.";
+        errorBox.style.display = "block";
+        return;
+      }
+
+      if (newPass.value !== confirmPass.value) {
+        errorBox.textContent = "Las contraseñas no coinciden.";
+        errorBox.style.display = "block";
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/set-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            password: newPass.value
+          })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message || "Error al guardar contraseña");
+        }
+
+        // Éxito → cerrar modal
+        modal.hidden = true;
+
+      } catch (err) {
+        errorBox.textContent = err.message || "Error inesperado";
+        errorBox.style.display = "block";
+      }
+    });
   }
 
   // ===============================

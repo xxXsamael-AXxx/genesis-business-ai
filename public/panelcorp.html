@@ -153,6 +153,87 @@
     </main>
   </div>
 
+<!-- =========================
+     MODAL — CREAR CONTRASEÑA (POST-PAGO)
+     ========================= -->
+<div id="create-password-modal" class="modal-overlay" hidden>
+  <div class="modal-card">
+
+    <h2>Crear contraseña</h2>
+    <p>Por seguridad, crea tu contraseña para acceder a tu panel.</p>
+
+    <form id="create-password-form">
+
+      <!-- NUEVA CONTRASEÑA -->
+      <div class="modal-field">
+        <label>Nueva contraseña</label>
+
+        <div class="modal-password-field">
+          <input
+            type="password"
+            id="new-password"
+            minlength="8"
+            required
+            placeholder="Mínimo 8 caracteres"
+          />
+
+          <button
+            type="button"
+            class="modal-password-toggle"
+            data-target="new-password"
+            aria-label="Mostrar u ocultar contraseña"
+          >
+            <img
+              src="/assets/img/eye-closed.svg"
+              alt="Mostrar contraseña"
+            />
+          </button>
+        </div>
+      </div>
+
+      <!-- CONFIRMAR CONTRASEÑA -->
+      <div class="modal-field">
+        <label>Confirmar contraseña</label>
+
+        <div class="modal-password-field">
+          <input
+            type="password"
+            id="confirm-password"
+            minlength="8"
+            required
+            placeholder="Repite la contraseña"
+          />
+
+          <button
+            type="button"
+            class="modal-password-toggle"
+            data-target="confirm-password"
+            aria-label="Mostrar u ocultar contraseña"
+          >
+            <img
+              src="/assets/img/eye-closed.svg"
+              alt="Mostrar contraseña"
+            />
+          </button>
+        </div>
+      </div>
+
+      <!-- ERROR -->
+      <p id="create-password-error" class="modal-error" style="display:none;"></p>
+
+      <!-- SUBMIT -->
+      <div class="modal-actions">
+        <button type="submit" class="btn-primary">
+          Guardar contraseña
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+
   <script src="/panelcorp.js"></script>
 </body>
 </html>

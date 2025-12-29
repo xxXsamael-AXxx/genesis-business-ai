@@ -241,6 +241,66 @@ app.post("/api/login", async (req, res) => {
 });
 
 // ================================
+// API — CREAR CONTRASEÑA (POST-PAGO)
+// ================================
+app.post("/api/set-password", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Email y contraseña son obligatorios",
+      });
+    }
+
+    if (password.length < 8) {
+      return res.status(400).json({
+        message: "La contraseña debe tener al menos 8 caracteres",
+      });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Usuario no encontrado",
+      });
+    }
+
+    // Seguridad: solo permitir si aún NO tiene contraseña
+    if (user.passwordHash) {
+      return res.status(403).json({
+        message: "Esta cuenta ya tiene contraseña configurada",
+      });
+    }
+
+    // Hashear contraseña
+    const hash = await bcrypt.hash(password, 10);
+
+    // Guardar en BD
+    await prisma.user.update({
+      where: { email },
+      data: {
+        passwordHash: hash,
+      },
+    });
+
+    return res.status(200).json({
+      message: "Contraseña creada correctamente",
+    });
+
+  } catch (err) {
+    console.error("❌ Error set-password:", err);
+    return res.status(500).json({
+      message: "Error interno del servidor",
+    });
+  }
+});
+
+
+// ================================
 // PANEL — REDIRECCIÓN SEGÚN PLAN
 // ================================
 app.get("/panel", async (req, res) => {
