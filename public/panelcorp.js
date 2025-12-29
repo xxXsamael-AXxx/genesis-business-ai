@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
     emailSpan.textContent = email;
   }
 
-  // ===============================
-// MODAL — CREAR CONTRASEÑA (POST-PAGO)
+// ===============================
+// MODAL — CREAR CONTRASEÑA (POST-PAGO) — FIX FINAL
 // ===============================
 const modal = document.getElementById("create-password-modal");
 const form = document.getElementById("create-password-form");
@@ -63,13 +63,16 @@ const newPass = document.getElementById("new-password");
 const confirmPass = document.getElementById("confirm-password");
 const errorBox = document.getElementById("create-password-error");
 
-// Flag local para no reabrir el modal
-const passwordReady = sessionStorage.getItem("passwordReady");
+// 🔒 Flag duro para NO volver a abrir el modal
+let modalLocked = false;
 
-// Si vienes de post-pago y NO se ha creado contraseña aún
-if (needsPassword === "true" && modal && !passwordReady) {
+// SOLO abrir modal si:
+// 1) viene needsPassword=true
+// 2) el modal existe
+// 3) NO está bloqueado
+if (needsPassword === "true" && modal && !modalLocked) {
   modal.hidden = false;
-  document.body.classList.add("modal-lock"); // si usas bloqueo visual
+  document.body.classList.add("modal-lock");
 }
 
 // Toggle ojos
@@ -80,13 +83,11 @@ document.querySelectorAll(".modal-password-toggle").forEach(btn => {
     const img = btn.querySelector("img");
     if (!input || !img) return;
 
-    if (input.type === "password") {
-      input.type = "text";
-      img.src = "/assets/img/eye-open.svg";
-    } else {
-      input.type = "password";
-      img.src = "/assets/img/eye-closed.svg";
-    }
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    img.src = show
+      ? "/assets/img/eye-open.svg"
+      : "/assets/img/eye-closed.svg";
   });
 });
 
@@ -121,18 +122,16 @@ if (form) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Error al guardar contraseña");
 
-      // ✅ ÉXITO REAL
-      sessionStorage.setItem("passwordReady", "true");
+      // 🔒 BLOQUEO DEFINITIVO DEL MODAL
+      modalLocked = true;
 
-      // Cerrar modal y desbloquear UI
+      // ❌ NO reload
+      // ❌ NO replace
+      // ❌ NO sessionStorage
+
+      // ✅ CERRAR MODAL A LA VERGA
       modal.hidden = true;
       document.body.classList.remove("modal-lock");
-
-      // 🔁 Sync final con backend (una sola vez)
-      setTimeout(() => {
-  window.location.replace(`/panel?email=${encodeURIComponent(email)}`);
-}, 300);
-
 
     } catch (err) {
       errorBox.textContent = err.message || "Error inesperado";
@@ -140,6 +139,7 @@ if (form) {
     }
   });
 }
+
 
   // ===============================
   // LOGOUT
