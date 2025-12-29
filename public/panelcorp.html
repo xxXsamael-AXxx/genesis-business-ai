@@ -10,67 +10,91 @@
 <body>
   <div class="panelcorp-layout">
 
-    <!-- =========================
-         SIDEBAR IZQUIERDO
-         ========================= -->
+    <!-- SIDEBAR -->
     <aside class="panelcorp-sidebar" id="panelcorp-sidebar">
 
-      <!-- Toggle -->
-      <button id="panelcorp-toggle-btn">❮</button>
+      <button id="panelcorp-toggle-btn" aria-label="Colapsar panel">❮</button>
 
-      <!-- Perfil -->
+      <!-- PERFIL -->
       <div class="panelcorp-profile">
         <div class="panelcorp-avatar">C</div>
         <div class="panelcorp-profile-info">
           <span class="panelcorp-name">Corporación</span>
-          <span class="panelcorp-email" id="panel-user-email">
-            cargando…
-          </span>
+          <span class="panelcorp-email" id="panel-user-email">cargando…</span>
         </div>
       </div>
 
-      <!-- Navegación -->
+      <!-- NAV -->
       <nav class="panelcorp-nav">
 
-        <button data-view="corp-home">🏠 Inicio</button>
+        <button data-view="corp-home" data-label="Inicio">
+          <span class="icon">🏠</span>
+          <span class="label">Inicio</span>
+        </button>
 
-        <button data-view="corp-ia">🤖 IA / Automatización</button>
+        <button data-view="corp-ia" data-label="IA / Automatización">
+          <span class="icon">🤖</span>
+          <span class="label">IA / Automatización</span>
+        </button>
 
-        <button data-view="corp-whatsapp">💬 WhatsApp</button>
+        <button data-view="corp-whatsapp" data-label="WhatsApp">
+          <span class="icon">💬</span>
+          <span class="label">WhatsApp</span>
+        </button>
 
-        <button data-view="corp-conversations">📊 Conversaciones</button>
+        <button data-view="corp-conversations" data-label="Conversaciones">
+          <span class="icon">📊</span>
+          <span class="label">Conversaciones</span>
+        </button>
 
-        <button data-view="corp-flows">🧠 Flujos</button>
+        <button data-view="corp-flows" data-label="Flujos">
+          <span class="icon">🧠</span>
+          <span class="label">Flujos</span>
+        </button>
 
-        <button data-view="corp-rules">🛠 Reglas de negocio</button>
+        <button data-view="corp-rules" data-label="Reglas de negocio">
+          <span class="icon">🛠</span>
+          <span class="label">Reglas de negocio</span>
+        </button>
 
-        <button data-view="corp-quotes">💰 Cotizaciones</button>
+        <button data-view="corp-quotes" data-label="Cotizaciones">
+          <span class="icon">💰</span>
+          <span class="label">Cotizaciones</span>
+        </button>
 
-        <button data-view="corp-team">👥 Equipo</button>
+        <button data-view="corp-team" data-label="Equipo">
+          <span class="icon">👥</span>
+          <span class="label">Equipo</span>
+        </button>
 
-        <button data-view="corp-analytics">📈 Analítica</button>
+        <button data-view="corp-analytics" data-label="Analítica">
+          <span class="icon">📈</span>
+          <span class="label">Analítica</span>
+        </button>
 
-        <button data-view="corp-subscription">💳 Suscripción</button>
+        <button data-view="corp-subscription" data-label="Suscripción">
+          <span class="icon">💳</span>
+          <span class="label">Suscripción</span>
+        </button>
 
-        <button data-view="corp-settings">⚙️ Configuración</button>
+        <button data-view="corp-settings" data-label="Configuración">
+          <span class="icon">⚙️</span>
+          <span class="label">Configuración</span>
+        </button>
 
       </nav>
 
-      <!-- Logout -->
-      <button id="logout-btn" class="panelcorp-logout">
-        ⏻ Cerrar sesión
+      <!-- LOGOUT -->
+      <button id="logout-btn" class="panelcorp-logout" data-label="Cerrar sesión">
+        <span class="icon">⏻</span>
+        <span class="label">Cerrar sesión</span>
       </button>
 
     </aside>
 
-    <!-- =========================
-         PANEL DERECHO (CONTENIDO)
-         ========================= -->
+    <!-- CONTENT -->
     <main class="panelcorp-content">
 
-      <!-- =========================
-           VISTAS
-           ========================= -->
       <section id="corp-home" class="panelcorp-view active">
         <h1>Panel Corporativo</h1>
         <p>Estado general del sistema</p>
@@ -129,7 +153,6 @@
     </main>
   </div>
 
-  <!-- Scripts -->
   <script src="/panelcorp.js"></script>
 </body>
 </html>

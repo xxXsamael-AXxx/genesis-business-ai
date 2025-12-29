@@ -1,17 +1,14 @@
 /* ==========================================================
    PANEL CORPORATIVO — GÉNESIS BUSINESS AI
-   (CSS + lógicas de colapso estilo Eclypssa, adaptado al HTML real)
+   (CSS adaptado al HTML nuevo: icon + label + data-label)
    ========================================================== */
 
 /* ===== RESET ===== */
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
-html,
-body {
+html, body {
   height: 100%;
   margin: 0;
   overflow: hidden;
@@ -34,33 +31,31 @@ body {
 /* ==================================================
    LAYOUT GENERAL
    ================================================== */
-
-.panelcorp-layout {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  padding: 24px;
-  gap: 28px;
+.panelcorp-layout{
+  display:flex;
+  min-height:100vh;
+  width:100%;
+  padding:24px;
+  gap:28px;
 }
 
 /* ==================================================
    SIDEBAR IZQUIERDO
    ================================================== */
-
-.panelcorp-sidebar {
-  position: relative;
-  flex: 0 0 300px;
-  width: 300px;
-  height: calc(100vh - 48px);
+.panelcorp-sidebar{
+  position:relative;
+  flex:0 0 300px;
+  width:300px;
+  height:calc(100vh - 48px);
 
   background: rgba(2, 20, 18, 0.98);
   border: 1px solid rgba(34, 211, 153, 0.55);
   border-radius: 24px;
   padding: 22px 20px;
 
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
 
   box-shadow:
     0 0 35px rgba(34, 211, 153, 0.45),
@@ -77,182 +72,190 @@ body {
 }
 
 /* ===== BOTÓN TOGGLE ===== */
-#panelcorp-toggle-btn {
-  position: absolute;
-  top: 22px;
-  right: -14px;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  border: 2px solid rgba(34, 211, 153, 0.9);
+#panelcorp-toggle-btn{
+  position:absolute;
+  top:22px;
+  right:-14px;
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  border:2px solid rgba(34, 211, 153, 0.9);
   background: radial-gradient(circle at 30% 0%, #021f18, #022c22 70%, #000);
-  color: #ecfeff;
-  cursor: pointer;
-  z-index: 9999;
+  color:#ecfeff;
+  cursor:pointer;
+  z-index:9999;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
   box-shadow:
     0 0 8px rgba(34, 211, 153, 0.55),
     0 0 14px rgba(16, 185, 129, 0.45);
 
-  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
 }
 
-#panelcorp-toggle-btn:hover {
+#panelcorp-toggle-btn:hover{
   background: radial-gradient(circle at 30% 0%, #10b981, #065f46 70%, #000);
   box-shadow:
     0 0 12px rgba(34, 211, 153, 0.8),
     0 0 22px rgba(16, 185, 129, 0.65);
 }
 
-#panelcorp-toggle-btn:active {
-  transform: scale(0.96);
-}
+#panelcorp-toggle-btn:active{ transform:scale(.96); }
 
 /* ==================================================
    PERFIL
    ================================================== */
-
-.panelcorp-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.25);
+.panelcorp-profile{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(16, 185, 129, 0.25);
 }
 
-.panelcorp-avatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
+.panelcorp-avatar{
+  width:46px;
+  height:46px;
+  border-radius:999px;
   background: radial-gradient(circle at 30% 0%, #34d399, #022c22 60%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #022c22;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#022c22;
   box-shadow:
     0 0 12px rgba(34, 211, 153, 0.6),
     0 0 22px rgba(16, 185, 129, 0.45);
-  flex: 0 0 auto;
-  aspect-ratio: 1/1;
+  flex:0 0 auto;
+  aspect-ratio:1/1;
 }
 
-.panelcorp-profile-info {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
+.panelcorp-profile-info{ display:flex; flex-direction:column; min-width:0; }
+
+.panelcorp-name{
+  font-size:14px;
+  font-weight:600;
+  color:#ecfeff;
 }
 
-.panelcorp-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #ecfeff;
-}
-
-.panelcorp-email {
-  font-size: 12px;
-  color: #99f6e4;
-  max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.panelcorp-email{
+  font-size:12px;
+  color:#99f6e4;
+  max-width:200px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 /* ==================================================
    NAVEGACIÓN
    ================================================== */
-
-.panelcorp-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.panelcorp-nav{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
 }
 
-.panelcorp-nav button {
-  all: unset;
-  cursor: pointer;
+.panelcorp-nav button{
+  all:unset;
+  cursor:pointer;
 
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 
-  padding: 9px 14px;
-  border-radius: 999px;
+  padding:9px 14px;
+  border-radius:999px;
 
-  color: #ccfbf1;
-  font-size: 13px;
+  color:#ccfbf1;
+  font-size:13px;
 
-  border: 1px solid transparent;
+  border:1px solid transparent;
 
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
 
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: clip;
+  overflow:hidden;
+  white-space:nowrap;
 
   transition:
-    background 0.15s ease,
-    box-shadow 0.15s ease,
-    transform 0.12s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
+    background .15s ease,
+    box-shadow .15s ease,
+    transform .12s ease,
+    border-color .15s ease,
+    color .15s ease;
 }
 
-.panelcorp-nav button:hover {
+.panelcorp-nav button:hover{
   background: rgba(16, 185, 129, 0.12);
   border-color: rgba(34, 211, 153, 0.22);
   box-shadow: 0 0 12px rgba(34, 211, 153, 0.45);
   transform: translateX(2px);
 }
 
-.panelcorp-nav button.active {
+.panelcorp-nav button.active{
   background: rgba(16, 185, 129, 0.18);
   border-color: rgba(34, 211, 153, 0.45);
   box-shadow:
     0 0 14px rgba(34, 211, 153, 0.85),
     inset 0 0 8px rgba(34, 211, 153, 0.35);
-  color: #ecfeff;
+  color:#ecfeff;
+}
+
+/* icon/label del HTML nuevo */
+.panelcorp-nav .icon{
+  width:22px;
+  min-width:22px;
+  text-align:center;
+  font-size:16px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.panelcorp-nav .label{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 /* ==================================================
    LOGOUT
    ================================================== */
+.panelcorp-logout{
+  margin-top:auto;
 
-.panelcorp-logout {
-  margin-top: auto;
+  width:100%;
+  padding:8px 12px;
+  border-radius:999px;
 
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 999px;
+  border:1px solid rgba(34, 211, 153, 0.5);
+  background:transparent;
+  color:#ecfeff;
 
-  border: 1px solid rgba(34, 211, 153, 0.5);
-  background: transparent;
-  color: #ecfeff;
+  cursor:pointer;
+  text-align:center;
 
-  cursor: pointer;
-  text-align: center;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
 
   transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    width 0.28s ease,
-    height 0.28s ease,
-    padding 0.28s ease;
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease,
+    width .28s ease,
+    height .28s ease,
+    padding .28s ease;
 }
 
-.panelcorp-logout:hover {
+.panelcorp-logout:hover{
   background: rgba(239, 68, 68, 0.15);
   border-color: rgba(248, 113, 113, 0.9);
   box-shadow:
@@ -261,14 +264,12 @@ body {
 }
 
 /* ==================================================
-   COLAPSO (CLASE QUE AGREGA EL JS)
-   .panelcorp-sidebar.is-collapsed
+   COLAPSO (JS agrega .is-collapsed)
    ================================================== */
-
-.panelcorp-sidebar.is-collapsed {
-  flex: 0 0 74px;
-  width: 74px;
-  padding: 18px 12px;
+.panelcorp-sidebar.is-collapsed{
+  flex:0 0 74px;
+  width:74px;
+  padding:18px 12px;
 
   box-shadow:
     0 0 28px rgba(34, 211, 153, 0.42),
@@ -276,95 +277,96 @@ body {
 }
 
 /* Perfil: oculta texto */
-.panelcorp-sidebar.is-collapsed .panelcorp-profile {
-  justify-content: center;
-  padding-bottom: 12px;
+.panelcorp-sidebar.is-collapsed .panelcorp-profile{
+  justify-content:center;
+  padding-bottom:12px;
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-profile-info {
-  display: none;
+.panelcorp-sidebar.is-collapsed .panelcorp-profile-info{ display:none; }
+
+/* Menu: solo iconos centrados */
+.panelcorp-sidebar.is-collapsed .panelcorp-nav{ gap:10px; }
+
+.panelcorp-sidebar.is-collapsed .panelcorp-nav button{
+  padding:10px 12px;
+  justify-content:center; /* ahora sí: solo icono */
+  transform:none;
 }
 
-/* Menú: en colapsado, “se corta” el label y se ve el emoji (porque va al inicio) */
-.panelcorp-sidebar.is-collapsed .panelcorp-nav {
-  gap: 10px;
+.panelcorp-sidebar.is-collapsed .panelcorp-nav .label{ display:none; }
+
+/* ==================================================
+   TOOLTIPS (colapsado) — estilo Génesis/Eclyssa
+   ================================================== */
+.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label],
+.panelcorp-sidebar.is-collapsed .panelcorp-logout[data-label]{
+  position:relative;
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-nav button {
-  padding: 10px 12px;
-  justify-content: flex-start;   /* importante para que se vea el emoji al inicio */
-  transform: none;
-}
-
-/* Tooltip opcional (si luego le metes data-label a los botones) */
-.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label] {
-  position: relative;
-}
-
-.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label]::after {
+.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label]::after,
+.panelcorp-sidebar.is-collapsed .panelcorp-logout[data-label]::after{
   content: attr(data-label);
 
-  position: absolute;
-  left: calc(100% + 10px);
+  position:absolute;
+  left: calc(100% + 12px);
   top: 50%;
   transform: translateY(-50%);
 
-  padding: 6px 14px;
+  padding: 7px 14px;
   border-radius: 999px;
 
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: .2px;
   white-space: nowrap;
 
-  background: radial-gradient(circle at 30% 0%, #020617, #052018 60%, #020617);
-  border: 1px solid rgba(52, 211, 153, 0.85);
-  color: #f9fafb;
+  background: rgba(0,0,0,.88);
+  border: 1px solid rgba(34, 211, 153, 0.95);
+  color: #ffffff;
 
   box-shadow:
-    0 0 10px rgba(34, 211, 153, 0.75),
-    0 0 20px rgba(16, 185, 129, 0.55);
+    0 0 10px rgba(34, 211, 153, 0.55),
+    0 0 22px rgba(16, 185, 129, 0.35);
 
-  opacity: 0;
-  pointer-events: none;
-
-  transition: opacity 0.16s ease, transform 0.16s ease;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .14s ease, transform .14s ease;
+  z-index: 99999;
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label]:hover::after {
-  opacity: 1;
+.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label]:hover::after,
+.panelcorp-sidebar.is-collapsed .panelcorp-logout[data-label]:hover::after{
+  opacity:1;
   transform: translate(4px, -50%);
 }
 
-/* Logout en colapsado: botón redondo con icono fijo */
-.panelcorp-sidebar.is-collapsed .panelcorp-logout {
-  width: 42px;
-  height: 42px;
+/* ==================================================
+   Logout en colapsado: power redondo bonito (usando .icon)
+   ================================================== */
+.panelcorp-sidebar.is-collapsed .panelcorp-logout{
+  width:44px;
+  height:44px;
   margin: 0 auto 6px;
-  padding: 0;
-  border-radius: 999px;
+  padding:0;
+  border-radius:999px;
 
   background: radial-gradient(circle at 30% 0%, #020617, #052018 60%, #020617);
   border-color: rgba(34, 211, 153, 0.85);
 
-  font-size: 0; /* oculta texto completo */
-  color: transparent;
-
-  box-shadow:
-    0 0 12px rgba(34, 211, 153, 0.75),
-    0 0 22px rgba(16, 185, 129, 0.55);
+  justify-content:center;
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-logout::before {
-  content: "⏻";
-  font-size: 18px;
-  line-height: 1;
-  color: #99f6e4;
+.panelcorp-sidebar.is-collapsed .panelcorp-logout .label{ display:none; }
+
+.panelcorp-sidebar.is-collapsed .panelcorp-logout .icon{
+  font-size:18px;
+  color:#99f6e4;
   text-shadow:
     0 0 6px rgba(153, 246, 228, 0.75),
     0 0 14px rgba(34, 211, 153, 0.65);
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-logout:hover {
+.panelcorp-sidebar.is-collapsed .panelcorp-logout:hover{
   background: radial-gradient(circle at 30% 0%, #ef4444, #991b1b 70%, #020617);
   border-color: rgba(248, 113, 113, 0.95);
   box-shadow:
@@ -375,12 +377,11 @@ body {
 /* ==================================================
    PANEL DERECHO (CONTENIDO)
    ================================================== */
-
-.panelcorp-content {
-  flex: 1;
-  height: calc(100vh - 48px);
-  border-radius: 24px;
-  padding: 28px;
+.panelcorp-content{
+  flex:1;
+  height:calc(100vh - 48px);
+  border-radius:24px;
+  padding:28px;
 
   background:
     radial-gradient(circle at top,
@@ -389,45 +390,40 @@ body {
       rgba(0, 0, 0, 0.98)
     );
 
-  border: 1px solid rgba(34, 211, 153, 0.45);
+  border:1px solid rgba(34, 211, 153, 0.45);
   box-shadow:
     0 0 45px rgba(34, 211, 153, 0.55),
     0 0 120px rgba(16, 185, 129, 0.65);
 
-  overflow-y: auto;
+  overflow-y:auto;
 }
 
 /* Scrollbar (Firefox) */
-.panelcorp-content {
-  scrollbar-width: thin;
+.panelcorp-content{
+  scrollbar-width:thin;
   scrollbar-color: rgba(34, 211, 153, 0.9) rgba(0, 0, 0, 0.35);
 }
 
 /* Scrollbar (Chrome/Edge/Safari) */
-.panelcorp-content::-webkit-scrollbar {
-  width: 12px;
-}
-
-.panelcorp-content::-webkit-scrollbar-track {
+.panelcorp-content::-webkit-scrollbar{ width:12px; }
+.panelcorp-content::-webkit-scrollbar-track{
   background: rgba(0, 0, 0, 0.35);
-  border-radius: 999px;
-  margin: 10px 0;
+  border-radius:999px;
+  margin:10px 0;
 }
-
-.panelcorp-content::-webkit-scrollbar-thumb {
-  border-radius: 999px;
+.panelcorp-content::-webkit-scrollbar-thumb{
+  border-radius:999px;
   background: linear-gradient(
     180deg,
     rgba(34, 211, 153, 1),
     rgba(16, 185, 129, 0.9)
   );
-  border: 3px solid rgba(0, 0, 0, 0.55);
+  border:3px solid rgba(0, 0, 0, 0.55);
   box-shadow:
     0 0 16px rgba(34, 211, 153, 0.55),
     inset 0 0 6px rgba(255, 255, 255, 0.12);
 }
-
-.panelcorp-content::-webkit-scrollbar-thumb:hover {
+.panelcorp-content::-webkit-scrollbar-thumb:hover{
   box-shadow:
     0 0 22px rgba(34, 211, 153, 0.8),
     inset 0 0 8px rgba(255, 255, 255, 0.18);
@@ -436,43 +432,25 @@ body {
 /* ==================================================
    VISTAS
    ================================================== */
+.panelcorp-view{ display:none; }
+.panelcorp-view.active{ display:block; }
 
-.panelcorp-view {
-  display: none;
+.panelcorp-view h1{
+  margin:0 0 6px;
+  font-size:22px;
+  color:#ecfeff;
 }
-
-.panelcorp-view.active {
-  display: block;
-}
-
-.panelcorp-view h1 {
-  margin: 0 0 6px;
-  font-size: 22px;
-  color: #ecfeff;
-}
-
-.panelcorp-view p {
-  margin: 0;
-  font-size: 14px;
-  color: #99f6e4;
+.panelcorp-view p{
+  margin:0;
+  font-size:14px;
+  color:#99f6e4;
 }
 
 /* ==================================================
-   RESPONSIVE MÍNIMO
+   RESPONSIVE
    ================================================== */
-
-@media (max-width: 980px) {
-  .panelcorp-layout {
-    padding: 18px;
-    gap: 18px;
-  }
-
-  .panelcorp-sidebar {
-    flex: 0 0 280px;
-    width: 280px;
-  }
-
-  .panelcorp-content {
-    padding: 20px;
-  }
+@media (max-width: 980px){
+  .panelcorp-layout{ padding:18px; gap:18px; }
+  .panelcorp-sidebar{ flex:0 0 280px; width:280px; }
+  .panelcorp-content{ padding:20px; }
 }
