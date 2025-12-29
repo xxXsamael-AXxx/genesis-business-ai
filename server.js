@@ -3,8 +3,20 @@ const path = require("path");
 const bcrypt = require("bcryptjs");
 const { PrismaClient } = require("@prisma/client");
 const Stripe = require("stripe");
+const { execSync } = require("child_process");
 require("dotenv").config();
 
+try {
+  console.log("🟢 Aplicando migraciones Prisma...");
+  execSync("npx prisma migrate deploy", { stdio: "inherit" });
+  console.log("✅ Migraciones aplicadas");
+} catch (e) {
+  console.error("❌ Error aplicando migraciones", e);
+}
+
+// ================================
+// App
+// ================================
 const app = express();
 const PORT = process.env.PORT || 3000;
 
