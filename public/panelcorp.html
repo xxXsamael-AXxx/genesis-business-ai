@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Génesis Business AI — Panel Corporativo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/panelcorp.css" />
+</head>
+
+<body>
+  <div class="panelcorp-layout">
+
+    <!-- =========================
+         SIDEBAR IZQUIERDO
+         ========================= -->
+    <aside class="panelcorp-sidebar" id="panelcorp-sidebar">
+
+      <!-- Toggle -->
+      <button id="panelcorp-toggle-btn">❮</button>
+
+      <!-- Perfil -->
+      <div class="panelcorp-profile">
+        <div class="panelcorp-avatar">C</div>
+        <div class="panelcorp-profile-info">
+          <span class="panelcorp-name">Corporación</span>
+          <span class="panelcorp-email" id="panel-user-email">
+            cargando…
+          </span>
+        </div>
+      </div>
+
+      <!-- Navegación -->
+      <nav class="panelcorp-nav">
+
+        <button data-view="corp-home">🏠 Inicio</button>
+
+        <button data-view="corp-ia">🤖 IA / Automatización</button>
+
+        <button data-view="corp-whatsapp">💬 WhatsApp</button>
+
+        <button data-view="corp-conversations">📊 Conversaciones</button>
+
+        <button data-view="corp-flows">🧠 Flujos</button>
+
+        <button data-view="corp-rules">🛠 Reglas de negocio</button>
+
+        <button data-view="corp-quotes">💰 Cotizaciones</button>
+
+        <button data-view="corp-team">👥 Equipo</button>
+
+        <button data-view="corp-analytics">📈 Analítica</button>
+
+        <button data-view="corp-subscription">💳 Suscripción</button>
+
+        <button data-view="corp-settings">⚙️ Configuración</button>
+
+      </nav>
+
+      <!-- Logout -->
+      <button id="logout-btn" class="panelcorp-logout">
+        ⏻ Cerrar sesión
+      </button>
+
+    </aside>
+
+    <!-- =========================
+         PANEL DERECHO (CONTENIDO)
+         ========================= -->
+    <main class="panelcorp-content">
+
+      <!-- =========================
+           VISTAS
+           ========================= -->
+      <section id="corp-home" class="panelcorp-view active">
+        <h1>Panel Corporativo</h1>
+        <p>Estado general del sistema</p>
+      </section>
+
+      <section id="corp-ia" class="panelcorp-view">
+        <h1>IA & Automatización</h1>
+        <p>Prompts, reglas, entrenamiento</p>
+      </section>
+
+      <section id="corp-whatsapp" class="panelcorp-view">
+        <h1>WhatsApp</h1>
+        <p>Número, plantillas, estado, webhooks</p>
+      </section>
+
+      <section id="corp-conversations" class="panelcorp-view">
+        <h1>Conversaciones</h1>
+        <p>Bandeja de chats y estados</p>
+      </section>
+
+      <section id="corp-flows" class="panelcorp-view">
+        <h1>Flujos</h1>
+        <p>Automatizaciones por etapas</p>
+      </section>
+
+      <section id="corp-rules" class="panelcorp-view">
+        <h1>Reglas de negocio</h1>
+        <p>Condiciones, horarios, decisiones</p>
+      </section>
+
+      <section id="corp-quotes" class="panelcorp-view">
+        <h1>Cotizaciones</h1>
+        <p>Generación automática por reglas</p>
+      </section>
+
+      <section id="corp-team" class="panelcorp-view">
+        <h1>Equipo</h1>
+        <p>Usuarios, roles y permisos</p>
+      </section>
+
+      <section id="corp-analytics" class="panelcorp-view">
+        <h1>Analítica</h1>
+        <p>Métricas reales de uso</p>
+      </section>
+
+      <section id="corp-subscription" class="panelcorp-view">
+        <h1>Suscripción</h1>
+        <p>Plan, pagos y facturación</p>
+      </section>
+
+      <section id="corp-settings" class="panelcorp-view">
+        <h1>Configuración</h1>
+        <p>Datos del negocio</p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/panelcorp.js"></script>
+</body>
+</html>
