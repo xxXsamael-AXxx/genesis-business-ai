@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 // ===============================
-// MODAL — CREAR CONTRASEÑA (POST-PAGO) — FIX REAL
+// MODAL — CREAR CONTRASEÑA (POST-PAGO) — FIX DEFINITIVO CON LOGS
 // ===============================
 const modal = document.getElementById("create-password-modal");
 const form = document.getElementById("create-password-form");
@@ -63,36 +63,51 @@ const newPass = document.getElementById("new-password");
 const confirmPass = document.getElementById("confirm-password");
 const errorBox = document.getElementById("create-password-error");
 
-// 🔒 si ya se creó la contraseña en esta sesión, no mostrar modal
-if (sessionStorage.getItem("passwordCreated") === "true") {
+function closePasswordModal(reason = "unknown") {
+  console.log("🟢 [MODAL] cerrando modal | motivo:", reason);
   modal.hidden = true;
   document.body.classList.remove("modal-lock");
-} else {
-  checkPasswordAndToggleModal();
 }
 
+function openPasswordModal() {
+  console.log("🔴 [MODAL] abriendo modal (no tiene contraseña)");
+  modal.hidden = false;
+  document.body.classList.add("modal-lock");
+}
+
+// ===============================
+// CHECK INICIAL
+// ===============================
 async function checkPasswordAndToggleModal() {
   try {
+    console.log("🔍 [CHECK] verificando si el usuario tiene contraseña…");
+
     const res = await fetch(
       `/api/user/has-password?email=${encodeURIComponent(email)}`
     );
     const data = await res.json();
 
-    // 👉 ya tiene contraseña → nunca mostrar modal
+    console.log("📩 [CHECK] respuesta backend:", data);
+
     if (data.hasPassword) {
-      modal.hidden = true;
-      document.body.classList.remove("modal-lock");
       sessionStorage.setItem("passwordCreated", "true");
+      closePasswordModal("backend-confirmed");
       return;
     }
 
-    // 👉 no tiene contraseña → forzar modal
-    modal.hidden = false;
-    document.body.classList.add("modal-lock");
+    openPasswordModal();
 
   } catch (err) {
-    console.error("Error verificando contraseña:", err);
+    console.error("❌ [CHECK] error verificando contraseña:", err);
   }
+}
+
+// 🔒 si en esta sesión ya se creó la contraseña → no mostrar modal
+if (sessionStorage.getItem("passwordCreated") === "true") {
+  console.log("🟢 [SESSION] contraseña ya creada en esta sesión");
+  closePasswordModal("session-flag");
+} else {
+  checkPasswordAndToggleModal();
 }
 
 // ===============================
@@ -103,19 +118,25 @@ if (form) {
     e.preventDefault();
     errorBox.style.display = "none";
 
+    console.log("🟡 [SUBMIT] intento de guardar contraseña");
+
     if (newPass.value.length < 8) {
       errorBox.textContent = "La contraseña debe tener al menos 8 caracteres.";
       errorBox.style.display = "block";
+      console.warn("⚠️ [VALIDACIÓN] contraseña muy corta");
       return;
     }
 
     if (newPass.value !== confirmPass.value) {
       errorBox.textContent = "Las contraseñas no coinciden.";
       errorBox.style.display = "block";
+      console.warn("⚠️ [VALIDACIÓN] contraseñas no coinciden");
       return;
     }
 
     try {
+      console.log("📤 [API] enviando /api/set-password");
+
       const res = await fetch("/api/set-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -126,31 +147,57 @@ if (form) {
       });
 
       const data = await res.json();
+      console.log("📩 [API] respuesta set-password:", data);
 
       if (!res.ok) {
         errorBox.textContent = data.message || "Error al guardar contraseña";
         errorBox.style.display = "block";
+        console.error("❌ [API] error guardando contraseña");
         return;
       }
 
-      // ✅ CONTRASEÑA GUARDADA → CERRAR Y NORMALIZAR PANEL
+      // ✅ CONTRASEÑA GUARDADA — CIERRE INMEDIATO
+      console.log("✅ [SUCCESS] contraseña guardada correctamente");
+
       sessionStorage.setItem("passwordCreated", "true");
+      closePasswordModal("password-saved");
 
-      modal.hidden = true;
-      document.body.classList.remove("modal-lock");
-
-      // 🔁 refresco limpio para dejar panel 100% funcional
+      // 🔁 verificación final SIN recargar
       setTimeout(() => {
-        window.location.reload();
-      }, 300);
+        checkPasswordAndToggleModal();
+      }, 200);
 
     } catch (err) {
-      console.error("Error set-password:", err);
+      console.error("❌ [API] error set-password:", err);
       errorBox.textContent = "Error de conexión";
       errorBox.style.display = "block";
     }
   });
 }
+
+// ===============================
+// TOGGLE OJOS — MOSTRAR / OCULTAR CONTRASEÑA
+// ===============================
+document.querySelectorAll(".modal-password-toggle").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const targetId = btn.dataset.target;
+    const input = document.getElementById(targetId);
+    const img = btn.querySelector("img");
+
+    if (!input) return;
+
+    if (input.type === "password") {
+      input.type = "text";
+      img.src = "/assets/img/eye-open.svg";
+      img.alt = "Ocultar contraseña";
+    } else {
+      input.type = "password";
+      img.src = "/assets/img/eye-closed.svg";
+      img.alt = "Mostrar contraseña";
+    }
+  });
+});
+
 
   // ===============================
   // LOGOUT
