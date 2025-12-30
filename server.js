@@ -98,7 +98,7 @@ app.post(
           return res.json({ received: true });
         }
 
-        // 2) Obtener line items reales (FORMA CORRECTA)
+        // 2) Obtener line items reales
         const lineItems = await stripe.checkout.sessions.listLineItems(
           session.id,
           { limit: 1 }
@@ -119,7 +119,7 @@ app.post(
         const user = await prisma.user.upsert({
           where: { email },
           update: {},
-          create: { email },
+          create: { email }
         });
 
         // 4) Crear o actualizar suscripción
@@ -130,38 +130,46 @@ app.post(
           update: {
             plan,
             status: "ACTIVE",
-            expiresAt,
+            expiresAt
           },
           create: {
             userId: user.id,
             plan,
             status: "ACTIVE",
-            expiresAt,
-          },
+            expiresAt
+          }
         });
 
-        // 5) Asegurar perfil (opcional)
+        // 5) Asegurar perfil + guardar nombre desde Stripe
+        const fullName = session.customer_details?.name || null;
+        const firstName = fullName ? fullName.split(" ")[0] : null;
+
         await prisma.profile.upsert({
           where: { userId: user.id },
-          update: {},
+          update: {
+            ...(firstName && { businessName: firstName })
+          },
           create: {
             userId: user.id,
-          },
+            businessName: firstName
+          }
         });
 
         console.log(
-          "✅ Prisma OK: user + subscription creados/actualizados:",
-          email
+          "✅ Prisma OK: user + subscription + profile name guardado:",
+          email,
+          firstName
         );
       }
 
-      res.json({ received: true });
+      return res.json({ received: true });
     } catch (err) {
       console.error("❌ Webhook processing error:", err);
-      res.status(500).send("Webhook handler failed");
+      return res.status(500).send("Webhook handler failed");
     }
   }
 );
+
 
 // ================================
 // Middlewares normales (DESPUÉS)
@@ -320,6 +328,34 @@ app.get("/api/user/has-password", async (req, res) => {
 
   const user = await prisma.user.findUnique({ where: { email } });
   return res.json({ hasPassword: !!user?.passwordHash });
+});
+
+// ================================
+// API — PERFIL USUARIO (NOMBRE STRIPE + AVATAR)
+// ================================
+app.get("/api/user/profile", async (req, res) => {
+  try {
+    const { email } = req.query;
+    if (!email) {
+      return res.status(400).json({ message: "Email requerido" });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+      include: { profile: true },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    return res.json({
+      businessName: user.profile?.businessName || null,
+    });
+  } catch (err) {
+    console.error("❌ Error obteniendo perfil:", err);
+    return res.status(500).json({ message: "Error interno del servidor" });
+  }
 });
 
 

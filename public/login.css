@@ -206,6 +206,24 @@ input:-webkit-autofill:focus {
     drop-shadow(0 0 32px rgba(0,180,255,0.7));
 }
 
+/* ==================================================
+   OCULTAR OJO NATIVO DEL NAVEGADOR (PASSWORD)
+   ================================================== */
+
+/* Edge / Chrome */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Safari / WebKit */
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
 /* ================= BOTÓN ================= */
 .landing-btn-primary {
   margin-top: 14px;

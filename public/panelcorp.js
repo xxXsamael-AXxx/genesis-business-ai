@@ -55,6 +55,53 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 // ===============================
+// PERFIL DEL USUARIO (NOMBRE + AVATAR)
+// ===============================
+const nameSpan = document.getElementById("panel-user-name");
+const avatarDiv = document.getElementById("panel-user-avatar");
+
+async function loadUserProfile() {
+  if (!email) return;
+
+  try {
+    console.log("👤 [PROFILE] cargando perfil del usuario");
+
+    const res = await fetch(
+      `/api/user/profile?email=${encodeURIComponent(email)}`
+    );
+    const data = await res.json();
+
+    console.log("📩 [PROFILE] respuesta backend:", data);
+
+    const displayName =
+      data.businessName && data.businessName.trim().length > 0
+        ? data.businessName
+        : "Corporación";
+
+    // Nombre visible
+    if (nameSpan) {
+      nameSpan.textContent = displayName;
+    }
+
+    // Avatar = inicial del nombre (fallback email)
+    if (avatarDiv) {
+      const letter = displayName !== "Corporación"
+        ? displayName.charAt(0)
+        : email.charAt(0);
+
+      avatarDiv.textContent = letter.toUpperCase();
+    }
+
+  } catch (err) {
+    console.error("❌ [PROFILE] error cargando perfil:", err);
+  }
+}
+
+// 🚀 cargar perfil al iniciar panel
+loadUserProfile();
+
+
+// ===============================
 // MODAL — CREAR CONTRASEÑA (POST-PAGO) — FIX DEFINITIVO CON LOGS
 // ===============================
 const modal = document.getElementById("create-password-modal");
