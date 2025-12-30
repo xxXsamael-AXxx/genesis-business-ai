@@ -613,6 +613,25 @@ body {
 }
 
 /* ==================================================
+   OCULTAR OJO NATIVO DEL NAVEGADOR (PASSWORD)
+   ================================================== */
+
+/* Edge / Chrome */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Safari / WebKit */
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+
+/* ==================================================
    ERROR
    ================================================== */
 .modal-error {
