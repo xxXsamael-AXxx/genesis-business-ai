@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 // ===============================
-// MODAL — CREAR CONTRASEÑA (POST-PAGO) — FIX DEFINITIVO
+// MODAL — CREAR CONTRASEÑA (POST-PAGO) — FIX REAL
 // ===============================
 const modal = document.getElementById("create-password-modal");
 const form = document.getElementById("create-password-form");
@@ -63,26 +63,41 @@ const newPass = document.getElementById("new-password");
 const confirmPass = document.getElementById("confirm-password");
 const errorBox = document.getElementById("create-password-error");
 
-async function checkPasswordAndToggleModal() {
-  const res = await fetch(`/api/user/has-password?email=${encodeURIComponent(email)}`);
-  const data = await res.json();
-
-  // 👉 SI YA TIENE CONTRASEÑA → JAMÁS MOSTRAR MODAL
-  if (data.hasPassword) {
-    modal.hidden = true;
-    document.body.classList.remove("modal-lock");
-    return;
-  }
-
-  // 👉 SOLO SI NO TIENE CONTRASEÑA
-  modal.hidden = false;
-  document.body.classList.add("modal-lock");
+// 🔒 si ya se creó la contraseña en esta sesión, no mostrar modal
+if (sessionStorage.getItem("passwordCreated") === "true") {
+  modal.hidden = true;
+  document.body.classList.remove("modal-lock");
+} else {
+  checkPasswordAndToggleModal();
 }
 
-// 🔥 DECISIÓN REAL DEL MODAL
-checkPasswordAndToggleModal();
+async function checkPasswordAndToggleModal() {
+  try {
+    const res = await fetch(
+      `/api/user/has-password?email=${encodeURIComponent(email)}`
+    );
+    const data = await res.json();
 
-// Submit crear contraseña
+    // 👉 ya tiene contraseña → nunca mostrar modal
+    if (data.hasPassword) {
+      modal.hidden = true;
+      document.body.classList.remove("modal-lock");
+      sessionStorage.setItem("passwordCreated", "true");
+      return;
+    }
+
+    // 👉 no tiene contraseña → forzar modal
+    modal.hidden = false;
+    document.body.classList.add("modal-lock");
+
+  } catch (err) {
+    console.error("Error verificando contraseña:", err);
+  }
+}
+
+// ===============================
+// SUBMIT — CREAR CONTRASEÑA
+// ===============================
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -100,25 +115,42 @@ if (form) {
       return;
     }
 
-    const res = await fetch("/api/set-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password: newPass.value })
-    });
+    try {
+      const res = await fetch("/api/set-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password: newPass.value
+        })
+      });
 
-    if (!res.ok) {
       const data = await res.json();
-      errorBox.textContent = data.message;
-      errorBox.style.display = "block";
-      return;
-    }
 
-    // ✅ CONTRASEÑA GUARDADA → CERRAR PARA SIEMPRE
-    modal.hidden = true;
-    document.body.classList.remove("modal-lock");
+      if (!res.ok) {
+        errorBox.textContent = data.message || "Error al guardar contraseña";
+        errorBox.style.display = "block";
+        return;
+      }
+
+      // ✅ CONTRASEÑA GUARDADA → CERRAR Y NORMALIZAR PANEL
+      sessionStorage.setItem("passwordCreated", "true");
+
+      modal.hidden = true;
+      document.body.classList.remove("modal-lock");
+
+      // 🔁 refresco limpio para dejar panel 100% funcional
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
+
+    } catch (err) {
+      console.error("Error set-password:", err);
+      errorBox.textContent = "Error de conexión";
+      errorBox.style.display = "block";
+    }
   });
 }
-
 
   // ===============================
   // LOGOUT
