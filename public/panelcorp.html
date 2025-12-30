@@ -102,6 +102,9 @@
 
     </aside>
 
+    <!-- CONTENT -->
+    <main class="panelcorp-content">
+
 <!-- HEADER GLOBAL — GENESIS -->
 <header class="panelcorp-header">
   <div class="panelcorp-header-brand">
@@ -116,14 +119,71 @@
   </div>
 </header>
 
+     <section id="corp-home" class="panelcorp-view active">
 
-    <!-- CONTENT -->
-    <main class="panelcorp-content">
+  <!-- TÍTULO -->
+  <header class="panelcorp-home-header">
+    <h1>Panel Corporativo</h1>
+    <p>Estado general del sistema</p>
+  </header>
 
-      <section id="corp-home" class="panelcorp-view active">
-        <h1>Panel Corporativo</h1>
-        <p>Estado general del sistema</p>
-      </section>
+  <!-- ESTADO GENERAL -->
+  <div class="panelcorp-home-stats">
+
+    <div class="panelcorp-stat-card">
+      <span class="panelcorp-stat-icon">🤖</span>
+      <span class="panelcorp-stat-label">IA</span>
+      <span class="panelcorp-stat-value pending">Pendiente</span>
+    </div>
+
+    <div class="panelcorp-stat-card">
+      <span class="panelcorp-stat-icon">💬</span>
+      <span class="panelcorp-stat-label">WhatsApp</span>
+      <span class="panelcorp-stat-value pending">No conectado</span>
+    </div>
+
+    <div class="panelcorp-stat-card">
+      <span class="panelcorp-stat-icon">🧠</span>
+      <span class="panelcorp-stat-label">Flujos</span>
+      <span class="panelcorp-stat-value pending">0 activos</span>
+    </div>
+
+    <div class="panelcorp-stat-card">
+      <span class="panelcorp-stat-icon">👥</span>
+      <span class="panelcorp-stat-label">Equipo</span>
+      <span class="panelcorp-stat-value ok">1 usuario</span>
+    </div>
+
+  </div>
+
+  <!-- PRIMEROS PASOS (ONBOARDING) -->
+  <div class="panelcorp-home-onboarding">
+
+    <h3>Primeros pasos</h3>
+
+    <ul class="panelcorp-onboarding-list">
+      <li class="pending">Conectar WhatsApp</li>
+      <li class="pending">Configurar IA</li>
+      <li class="pending">Crear primer flujo</li>
+      <li class="pending">Probar una conversación</li>
+    </ul>
+
+    <button class="panelcorp-home-cta">
+      Ir a configuración inicial
+    </button>
+
+  </div>
+
+  <!-- ESTADO FINAL (oculto por ahora)
+  <div class="panelcorp-home-complete">
+    <span class="panelcorp-complete-icon">✅</span>
+    <h3>Sistema operativo</h3>
+    <p>Todo está configurado y funcionando correctamente.</p>
+  </div>
+  -->
+
+</section>
+
 
       <section id="corp-ia" class="panelcorp-view">
         <h1>IA & Automatización</h1>
