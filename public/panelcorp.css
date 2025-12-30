@@ -630,6 +630,13 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   right: 0;
 }
 
+/* ==================================================
+   RESPETAR ATRIBUTO hidden (FIX MODAL)
+   ================================================== */
+.modal-overlay[hidden] {
+  display: none !important;
+}
+
 
 /* ==================================================
    ERROR
