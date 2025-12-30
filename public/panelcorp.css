@@ -686,4 +686,44 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 }
 
 
-/* ================================================== Vistas================================================== */
+/* ================================================== Vistas Panel Derecho ================================================== */
+
+/* =============== Header Global ================*/
+.panelcorp-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+
+  background: radial-gradient(
+    circle at 20% 0%,
+    rgba(16, 185, 129, 0.18),
+    rgba(2, 20, 18, 0.95) 60%
+  );
+
+  border-bottom: 1px solid rgba(34, 211, 153, 0.25);
+}
+
+.panelcorp-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  cursor: default;        /* ← importante */
+  user-select: none;      /* ← importante */
+}
+
+.panelcorp-header-logo {
+  width: 26px;
+  height: 26px;
+  filter:
+    drop-shadow(0 0 6px rgba(34, 211, 153, 0.6));
+}
+
+.panelcorp-header-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #ecfeff;
+  opacity: 0.9;
+}
