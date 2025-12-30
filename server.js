@@ -311,6 +311,17 @@ app.post("/api/set-password", async (req, res) => {
   }
 });
 
+// ================================
+// API — CHECK PASSWORD STATUS
+// ================================
+app.get("/api/user/has-password", async (req, res) => {
+  const { email } = req.query;
+  if (!email) return res.json({ hasPassword: false });
+
+  const user = await prisma.user.findUnique({ where: { email } });
+  return res.json({ hasPassword: !!user?.passwordHash });
+});
+
 
 // ================================
 // PANEL — REDIRECCIÓN SEGÚN PLAN
