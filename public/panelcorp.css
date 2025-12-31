@@ -933,3 +933,196 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   color: #99f6e4;
 }
 
+/* ==================================================
+   IA / AUTOMATIZACIÓN — PANEL CORPORATIVO
+   ================================================== */
+
+/* ===============================
+   HEADER
+   =============================== */
+
+.panelcorp-ia-header {
+  margin-bottom: 28px;
+}
+
+.panelcorp-ia-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ecfeff;
+}
+
+.panelcorp-ia-header p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* ===============================
+   CARDS
+   =============================== */
+
+.panelcorp-ia-card {
+  padding: 22px;
+  border-radius: 22px;
+  margin-bottom: 24px;
+
+  background: radial-gradient(
+    circle at top,
+    rgba(10, 30, 28, 0.95),
+    rgba(2, 20, 18, 0.98)
+  );
+
+  border: 1px solid rgba(34, 211, 153, 0.45);
+
+  box-shadow:
+    0 0 18px rgba(34, 211, 153, 0.25),
+    inset 0 0 0 1px rgba(16, 185, 129, 0.08);
+}
+
+.panelcorp-ia-card.required {
+  border-color: rgba(34, 211, 153, 0.9);
+
+  box-shadow:
+    0 0 24px rgba(34, 211, 153, 0.55),
+    0 0 48px rgba(16, 185, 129, 0.35);
+}
+
+/* ===============================
+   TITULOS Y DESCRIPCIONES
+   =============================== */
+
+.panelcorp-ia-card h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ecfeff;
+}
+
+.panelcorp-ia-desc {
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* ===============================
+   GRID DE CAMPOS
+   =============================== */
+
+.panelcorp-ia-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+/* ===============================
+   CAMPOS
+   =============================== */
+
+.panelcorp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.panelcorp-field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+/* INPUT / SELECT */
+
+.panelcorp-field input,
+.panelcorp-field select {
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  background: rgba(2, 30, 26, 0.85);
+  border: 1px solid rgba(34, 211, 153, 0.35);
+
+  color: #ecfeff;
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.panelcorp-field input::placeholder {
+  color: #6b7280;
+}
+
+/* FOCUS */
+
+.panelcorp-field input:focus,
+.panelcorp-field select:focus {
+  background: rgba(4, 40, 34, 0.9);
+  border-color: rgba(34, 211, 153, 0.9);
+
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 153, 0.4),
+    0 0 16px rgba(34, 211, 153, 0.55);
+}
+
+/* ===============================
+   SELECT CUSTOM
+   =============================== */
+
+.panelcorp-field select {
+  cursor: pointer;
+  appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, #9ca3af 50%),
+    linear-gradient(135deg, #9ca3af 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* ===============================
+   ACCIONES
+   =============================== */
+
+.panelcorp-ia-actions {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ESTADO */
+
+.panelcorp-ia-status {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.panelcorp-ia-status.ok {
+  color: #34d399;
+}
+
+.panelcorp-ia-status.error {
+  color: #f87171;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+
+@media (max-width: 640px) {
+  .panelcorp-ia-card {
+    padding: 18px;
+  }
+
+  .panelcorp-ia-header h1 {
+    font-size: 22px;
+  }
+}
+

@@ -49,22 +49,12 @@
 
         <button data-view="corp-whatsapp" data-label="WhatsApp">
           <span class="icon">💬</span>
-          <span class="label">WhatsApp</span>
-        </button>
-
-        <button data-view="corp-conversations" data-label="Conversaciones">
-          <span class="icon">📊</span>
-          <span class="label">Conversaciones</span>
+          <span class="label">WhatsApp / Mail</span>
         </button>
 
         <button data-view="corp-flows" data-label="Flujos">
           <span class="icon">🧠</span>
           <span class="label">Flujos</span>
-        </button>
-
-        <button data-view="corp-rules" data-label="Reglas de negocio">
-          <span class="icon">🛠</span>
-          <span class="label">Reglas de negocio</span>
         </button>
 
         <button data-view="corp-quotes" data-label="Cotizaciones">
@@ -138,7 +128,7 @@
 
     <div class="panelcorp-stat-card">
       <span class="panelcorp-stat-icon">💬</span>
-      <span class="panelcorp-stat-label">WhatsApp</span>
+      <span class="panelcorp-stat-label">WhatsApp / Mail</span>
       <span class="panelcorp-stat-value pending">No conectado</span>
     </div>
 
@@ -186,28 +176,118 @@
 
 
       <section id="corp-ia" class="panelcorp-view">
-        <h1>IA & Automatización</h1>
-        <p>Prompts, reglas, entrenamiento</p>
-      </section>
+
+  <!-- HEADER -->
+  <header class="panelcorp-ia-header">
+    <h1>IA / Automatización</h1>
+    <p>Define cómo piensa, responde y actúa tu asistente</p>
+  </header>
+
+  <!-- =========================
+       DATOS DEL NEGOCIO
+       ========================= -->
+  <div class="panelcorp-ia-card required">
+
+    <h3>🏢 Datos del negocio</h3>
+    <p class="panelcorp-ia-desc">
+      Información esencial para que la IA sepa quién eres y qué vendes.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Nombre del negocio</label>
+        <input id="ia-business-name" type="text" placeholder="Ej. Clínica Nova" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>¿Qué vendes?</label>
+        <input id="ia-business-product" type="text" placeholder="Servicios, productos, cursos…" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Tipo de cliente</label>
+        <input id="ia-business-client" type="text" placeholder="Empresas, personas, prospectos" />
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       PERSONALIDAD
+       ========================= -->
+  <div class="panelcorp-ia-card">
+
+    <h3>🧠 Personalidad de la IA</h3>
+    <p class="panelcorp-ia-desc">
+      Define cómo se comunica con tus clientes.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Tono de comunicación</label>
+        <select id="ia-tone">
+          <option value="profesional">Profesional</option>
+          <option value="cercano">Cercano</option>
+          <option value="formal">Formal</option>
+          <option value="relajado">Relajado</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Objetivo principal</label>
+        <select id="ia-goal">
+          <option value="vender">Vender</option>
+          <option value="agendar">Agendar</option>
+          <option value="informar">Informar</option>
+          <option value="filtrar">Filtrar prospectos</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       ESCALAMIENTO
+       ========================= -->
+  <div class="panelcorp-ia-card">
+
+    <h3>🚨 Escalar a humano</h3>
+    <p class="panelcorp-ia-desc">
+      Cuándo la IA debe pasar la conversación a tu equipo.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Escalar cuando</label>
+        <select id="ia-escalation">
+          <option value="solicita_humano">El cliente pide hablar con una persona</option>
+          <option value="no_entendio">No entiende la respuesta</option>
+          <option value="cierre">Quiere cerrar compra</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       ACCIONES
+       ========================= -->
+  <div class="panelcorp-ia-actions">
+    <button id="ia-save-btn" class="panelcorp-home-cta">
+      Guardar configuración de IA
+    </button>
+
+    <span id="ia-status" class="panelcorp-ia-status"></span>
+  </div>
+
+</section>
+
 
       <section id="corp-whatsapp" class="panelcorp-view">
-        <h1>WhatsApp</h1>
+        <h1>WhatsApp / Mail</h1>
         <p>Número, plantillas, estado, webhooks</p>
-      </section>
-
-      <section id="corp-conversations" class="panelcorp-view">
-        <h1>Conversaciones</h1>
-        <p>Bandeja de chats y estados</p>
       </section>
 
       <section id="corp-flows" class="panelcorp-view">
         <h1>Flujos</h1>
         <p>Automatizaciones por etapas</p>
-      </section>
-
-      <section id="corp-rules" class="panelcorp-view">
-        <h1>Reglas de negocio</h1>
-        <p>Condiciones, horarios, decisiones</p>
       </section>
 
       <section id="corp-quotes" class="panelcorp-view">
