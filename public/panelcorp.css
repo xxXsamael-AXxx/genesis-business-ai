@@ -959,13 +959,13 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 }
 
 /* ===============================
-   CARDS
+   TARJETAS / BLOQUES
    =============================== */
 
 .panelcorp-ia-card {
   padding: 22px;
   border-radius: 22px;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 
   background: radial-gradient(
     circle at top,
@@ -980,6 +980,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
     inset 0 0 0 1px rgba(16, 185, 129, 0.08);
 }
 
+/* BLOQUE CRÍTICO / REQUERIDO */
 .panelcorp-ia-card.required {
   border-color: rgba(34, 211, 153, 0.9);
 
@@ -989,7 +990,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 }
 
 /* ===============================
-   TITULOS Y DESCRIPCIONES
+   TÍTULOS Y DESCRIPCIÓN
    =============================== */
 
 .panelcorp-ia-card h3 {
@@ -1003,6 +1004,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   margin-bottom: 18px;
   font-size: 14px;
   color: #9ca3af;
+  max-width: 680px;
 }
 
 /* ===============================
@@ -1031,7 +1033,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   color: #9ca3af;
 }
 
-/* INPUT / SELECT */
+/* INPUTS / SELECTS */
 
 .panelcorp-field input,
 .panelcorp-field select {
@@ -1069,7 +1071,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 }
 
 /* ===============================
-   SELECT CUSTOM
+   SELECT PERSONALIZADO
    =============================== */
 
 .panelcorp-field select {
@@ -1091,10 +1093,18 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
    =============================== */
 
 .panelcorp-ia-actions {
-  margin-top: 28px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.panelcorp-ia-actions .panelcorp-home-cta {
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 /* ESTADO */
@@ -1117,12 +1127,17 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
    =============================== */
 
 @media (max-width: 640px) {
+  .panelcorp-ia-header h1 {
+    font-size: 22px;
+  }
+
   .panelcorp-ia-card {
     padding: 18px;
   }
 
-  .panelcorp-ia-header h1 {
-    font-size: 22px;
+  .panelcorp-ia-actions {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

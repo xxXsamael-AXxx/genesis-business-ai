@@ -180,51 +180,80 @@
   <!-- HEADER -->
   <header class="panelcorp-ia-header">
     <h1>IA / Automatización</h1>
-    <p>Define cómo piensa, responde y actúa tu asistente</p>
+    <p>Configura el cerebro de tu asistente: identidad, reglas y comportamiento.</p>
   </header>
 
-  <!-- =========================
-       DATOS DEL NEGOCIO
-       ========================= -->
+  <!-- 1) IDENTIDAD -->
   <div class="panelcorp-ia-card required">
-
-    <h3>🏢 Datos del negocio</h3>
+    <h3>🏢 Identidad del negocio</h3>
     <p class="panelcorp-ia-desc">
-      Información esencial para que la IA sepa quién eres y qué vendes.
+      Base para que tu asistente responda como parte de tu empresa.
     </p>
 
     <div class="panelcorp-ia-fields">
       <div class="panelcorp-field">
         <label>Nombre del negocio</label>
-        <input id="ia-business-name" type="text" placeholder="Ej. Clínica Nova" />
+        <input id="ia_business_name" type="text" placeholder="Ej. Clínica Nova" />
       </div>
 
       <div class="panelcorp-field">
-        <label>¿Qué vendes?</label>
-        <input id="ia-business-product" type="text" placeholder="Servicios, productos, cursos…" />
+        <label>Giro o tipo de negocio</label>
+        <input id="ia_business_type" type="text" placeholder="Ej. Clínica dental, gym, abarrotes" />
       </div>
 
       <div class="panelcorp-field">
-        <label>Tipo de cliente</label>
-        <input id="ia-business-client" type="text" placeholder="Empresas, personas, prospectos" />
+        <label>Qué ofrece (servicios / productos principales)</label>
+        <input id="ia_business_offers" type="text" placeholder="Ej. Limpiezas, ortodoncia, blanqueamiento" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Tipo de clientes</label>
+        <input id="ia_business_clients" type="text" placeholder="Ej. Familias, empresas, prospectos" />
       </div>
     </div>
   </div>
 
-  <!-- =========================
-       PERSONALIDAD
-       ========================= -->
+  <!-- 2) OBJETIVO -->
   <div class="panelcorp-ia-card">
-
-    <h3>🧠 Personalidad de la IA</h3>
+    <h3>🎯 Objetivo del asistente</h3>
     <p class="panelcorp-ia-desc">
-      Define cómo se comunica con tus clientes.
+      Define qué debe priorizar en cada conversación.
     </p>
 
     <div class="panelcorp-ia-fields">
       <div class="panelcorp-field">
-        <label>Tono de comunicación</label>
-        <select id="ia-tone">
+        <label>Prioridad principal</label>
+        <select id="ia_primary_goal">
+          <option value="informar">Informar</option>
+          <option value="capturar">Capturar prospectos</option>
+          <option value="agendar">Agendar citas / seguimiento</option>
+          <option value="ventas">Preparar ventas / cierre</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Acción final esperada</label>
+        <select id="ia_expected_outcome">
+          <option value="datos">Obtener datos del cliente</option>
+          <option value="cita">Dejar cita/seguimiento listo</option>
+          <option value="humano">Derivar a un humano</option>
+          <option value="info">Resolver con información</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3) COMUNICACIÓN -->
+  <div class="panelcorp-ia-card">
+    <h3>🗣️ Forma de comunicación</h3>
+    <p class="panelcorp-ia-desc">
+      Ajusta el tono y la iniciativa del asistente.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Tono</label>
+        <select id="ia_tone">
           <option value="profesional">Profesional</option>
           <option value="cercano">Cercano</option>
           <option value="formal">Formal</option>
@@ -233,48 +262,117 @@
       </div>
 
       <div class="panelcorp-field">
-        <label>Objetivo principal</label>
-        <select id="ia-goal">
-          <option value="vender">Vender</option>
-          <option value="agendar">Agendar</option>
-          <option value="informar">Informar</option>
-          <option value="filtrar">Filtrar prospectos</option>
+        <label>Nivel de iniciativa</label>
+        <select id="ia_initiative">
+          <option value="reactivo">Reactivo (solo responde lo que preguntan)</option>
+          <option value="guiado">Guiado (hace 1-2 preguntas para avanzar)</option>
+          <option value="proactivo">Proactivo (lidera para lograr el objetivo)</option>
         </select>
       </div>
     </div>
   </div>
 
-  <!-- =========================
-       ESCALAMIENTO
-       ========================= -->
+  <!-- 4) HORARIOS -->
   <div class="panelcorp-ia-card">
-
-    <h3>🚨 Escalar a humano</h3>
+    <h3>🕒 Horarios y disponibilidad</h3>
     <p class="panelcorp-ia-desc">
-      Cuándo la IA debe pasar la conversación a tu equipo.
+      Define cuándo el asistente opera como negocio activo y qué hacer fuera de horario.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Respuestas fuera de horario</label>
+        <select id="ia_after_hours_mode">
+          <option value="normal">Responder normalmente</option>
+          <option value="cerrado">Responder “Estamos cerrados”</option>
+          <option value="datos">Tomar datos del cliente</option>
+          <option value="agendar">Agendar contacto para después</option>
+          <option value="escalar">Escalar a un humano</option>
+          <option value="off">No responder</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Horario de atención (texto)</label>
+        <input id="ia_business_hours" type="text" placeholder="Ej. Lun–Vie 9:00–18:00, Sáb 9:00–14:00" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Mensaje fuera de horario</label>
+        <input id="ia_after_hours_message" type="text" placeholder="Ej. Gracias, estamos cerrados. Te contactamos mañana." />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Datos a pedir fuera de horario</label>
+        <input id="ia_after_hours_fields" type="text" placeholder="Ej. Nombre, motivo, teléfono, horario preferido" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 5) LÍMITES / ESCALAMIENTO -->
+  <div class="panelcorp-ia-card">
+    <h3>🚨 Límites y escalamiento</h3>
+    <p class="panelcorp-ia-desc">
+      Define cuándo la IA debe pasar la conversación a tu equipo.
     </p>
 
     <div class="panelcorp-ia-fields">
       <div class="panelcorp-field">
         <label>Escalar cuando</label>
-        <select id="ia-escalation">
-          <option value="solicita_humano">El cliente pide hablar con una persona</option>
-          <option value="no_entendio">No entiende la respuesta</option>
-          <option value="cierre">Quiere cerrar compra</option>
+        <select id="ia_escalate_when">
+          <option value="pide_humano">El cliente pide hablar con una persona</option>
+          <option value="no_se_puede">La solicitud requiere atención humana</option>
+          <option value="enojo">Cliente molesto / conflicto</option>
+          <option value="cierre">Quiere cerrar compra / pago</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Contacto para escalar (correo o WhatsApp interno)</label>
+        <input id="ia_escalation_contact" type="text" placeholder="Ej. ventas@tuempresa.com / +52 55..." />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Qué debe enviar al humano (resumen)</label>
+        <input id="ia_escalation_summary" type="text" placeholder="Ej. Nombre, necesidad, urgencia, conversación resumida" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 6) RESULTADO ESPERADO -->
+  <div class="panelcorp-ia-card">
+    <h3>✅ Resultado esperado</h3>
+    <p class="panelcorp-ia-desc">
+      Qué debe intentar lograr antes de cerrar una conversación.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Regla principal (1 frase)</label>
+        <input id="ia_main_rule" type="text" placeholder="Ej. Captura datos y ofrece agendar antes de escalar." />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Reglas extra (opcional)</label>
+        <input id="ia_extra_rules" type="text" placeholder="Ej. No inventes precios. Si no sabes, pide datos y escala." />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Encendido del asistente</label>
+        <select id="ia_enabled">
+          <option value="true">Activo</option>
+          <option value="false">Inactivo</option>
         </select>
       </div>
     </div>
   </div>
 
-  <!-- =========================
-       ACCIONES
-       ========================= -->
+  <!-- ACCIONES -->
   <div class="panelcorp-ia-actions">
-    <button id="ia-save-btn" class="panelcorp-home-cta">
-      Guardar configuración de IA
+    <button id="ia_save_btn" class="panelcorp-home-cta">
+      Guardar configuración
     </button>
-
-    <span id="ia-status" class="panelcorp-ia-status"></span>
+    <span id="ia_status" class="panelcorp-ia-status"></span>
   </div>
 
 </section>
