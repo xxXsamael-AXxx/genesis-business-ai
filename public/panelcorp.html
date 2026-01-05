@@ -309,35 +309,34 @@
     </div>
   </div>
 
-  <!-- 5) LÍMITES / ESCALAMIENTO -->
-  <div class="panelcorp-ia-card">
-    <h3>🚨 Límites y escalamiento</h3>
-    <p class="panelcorp-ia-desc">
-      Define cuándo la IA debe pasar la conversación a tu equipo.
-    </p>
+  <!-- 5) LÍMITES -->
+<div class="panelcorp-ia-card">
+  <h3>🚨 Límites del asistente</h3>
+  <p class="panelcorp-ia-desc">
+    Define en qué situaciones la IA debe dejar de responder y solicitar apoyo humano.
+  </p>
 
-    <div class="panelcorp-ia-fields">
-      <div class="panelcorp-field">
-        <label>Escalar cuando</label>
-        <select id="ia_escalate_when">
-          <option value="pide_humano">El cliente pide hablar con una persona</option>
-          <option value="no_se_puede">La solicitud requiere atención humana</option>
-          <option value="enojo">Cliente molesto / conflicto</option>
-          <option value="cierre">Quiere cerrar compra / pago</option>
-        </select>
-      </div>
+  <div class="panelcorp-ia-fields">
+    <div class="panelcorp-field">
+      <label>Escalar cuando</label>
+      <select id="ia_escalate_when">
+        <option value="pide_humano">El cliente pide hablar con una persona</option>
+        <option value="no_se_puede">La solicitud requiere atención humana</option>
+        <option value="enojo">Cliente molesto o conflicto</option>
+        <option value="cierre">Quiere cerrar compra o pago</option>
+      </select>
+    </div>
 
-      <div class="panelcorp-field">
-        <label>Contacto para escalar (correo o WhatsApp interno)</label>
-        <input id="ia_escalation_contact" type="text" placeholder="Ej. ventas@tuempresa.com / +52 55..." />
-      </div>
-
-      <div class="panelcorp-field">
-        <label>Qué debe enviar al humano (resumen)</label>
-        <input id="ia_escalation_summary" type="text" placeholder="Ej. Nombre, necesidad, urgencia, conversación resumida" />
-      </div>
+    <div class="panelcorp-field">
+      <label>Información mínima que debe recopilar antes de escalar</label>
+      <input
+        id="ia_escalation_summary"
+        type="text"
+        placeholder="Ej. Nombre, motivo de contacto, urgencia"
+      />
     </div>
   </div>
+</div>
 
   <!-- 6) RESULTADO ESPERADO -->
   <div class="panelcorp-ia-card">
