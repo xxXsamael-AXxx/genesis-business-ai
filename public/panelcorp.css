@@ -688,6 +688,46 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 
 /* ================================================== Vistas Panel Derecho ================================================== */
 
+/* ==================================================
+   UX GLOBAL — MOSTRAR TEXTO COMPLETO EN CAMPOS
+   ================================================== */
+
+/* INPUTS: permitir ver todo el texto */
+.panelcorp-field input {
+  overflow-x: auto;
+  white-space: nowrap;
+  text-overflow: unset;
+}
+
+/* Quitar cualquier recorte forzado */
+.panelcorp-field input::-webkit-scrollbar {
+  height: 6px;
+}
+
+.panelcorp-field input::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 153, 0.45);
+  border-radius: 6px;
+}
+
+.panelcorp-field input::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* TEXTAREA: mostrar todo el contenido sin cortar */
+.panelcorp-field textarea {
+  min-height: 96px;
+  resize: vertical;
+  overflow-y: auto;
+  line-height: 1.45;
+}
+
+/* Placeholder completo y legible */
+.panelcorp-field input::placeholder,
+.panelcorp-field textarea::placeholder {
+  white-space: normal;
+}
+
+
 /* =============== Header Global ================*/
 .panelcorp-header {
   height: 64px;
@@ -1141,3 +1181,36 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   }
 }
 
+/* ==================================================
+   WHATSAPP / MAIL — AJUSTES MÍNIMOS DE CANAL
+   ================================================== */
+
+/* Botón secundario (acciones no principales) */
+.panelcorp-home-cta.secondary {
+  background: rgba(2, 30, 26, 0.6);
+  border: 1px solid rgba(34, 211, 153, 0.35);
+  color: #9ca3af;
+
+  box-shadow: none;
+}
+
+.panelcorp-home-cta.secondary:hover {
+  background: rgba(4, 40, 34, 0.85);
+  color: #ecfeff;
+
+  box-shadow:
+    0 0 12px rgba(34, 211, 153, 0.35);
+}
+
+/* Inputs deshabilitados (estado / solo lectura) */
+.panelcorp-field input[disabled],
+.panelcorp-field select[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Botones dentro de grids */
+.panelcorp-ia-fields .panelcorp-home-cta {
+  width: 100%;
+  justify-content: center;
+}

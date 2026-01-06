@@ -366,6 +366,65 @@
     </div>
   </div>
 
+  <!-- 7) COMPORTAMIENTO POR EMAIL -->
+<div class="panelcorp-ia-card">
+  <h3>📧 Comportamiento por Email</h3>
+  <p class="panelcorp-ia-desc">
+    Define cómo y cuándo la IA debe usar el correo electrónico como canal de respuesta o seguimiento.
+  </p>
+
+  <div class="panelcorp-ia-fields">
+    <div class="panelcorp-field">
+      <label>¿Cuándo usar email?</label>
+      <select id="ia_email_when">
+        <option value="nunca">Nunca</option>
+        <option value="seguimiento">Para seguimiento posterior</option>
+        <option value="fuera_horario">Cuando el contacto ocurre fuera de horario</option>
+        <option value="cotizacion">Para enviar cotizaciones o información extensa</option>
+        <option value="siempre">Siempre que el cliente deje su correo</option>
+      </select>
+    </div>
+
+    <div class="panelcorp-field">
+      <label>Objetivo del email</label>
+      <select id="ia_email_goal">
+        <option value="informar">Informar</option>
+        <option value="seguimiento">Dar seguimiento</option>
+        <option value="recordatorio">Recordar cita o contacto</option>
+        <option value="venta">Preparar cierre / venta</option>
+      </select>
+    </div>
+
+    <div class="panelcorp-field">
+      <label>Tono del email</label>
+      <select id="ia_email_tone">
+        <option value="profesional">Profesional</option>
+        <option value="cercano">Cercano</option>
+        <option value="formal">Formal</option>
+      </select>
+    </div>
+
+    <div class="panelcorp-field">
+      <label>Qué debe incluir el email</label>
+      <input
+        id="ia_email_content"
+        type="text"
+        placeholder="Ej. Resumen del contacto, próximos pasos, datos del negocio"
+      />
+    </div>
+
+    <div class="panelcorp-field">
+      <label>Regla clave para email</label>
+      <input
+        id="ia_email_rule"
+        type="text"
+        placeholder="Ej. No envíes email sin consentimiento explícito del cliente"
+      />
+    </div>
+  </div>
+</div>
+
+
   <!-- ACCIONES -->
   <div class="panelcorp-ia-actions">
     <button id="ia_save_btn" class="panelcorp-home-cta">
@@ -377,10 +436,151 @@
 </section>
 
 
-      <section id="corp-whatsapp" class="panelcorp-view">
-        <h1>WhatsApp / Mail</h1>
-        <p>Número, plantillas, estado, webhooks</p>
-      </section>
+   <section id="corp-whatsapp" class="panelcorp-view">
+
+  <!-- HEADER -->
+  <header class="panelcorp-ia-header">
+    <h1>WhatsApp / Mail</h1>
+    <p>Conecta y administra los canales por donde responde tu asistente.</p>
+  </header>
+
+  <!-- =========================
+       WHATSAPP
+       ========================= -->
+  <div class="panelcorp-ia-card required">
+    <h3>💬 WhatsApp</h3>
+    <p class="panelcorp-ia-desc">
+      Vincula el número de WhatsApp que usará la IA para responder a tus clientes.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Estado del canal</label>
+        <select id="wa_status">
+          <option value="disconnected">No conectado</option>
+          <option value="connected">Conectado</option>
+          <option value="error">Error de conexión</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Número vinculado</label>
+        <input
+          id="wa_number"
+          type="text"
+          placeholder="Ej. +52 55 1234 5678"
+          disabled
+        />
+      </div>
+    </div>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Vinculación</label>
+        <button class="panelcorp-home-cta">
+          Mostrar QR para vincular WhatsApp
+        </button>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Acciones</label>
+        <button class="panelcorp-home-cta secondary">
+          Desconectar WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       EMAIL
+       ========================= -->
+  <div class="panelcorp-ia-card">
+    <h3>📧 Email</h3>
+    <p class="panelcorp-ia-desc">
+      Configura el correo desde el cual la IA enviará seguimientos y respuestas.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Estado del canal</label>
+        <select id="email_status">
+          <option value="inactive">Inactivo</option>
+          <option value="active">Activo</option>
+          <option value="error">Error de configuración</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Correo de salida</label>
+        <input
+          id="email_from"
+          type="email"
+          placeholder="Ej. contacto@tuempresa.com"
+        />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Nombre del remitente</label>
+        <input
+          id="email_sender_name"
+          type="text"
+          placeholder="Ej. Atención Clínica Nova"
+        />
+      </div>
+    </div>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Configuración del correo</label>
+        <select id="email_provider">
+          <option value="smtp">SMTP</option>
+          <option value="gmail">Gmail</option>
+          <option value="api">Proveedor por API</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Estado de validación</label>
+        <input
+          type="text"
+          placeholder="No validado / Validado"
+          disabled
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       WEBHOOKS / ESTADO
+       ========================= -->
+  <div class="panelcorp-ia-card">
+    <h3>🔌 Estado técnico</h3>
+    <p class="panelcorp-ia-desc">
+      Información técnica del sistema para recepción y envío de mensajes.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Webhook WhatsApp</label>
+        <input
+          type="text"
+          placeholder="Activo"
+          disabled
+        />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Webhook Email</label>
+        <input
+          type="text"
+          placeholder="Activo"
+          disabled
+        />
+      </div>
+    </div>
+  </div>
+
+</section>
 
       <section id="corp-flows" class="panelcorp-view">
         <h1>Flujos</h1>
