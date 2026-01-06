@@ -547,9 +547,27 @@
       </div>
 
       <div class="panelcorp-field">
-        <label>Contraseña / Token</label>
-        <input type="password" placeholder="••••••••" />
-      </div>
+  <label>Contraseña / Token</label>
+
+  <div class="panel-password-field">
+    <input
+      type="password"
+      placeholder="••••••••"
+    />
+
+    <button
+      type="button"
+      class="panel-password-toggle"
+      aria-label="Mostrar u ocultar contraseña"
+    >
+      <img
+        src="/assets/img/eye-closed.svg"
+        alt="Mostrar contraseña"
+      />
+    </button>
+  </div>
+</div>
+
 
       <div class="panelcorp-field">
         <label>Nombre del remitente</label>
@@ -630,6 +648,17 @@
       </div>
     </div>
   </div>
+
+<!-- =========================
+     ACCIONES — GUARDAR CANALES
+     ========================= -->
+<div class="panelcorp-ia-actions">
+  <button id="channels-save-btn" class="panelcorp-home-cta">
+    Guardar configuración
+  </button>
+
+  <span id="channels-status" class="panelcorp-ia-status"></span>
+</div>
 
 </section>
 
