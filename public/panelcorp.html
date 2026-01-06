@@ -746,6 +746,44 @@
   </div>
 </div>
 
+<!-- =========================
+     MODAL — VINCULAR WHATSAPP (QR)
+     ========================= -->
+<div id="whatsapp-qr-modal" class="modal-overlay" hidden>
+  <div class="modal-card">
+
+    <h2>Vincular WhatsApp</h2>
+    <p>
+      Escanea este código QR desde el WhatsApp de tu negocio para conectar el asistente.
+    </p>
+
+    <!-- QR -->
+    <div class="modal-qr-container">
+      <!-- Aquí se inyectará el QR desde backend -->
+      <div class="modal-qr-placeholder">
+        QR no disponible
+      </div>
+    </div>
+
+    <!-- ESTADO -->
+    <p id="whatsapp-qr-status" class="modal-status">
+      Esperando conexión…
+    </p>
+
+    <!-- ACCIONES -->
+    <div class="modal-actions">
+      <button
+        type="button"
+        class="btn-secondary"
+        data-close-modal
+      >
+        Cerrar
+      </button>
+    </div>
+
+  </div>
+</div>
+
 
 
   <script src="/panelcorp.js"></script>
