@@ -688,37 +688,6 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 
 /* ================================================== Vistas Panel Derecho ================================================== */
 
-/* ==================================================
-   UX GLOBAL — TEXTO NAVEGABLE (INFORMATIVO)
-   ================================================== */
-
-/* INPUTS: permiten navegar horizontalmente */
-.panelcorp-field input {
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  text-overflow: unset;
-}
-
-/* TEXTAREA: permiten navegar vertical y horizontal */
-.panelcorp-field textarea {
-  min-height: 72px;
-  resize: none;
-
-  white-space: pre-wrap;
-  overflow-x: auto;
-  overflow-y: auto;
-
-  line-height: 1.45;
-}
-
-/* Placeholder visible y navegable */
-.panelcorp-field input::placeholder,
-.panelcorp-field textarea::placeholder {
-  white-space: pre-wrap;
-}
-
-
 /* =============== Header Global ================*/
 .panelcorp-header {
   height: 64px;
@@ -965,7 +934,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 }
 
 /* ==================================================
-   IA / AUTOMATIZACIÓN — PANEL CORPORATIVO
+   IA / AUTOMATIZACIÓN — PANEL CORPORATIVO (CORREGIDO)
    ================================================== */
 
 /* ===============================
@@ -1034,6 +1003,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 .panelcorp-ia-desc {
   margin-bottom: 18px;
   font-size: 14px;
+  line-height: 1.45; /* ✅ que el texto “respire” y no se vea apretado */
   color: #9ca3af;
   max-width: 680px;
 }
@@ -1064,17 +1034,28 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   color: #9ca3af;
 }
 
-/* INPUTS / SELECTS */
+/* ===============================
+   INPUTS / SELECTS / TEXTAREA (BASE)
+   =============================== */
 
 .panelcorp-field input,
-.panelcorp-field select {
-  padding: 12px 14px;
+.panelcorp-field select,
+.panelcorp-field textarea {
+  box-sizing: border-box;
+  width: 100%;
+
+  /* ✅ centra mejor el texto dentro del campo */
+  min-height: 46px;
+  padding: 13px 14px;
+  line-height: 1.25;
+
   border-radius: 14px;
 
   background: rgba(2, 30, 26, 0.85);
   border: 1px solid rgba(34, 211, 153, 0.35);
 
   color: #ecfeff;
+  caret-color: #ecfeff;
   font-size: 14px;
 
   outline: none;
@@ -1085,20 +1066,64 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
     background 0.15s ease;
 }
 
-.panelcorp-field input::placeholder {
+/* Placeholder (no “scroll”, pero sí legible y limpio) */
+.panelcorp-field input::placeholder,
+.panelcorp-field textarea::placeholder {
   color: #6b7280;
 }
 
-/* FOCUS */
+/* Para que los textos largos no “rompan” visualmente */
+.panelcorp-field input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
+/* Textarea listo para cuando lo uses en campos largos */
+.panelcorp-field textarea {
+  min-height: 96px;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow: auto;
+  line-height: 1.4;
+}
+
+/* FOCUS */
 .panelcorp-field input:focus,
-.panelcorp-field select:focus {
+.panelcorp-field select:focus,
+.panelcorp-field textarea:focus {
   background: rgba(4, 40, 34, 0.9);
   border-color: rgba(34, 211, 153, 0.9);
 
   box-shadow:
     0 0 0 1px rgba(34, 211, 153, 0.4),
     0 0 16px rgba(34, 211, 153, 0.55);
+}
+
+/* ===============================
+   FIX AUTOFILL (CHROME/EDGE) — evita campos blancos
+   =============================== */
+
+.panelcorp-field input:-webkit-autofill,
+.panelcorp-field input:-webkit-autofill:hover,
+.panelcorp-field input:-webkit-autofill:focus,
+.panelcorp-field input:-webkit-autofill:active,
+.panelcorp-field textarea:-webkit-autofill,
+.panelcorp-field textarea:-webkit-autofill:hover,
+.panelcorp-field textarea:-webkit-autofill:focus,
+.panelcorp-field textarea:-webkit-autofill:active {
+  -webkit-text-fill-color: #ecfeff;
+  caret-color: #ecfeff;
+
+  /* pinta el fondo del autofill con tu tema */
+  -webkit-box-shadow:
+    0 0 0 1000px rgba(2, 30, 26, 0.92) inset,
+    0 0 0 1px rgba(34, 211, 153, 0.35);
+  box-shadow:
+    0 0 0 1000px rgba(2, 30, 26, 0.92) inset,
+    0 0 0 1px rgba(34, 211, 153, 0.35);
+
+  transition: background-color 9999s ease-out 0s;
 }
 
 /* ===============================
@@ -1139,7 +1164,6 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 }
 
 /* ESTADO */
-
 .panelcorp-ia-status {
   font-size: 13px;
   color: #9ca3af;
@@ -1195,7 +1219,8 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 
 /* Inputs deshabilitados (estado / solo lectura) */
 .panelcorp-field input[disabled],
-.panelcorp-field select[disabled] {
+.panelcorp-field select[disabled],
+.panelcorp-field textarea[disabled] {
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -1215,9 +1240,11 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   width: 100%;
 }
 
+/* 🔥 importante: no dejamos que el input base lo “pise” */
 .panel-password-field input {
   width: 100%;
-  padding: 12px 16px;
+  min-height: 46px;
+  padding: 13px 16px;
   padding-right: 58px;
 
   border-radius: 999px;
@@ -1225,7 +1252,9 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 
   background: rgba(2, 20, 18, 0.95);
   color: #ecfeff;
+  caret-color: #ecfeff;
   font-size: 14px;
+  line-height: 1.25;
 
   outline: none;
 
@@ -1241,6 +1270,24 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   box-shadow:
     0 0 0 1px rgba(34, 211, 153, 0.55),
     0 0 18px rgba(34, 211, 153, 0.65);
+}
+
+/* Autofill también para este campo */
+.panel-password-field input:-webkit-autofill,
+.panel-password-field input:-webkit-autofill:hover,
+.panel-password-field input:-webkit-autofill:focus,
+.panel-password-field input:-webkit-autofill:active {
+  -webkit-text-fill-color: #ecfeff;
+  caret-color: #ecfeff;
+
+  -webkit-box-shadow:
+    0 0 0 1000px rgba(2, 20, 18, 0.96) inset,
+    0 0 0 1px rgba(34, 211, 153, 0.55);
+  box-shadow:
+    0 0 0 1000px rgba(2, 20, 18, 0.96) inset,
+    0 0 0 1px rgba(34, 211, 153, 0.55);
+
+  transition: background-color 9999s ease-out 0s;
 }
 
 .panel-password-toggle {
@@ -1276,4 +1323,22 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 
 .panel-password-toggle:hover img {
   transform: scale(1.15);
+}
+
+/* ==================================================
+   OCULTAR OJO NATIVO DEL NAVEGADOR (PASSWORD)
+   ================================================== */
+
+/* Edge / Chrome */
+.panelcorp-field input[type="password"]::-ms-reveal,
+.panelcorp-field input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Safari / WebKit */
+.panelcorp-field input[type="password"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
 }
