@@ -689,42 +689,33 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 /* ================================================== Vistas Panel Derecho ================================================== */
 
 /* ==================================================
-   UX GLOBAL — MOSTRAR TEXTO COMPLETO EN CAMPOS
+   UX GLOBAL — TEXTO NAVEGABLE (INFORMATIVO)
    ================================================== */
 
-/* INPUTS: permitir ver todo el texto */
+/* INPUTS: permiten navegar horizontalmente */
 .panelcorp-field input {
-  overflow-x: auto;
   white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
   text-overflow: unset;
 }
 
-/* Quitar cualquier recorte forzado */
-.panelcorp-field input::-webkit-scrollbar {
-  height: 6px;
-}
-
-.panelcorp-field input::-webkit-scrollbar-thumb {
-  background: rgba(34, 211, 153, 0.45);
-  border-radius: 6px;
-}
-
-.panelcorp-field input::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* TEXTAREA: mostrar todo el contenido sin cortar */
+/* TEXTAREA: permiten navegar vertical y horizontal */
 .panelcorp-field textarea {
-  min-height: 96px;
-  resize: vertical;
+  min-height: 72px;
+  resize: none;
+
+  white-space: pre-wrap;
+  overflow-x: auto;
   overflow-y: auto;
+
   line-height: 1.45;
 }
 
-/* Placeholder completo y legible */
+/* Placeholder visible y navegable */
 .panelcorp-field input::placeholder,
 .panelcorp-field textarea::placeholder {
-  white-space: normal;
+  white-space: pre-wrap;
 }
 
 

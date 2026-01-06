@@ -492,12 +492,12 @@
   </div>
 
   <!-- =========================
-       EMAIL
+       EMAIL (GENERAL)
        ========================= -->
   <div class="panelcorp-ia-card">
     <h3>📧 Email</h3>
     <p class="panelcorp-ia-desc">
-      Configura el correo desde el cual la IA enviará seguimientos y respuestas.
+      Configura el correo desde el cual la IA enviará respuestas y seguimientos.
     </p>
 
     <div class="panelcorp-ia-fields">
@@ -511,76 +511,128 @@
       </div>
 
       <div class="panelcorp-field">
-        <label>Correo de salida</label>
-        <input
-          id="email_from"
-          type="email"
-          placeholder="Ej. contacto@tuempresa.com"
-        />
-      </div>
-
-      <div class="panelcorp-field">
-        <label>Nombre del remitente</label>
-        <input
-          id="email_sender_name"
-          type="text"
-          placeholder="Ej. Atención Clínica Nova"
-        />
-      </div>
-    </div>
-
-    <div class="panelcorp-ia-fields">
-      <div class="panelcorp-field">
-        <label>Configuración del correo</label>
+        <label>Método de envío</label>
         <select id="email_provider">
-          <option value="smtp">SMTP</option>
+          <option value="smtp" selected>SMTP</option>
           <option value="gmail">Gmail</option>
           <option value="api">Proveedor por API</option>
         </select>
-      </div>
-
-      <div class="panelcorp-field">
-        <label>Estado de validación</label>
-        <input
-          type="text"
-          placeholder="No validado / Validado"
-          disabled
-        />
       </div>
     </div>
   </div>
 
   <!-- =========================
-       WEBHOOKS / ESTADO
+       EMAIL — SMTP (VISIBLE POR DEFECTO)
+       ========================= -->
+  <div class="panelcorp-ia-card">
+    <h3>📤 SMTP</h3>
+    <p class="panelcorp-ia-desc">
+      Envío de correo mediante servidor SMTP del negocio.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Servidor SMTP</label>
+        <input type="text" placeholder="smtp.tuempresa.com" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Puerto</label>
+        <input type="text" placeholder="587" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Usuario</label>
+        <input type="text" placeholder="contacto@tuempresa.com" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Contraseña / Token</label>
+        <input type="password" placeholder="••••••••" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Nombre del remitente</label>
+        <input type="text" placeholder="Atención Tu Empresa" />
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       EMAIL — GMAIL
+       ========================= -->
+  <div class="panelcorp-ia-card">
+    <h3>📨 Gmail</h3>
+    <p class="panelcorp-ia-desc">
+      Conecta una cuenta de Google mediante autorización segura.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Cuenta de Gmail</label>
+        <input type="email" placeholder="tucuenta@gmail.com" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Autorización</label>
+        <button class="panelcorp-home-cta">
+          Conectar cuenta de Google
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       EMAIL — API
+       ========================= -->
+  <div class="panelcorp-ia-card">
+    <h3>🔑 Proveedor por API</h3>
+    <p class="panelcorp-ia-desc">
+      Servicios profesionales como SendGrid, Mailgun o Resend.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Proveedor</label>
+        <input type="text" placeholder="Ej. SendGrid" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>API Key</label>
+        <input type="password" placeholder="Pega aquí tu API Key" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Correo remitente validado</label>
+        <input type="email" placeholder="contacto@tuempresa.com" />
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       ESTADO TÉCNICO
        ========================= -->
   <div class="panelcorp-ia-card">
     <h3>🔌 Estado técnico</h3>
     <p class="panelcorp-ia-desc">
-      Información técnica del sistema para recepción y envío de mensajes.
+      Información del sistema para recepción y envío de mensajes.
     </p>
 
     <div class="panelcorp-ia-fields">
       <div class="panelcorp-field">
         <label>Webhook WhatsApp</label>
-        <input
-          type="text"
-          placeholder="Activo"
-          disabled
-        />
+        <input type="text" placeholder="Activo" disabled />
       </div>
 
       <div class="panelcorp-field">
         <label>Webhook Email</label>
-        <input
-          type="text"
-          placeholder="Activo"
-          disabled
-        />
+        <input type="text" placeholder="Activo" disabled />
       </div>
     </div>
   </div>
 
 </section>
+
 
       <section id="corp-flows" class="panelcorp-view">
         <h1>Flujos</h1>
