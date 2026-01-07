@@ -664,9 +664,93 @@
 
 
       <section id="corp-flows" class="panelcorp-view">
-        <h1>Flujos</h1>
-        <p>Automatizaciones por etapas</p>
-      </section>
+
+  <!-- HEADER -->
+  <header class="panelcorp-ia-header">
+    <h1>Flujos</h1>
+    <p>Visualiza y organiza las etapas por las que pasa una conversación.</p>
+  </header>
+
+  <!-- INFO -->
+  <div class="panelcorp-ia-card">
+    <h3>🔁 ¿Qué son los flujos?</h3>
+    <p class="panelcorp-ia-desc">
+      Los flujos representan el recorrido interno de una conversación.
+      No definen reglas nuevas: usan la configuración ya hecha en IA / Automatización
+      y muestran cómo avanza cada contacto por etapas.
+    </p>
+  </div>
+
+  <!-- FLUJO BASE -->
+  <div class="panelcorp-ia-card required">
+    <h3>📍 Flujo principal</h3>
+    <p class="panelcorp-ia-desc">
+      Orden estándar que sigue la IA desde el primer mensaje hasta el cierre o escalamiento.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+
+      <div class="panelcorp-field">
+        <label>Inicio</label>
+        <input type="text" value="Mensaje entrante del cliente" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Atención IA</label>
+        <input type="text" value="Responder según identidad, tono y objetivo" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Avance</label>
+        <input type="text" value="Captura de datos / Información / Seguimiento" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Decisión</label>
+        <input type="text" value="Continuar IA o escalar a humano" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Cierre</label>
+        <input type="text" value="Conversación resuelta o derivada" disabled />
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ESTADOS -->
+  <div class="panelcorp-ia-card">
+    <h3>📊 Estados posibles</h3>
+    <p class="panelcorp-ia-desc">
+      Estados internos usados para seguimiento y métricas (no editables).
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <input type="text" value="Activo" disabled />
+      </div>
+      <div class="panelcorp-field">
+        <input type="text" value="En seguimiento" disabled />
+      </div>
+      <div class="panelcorp-field">
+        <input type="text" value="Escalado a humano" disabled />
+      </div>
+      <div class="panelcorp-field">
+        <input type="text" value="Cerrado" disabled />
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTA -->
+  <div class="panelcorp-ia-card">
+    <p class="panelcorp-ia-desc">
+      Las conversaciones reales se visualizan en WhatsApp y Email.
+      Este panel solo define el recorrido interno que usa la IA para operar.
+    </p>
+  </div>
+
+</section>
+
 
       <section id="corp-quotes" class="panelcorp-view">
         <h1>Cotizaciones</h1>
