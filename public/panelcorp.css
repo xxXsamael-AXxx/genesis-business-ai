@@ -1344,59 +1344,96 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 }
 
 
-/* ==================================================
-   FILE INPUT — CATÁLOGOS (PDF) Cotizaciones
-   ================================================== */
+/* ===============================
+   FILE CARD – subir catálogo
+   =============================== */
 
-.panelcorp-file {
+.panelcorp-file-card {
   position: relative;
   width: 100%;
+  border-radius: 18px;
+  padding: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 30, 25, 0.95),
+    rgba(2, 18, 15, 0.95)
+  );
+  border: 1px solid rgba(34, 211, 153, 0.35);
+  cursor: pointer;
+  transition: all .2s ease;
 }
 
-.panelcorp-file input[type="file"] {
+.panelcorp-file-card:hover {
+  border-color: rgba(34, 211, 153, 0.9);
+  box-shadow: 0 0 18px rgba(34, 211, 153, 0.35);
+}
+
+.panelcorp-file-card input[type="file"] {
   position: absolute;
   inset: 0;
   opacity: 0;
   cursor: pointer;
 }
 
-.panelcorp-file-ui {
+/* contenido interno */
+.panelcorp-file-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #e5fdf7;
+}
+
+.panelcorp-file-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ecfeff;
+}
+
+.panelcorp-file-hint {
+  font-size: 13px;
+  color: rgba(167, 243, 208, 0.8);
+}
+
+/* estado vacío */
+.panelcorp-file-card.is-empty .panelcorp-file-title::after {
+  content: " · No se ha subido archivo";
+  font-weight: 400;
+  color: rgba(167, 243, 208, 0.6);
+}
+
+/* estado cargado (para cuando metas JS después) */
+.panelcorp-file-card.is-loaded {
+  border-color: rgba(16, 185, 129, 0.9);
+  background: linear-gradient(
+    180deg,
+    rgba(6, 45, 36, 0.95),
+    rgba(2, 26, 20, 0.95)
+  );
+}
+
+.panelcorp-file-card.is-loaded .panelcorp-file-title::after {
+  content: " · Archivo cargado";
+  font-weight: 500;
+  color: #34d399;
+}
+
+/* botón secundario tipo card */
+.panelcorp-file-secondary {
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  padding: 12px 16px;
-  border-radius: 14px;
-
-  background: rgba(2, 30, 26, 0.85);
-  border: 1px solid rgba(34, 211, 153, 0.35);
-
-  color: #9ca3af;
+  justify-content: center;
+  height: 100%;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(2, 20, 17, 0.8);
+  border: 1px dashed rgba(34, 211, 153, 0.4);
+  color: #9ff3d6;
   font-size: 14px;
-
-  transition: border-color .15s ease, box-shadow .15s ease;
-}
-
-.panelcorp-file-ui span {
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.panelcorp-file-ui button {
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(34, 211, 153, 0.6);
-
-  background: rgba(4, 40, 34, 0.9);
-  color: #ecfeff;
-  font-size: 13px;
   cursor: pointer;
+  transition: all .2s ease;
 }
 
-.panelcorp-file:hover .panelcorp-file-ui {
+.panelcorp-file-secondary:hover {
   border-color: rgba(34, 211, 153, 0.9);
-  box-shadow: 0 0 12px rgba(34, 211, 153, 0.45);
+  background: rgba(4, 35, 30, 0.9);
 }
-
