@@ -787,20 +787,21 @@
         <input type="url" placeholder="https://tusitio.com/catalogo" />
       </div>
 
-      <!-- CARD SUBIR PDF CLIENTES -->
-      <div class="panelcorp-file-card" tabindex="0">
-        <input
-          type="file"
-          accept="application/pdf"
-          id="catalog_public_pdf"
-          hidden
-        />
-
-        <div class="panelcorp-file-content">
-          <strong>Subir catálogo en PDF</strong>
-          <span class="panelcorp-file-status empty">
-            Haz clic para subir archivo (PDF)
-          </span>
+      <!-- PDF CLIENTES -->
+      <div class="panelcorp-field">
+        <div class="panelcorp-file-card" tabindex="0">
+          <input
+            type="file"
+            accept="application/pdf"
+            id="catalog_public_pdf"
+            hidden
+          />
+          <div class="panelcorp-file-content">
+            <strong>Subir catálogo en PDF</strong>
+            <span class="panelcorp-file-hint">
+              Haz clic para subir archivo (PDF)
+            </span>
+          </div>
         </div>
       </div>
 
@@ -817,28 +818,30 @@
 
     <div class="panelcorp-ia-fields">
 
-      <!-- CARD SUBIR PDF INTERNO -->
-      <div class="panelcorp-file-card" tabindex="0">
-        <input
-          type="file"
-          accept="application/pdf"
-          id="catalog_internal_pdf"
-          hidden
-        />
-
-        <div class="panelcorp-file-content">
-          <strong>Subir catálogo interno (PDF)</strong>
-          <span class="panelcorp-file-status empty">
-            Haz clic para subir archivo (PDF)
-          </span>
+      <!-- PDF INTERNO -->
+      <div class="panelcorp-field">
+        <div class="panelcorp-file-card" tabindex="0">
+          <input
+            type="file"
+            accept="application/pdf"
+            id="catalog_internal_pdf"
+            hidden
+          />
+          <div class="panelcorp-file-content">
+            <strong>Subir catálogo interno (PDF)</strong>
+            <span class="panelcorp-file-hint">
+              Haz clic para subir archivo (PDF)
+            </span>
+          </div>
         </div>
       </div>
 
+      <!-- PLANTILLA -->
       <div class="panelcorp-field">
         <label>Plantilla recomendada</label>
-        <button class="panelcorp-home-cta secondary">
+        <div class="panelcorp-file-secondary">
           Descargar catálogo base
-        </button>
+        </div>
       </div>
 
     </div>
@@ -1047,9 +1050,121 @@
 
 
       <section id="corp-analytics" class="panelcorp-view">
-        <h1>Analítica</h1>
-        <p>Métricas reales de uso</p>
-      </section>
+
+  <!-- HEADER -->
+  <header class="panelcorp-ia-header">
+    <h1>Analítica</h1>
+    <p>Métricas reales de uso y desempeño de Génesis.</p>
+  </header>
+
+  <!-- INFO GENERAL -->
+  <div class="panelcorp-ia-card">
+    <h3>📊 ¿Qué muestra este panel?</h3>
+    <p class="panelcorp-ia-desc">
+      Analítica refleja el comportamiento real de las conversaciones atendidas por Génesis.
+      Aquí puedes ver volumen, estados, escalamiento y cierres.
+      No modifica reglas ni flujos.
+    </p>
+  </div>
+
+  <!-- RESUMEN GENERAL -->
+  <div class="panelcorp-ia-card required">
+    <h3>📈 Resumen general</h3>
+    <p class="panelcorp-ia-desc">
+      Actividad total registrada en el sistema.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Conversaciones totales</label>
+        <input type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Atendidas por IA</label>
+        <input type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Escaladas a humano</label>
+        <input type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Conversaciones cerradas</label>
+        <input type="text" value="—" disabled />
+      </div>
+    </div>
+  </div>
+
+  <!-- AVANCE POR FLUJO -->
+  <div class="panelcorp-ia-card">
+    <h3>🔁 Avance por etapas del flujo</h3>
+    <p class="panelcorp-ia-desc">
+      Distribución de conversaciones según la etapa en la que se encuentran.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Inicio</label>
+        <input type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Atención IA</label>
+        <input type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Avance / Seguimiento</label>
+        <input type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Decisión</label>
+        <input type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Cierre</label>
+        <input type="text" value="—" disabled />
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTADOS -->
+  <div class="panelcorp-ia-card">
+    <h3>📌 Estados actuales</h3>
+    <p class="panelcorp-ia-desc">
+      Estado interno de las conversaciones activas.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <input type="text" value="Activo —" disabled />
+      </div>
+      <div class="panelcorp-field">
+        <input type="text" value="En seguimiento —" disabled />
+      </div>
+      <div class="panelcorp-field">
+        <input type="text" value="Escalado a humano —" disabled />
+      </div>
+      <div class="panelcorp-field">
+        <input type="text" value="Cerrado —" disabled />
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="panelcorp-ia-card">
+    <p class="panelcorp-ia-desc">
+      Las conversaciones se gestionan en WhatsApp y Email.
+      Este panel existe para análisis, decisiones y mejora del sistema.
+    </p>
+  </div>
+
+</section>
+
 
       <section id="corp-subscription" class="panelcorp-view">
         <h1>Suscripción</h1>
