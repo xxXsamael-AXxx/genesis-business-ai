@@ -1345,7 +1345,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 
 
 /* ===============================
-   FILE CARD – subir catálogo
+   FILE CARD – subir catálogo (PDF)
    =============================== */
 
 .panelcorp-file-card {
@@ -1353,21 +1353,29 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   width: 100%;
   border-radius: 18px;
   padding: 18px;
+
   background: linear-gradient(
     180deg,
-    rgba(6, 30, 25, 0.95),
-    rgba(2, 18, 15, 0.95)
+    rgba(6, 28, 24, 0.95),
+    rgba(2, 16, 14, 0.95)
   );
+
   border: 1px solid rgba(34, 211, 153, 0.35);
   cursor: pointer;
-  transition: all .2s ease;
+  transition: border-color .2s ease, background .2s ease;
 }
 
+/* hover sutil (sin glow exagerado) */
 .panelcorp-file-card:hover {
-  border-color: rgba(34, 211, 153, 0.9);
-  box-shadow: 0 0 18px rgba(34, 211, 153, 0.35);
+  border-color: rgba(34, 211, 153, 0.6);
+  background: linear-gradient(
+    180deg,
+    rgba(6, 32, 27, 0.95),
+    rgba(2, 18, 15, 0.95)
+  );
 }
 
+/* input invisible que captura el click */
 .panelcorp-file-card input[type="file"] {
   position: absolute;
   inset: 0;
@@ -1391,23 +1399,27 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 
 .panelcorp-file-hint {
   font-size: 13px;
-  color: rgba(167, 243, 208, 0.8);
+  color: rgba(167, 243, 208, 0.75);
 }
+
+/* ===============================
+   ESTADOS
+   =============================== */
 
 /* estado vacío */
 .panelcorp-file-card.is-empty .panelcorp-file-title::after {
   content: " · No se ha subido archivo";
   font-weight: 400;
-  color: rgba(167, 243, 208, 0.6);
+  color: rgba(167, 243, 208, 0.55);
 }
 
-/* estado cargado (para cuando metas JS después) */
+/* estado cargado (cuando metas JS después) */
 .panelcorp-file-card.is-loaded {
-  border-color: rgba(16, 185, 129, 0.9);
+  border-color: rgba(16, 185, 129, 0.7);
   background: linear-gradient(
     180deg,
-    rgba(6, 45, 36, 0.95),
-    rgba(2, 26, 20, 0.95)
+    rgba(6, 38, 32, 0.95),
+    rgba(2, 22, 18, 0.95)
   );
 }
 
@@ -1417,23 +1429,31 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   color: #34d399;
 }
 
-/* botón secundario tipo card */
+/* ===============================
+   CARD SECUNDARIA (descarga plantilla)
+   =============================== */
+
 .panelcorp-file-secondary {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+
+  width: 100%;
   padding: 18px;
   border-radius: 18px;
-  background: rgba(2, 20, 17, 0.8);
-  border: 1px dashed rgba(34, 211, 153, 0.4);
+
+  background: rgba(2, 18, 15, 0.85);
+  border: 1px dashed rgba(34, 211, 153, 0.35);
+
   color: #9ff3d6;
   font-size: 14px;
+  text-align: center;
+
   cursor: pointer;
-  transition: all .2s ease;
+  transition: border-color .2s ease, background .2s ease;
 }
 
 .panelcorp-file-secondary:hover {
-  border-color: rgba(34, 211, 153, 0.9);
-  background: rgba(4, 35, 30, 0.9);
+  border-color: rgba(34, 211, 153, 0.6);
+  background: rgba(4, 30, 25, 0.9);
 }
