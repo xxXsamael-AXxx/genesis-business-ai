@@ -790,12 +790,14 @@
         />
       </div>
 
-      <div class="panelcorp-field">
-        <label>Subir catálogo en PDF (opcional)</label>
-        <input type="file" accept="application/pdf" />
-      </div>
-    </div>
+      <div class="panelcorp-file">
+  <input id="quotes_public_pdf" type="file" accept="application/pdf" />
+  <div class="panelcorp-file-ui" role="button" tabindex="0">
+    <button type="button">Elegir archivo</button>
+    <span id="quotes_public_pdf_name">No se eligió ningún archivo</span>
   </div>
+</div>
+
 
   <!-- CATÁLOGO INTERNO PARA COTIZAR -->
   <div class="panelcorp-ia-card required">
@@ -805,11 +807,14 @@
       No se comparte con el cliente.
     </p>
 
-    <div class="panelcorp-ia-fields">
-      <div class="panelcorp-field">
-        <label>Subir catálogo interno (PDF)</label>
-        <input type="file" accept="application/pdf" />
-      </div>
+    <div class="panelcorp-file">
+  <input id="quotes_internal_pdf" type="file" accept="application/pdf" />
+  <div class="panelcorp-file-ui" role="button" tabindex="0">
+    <button type="button">Elegir archivo</button>
+    <span id="quotes_internal_pdf_name">No se eligió ningún archivo</span>
+  </div>
+</div>
+
 
       <div class="panelcorp-field">
         <label>Descargar plantilla recomendada</label>
@@ -867,9 +872,134 @@
 
 
       <section id="corp-team" class="panelcorp-view">
-        <h1>Equipo</h1>
-        <p>Usuarios, roles y permisos</p>
-      </section>
+
+  <!-- HEADER -->
+  <header class="panelcorp-ia-header">
+    <h1>Equipo</h1>
+    <p>
+      Administra los usuarios que pueden acceder al panel, recibir conversaciones
+      escaladas por la IA y validar cotizaciones.
+    </p>
+  </header>
+
+  <!-- INFO GENERAL -->
+  <div class="panelcorp-ia-card">
+    <h3>ℹ️ ¿Para qué sirve el equipo?</h3>
+    <p class="panelcorp-ia-desc">
+      Cuando Genesis detecta que una conversación debe ser atendida por una persona,
+      la asigna a un miembro del equipo según su rol. Este panel define quién puede
+      intervenir y en qué momento.
+    </p>
+  </div>
+
+  <!-- LISTADO DE USUARIOS -->
+  <div class="panelcorp-ia-card">
+    <h3>👥 Miembros del equipo</h3>
+    <p class="panelcorp-ia-desc">
+      Usuarios con acceso al panel o asignación de conversaciones.
+    </p>
+
+    <div class="panelcorp-table">
+
+      <!-- HEADER TABLA -->
+      <div class="panelcorp-table-row header">
+        <span>Nombre</span>
+        <span>Correo</span>
+        <span>Rol</span>
+        <span>Estado</span>
+      </div>
+
+      <!-- USUARIO EJEMPLO -->
+      <div class="panelcorp-table-row">
+        <span>Alejandro</span>
+        <span>alejandro@email.com</span>
+        <span>Administrador</span>
+        <span class="status active">Activo</span>
+      </div>
+
+      <!-- USUARIO EJEMPLO -->
+      <div class="panelcorp-table-row">
+        <span>Ventas</span>
+        <span>ventas@empresa.com</span>
+        <span>Asesor</span>
+        <span class="status inactive">Inactivo</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AGREGAR USUARIO -->
+  <div class="panelcorp-ia-card">
+    <h3>➕ Agregar nuevo miembro</h3>
+    <p class="panelcorp-ia-desc">
+      Invita a una persona para que pueda recibir conversaciones o validar cotizaciones.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Nombre</label>
+        <input type="text" placeholder="Nombre del usuario" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="correo@empresa.com" />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Rol</label>
+        <select>
+          <option>Administrador</option>
+          <option>Asesor</option>
+          <option>Solo lectura</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROLES -->
+  <div class="panelcorp-ia-card">
+    <h3>🛡️ Roles disponibles</h3>
+    <p class="panelcorp-ia-desc">
+      Los roles determinan qué puede hacer cada usuario dentro de Génesis.
+    </p>
+
+    <ul class="panelcorp-list">
+      <li><strong>Administrador:</strong> Acceso total y configuración general.</li>
+      <li><strong>Asesor:</strong> Atiende conversaciones y valida cotizaciones.</li>
+      <li><strong>Solo lectura:</strong> Visualiza información sin intervenir.</li>
+    </ul>
+  </div>
+
+  <!-- ESCALAMIENTO -->
+  <div class="panelcorp-ia-card">
+    <h3>🤝 Escalamiento humano</h3>
+    <p class="panelcorp-ia-desc">
+      Cuando la IA no puede resolver una solicitud, la conversación se escala
+      automáticamente a un asesor disponible.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Estado del escalamiento</label>
+        <select>
+          <option value="on">Activo</option>
+          <option value="off">Desactivado</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUARDAR -->
+  <div class="panelcorp-ia-actions">
+    <button class="panelcorp-home-cta">
+      Guardar configuración de equipo
+    </button>
+    <span class="panelcorp-ia-status"></span>
+  </div>
+
+</section>
+
 
       <section id="corp-analytics" class="panelcorp-view">
         <h1>Analítica</h1>
