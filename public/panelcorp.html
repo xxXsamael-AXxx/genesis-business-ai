@@ -1048,8 +1048,7 @@
 
 </section>
 
-
-      <section id="corp-analytics" class="panelcorp-view">
+<section id="corp-analytics" class="panelcorp-view">
 
   <!-- HEADER -->
   <header class="panelcorp-ia-header">
@@ -1063,11 +1062,11 @@
     <p class="panelcorp-ia-desc">
       Analítica refleja el comportamiento real de las conversaciones atendidas por Génesis.
       Aquí puedes ver volumen, estados, escalamiento y cierres.
-      No modifica reglas ni flujos.
+      Este panel no modifica reglas ni flujos.
     </p>
   </div>
 
-  <!-- RESUMEN GENERAL -->
+  <!-- RESUMEN GENERAL (KPIs) -->
   <div class="panelcorp-ia-card required">
     <h3>📈 Resumen general</h3>
     <p class="panelcorp-ia-desc">
@@ -1075,6 +1074,7 @@
     </p>
 
     <div class="panelcorp-ia-fields">
+
       <div class="panelcorp-field">
         <label>Conversaciones totales</label>
         <input type="text" value="—" disabled />
@@ -1094,6 +1094,20 @@
         <label>Conversaciones cerradas</label>
         <input type="text" value="—" disabled />
       </div>
+
+    </div>
+  </div>
+
+  <!-- GRÁFICA GENERAL -->
+  <div class="panelcorp-ia-card">
+    <h3>📉 Evolución de conversaciones</h3>
+    <p class="panelcorp-ia-desc">
+      Visualización del volumen de conversaciones a lo largo del tiempo.
+    </p>
+
+    <!-- Placeholder de gráfica -->
+    <div class="panelcorp-chart-placeholder">
+      <span>Gráfica disponible próximamente</span>
     </div>
   </div>
 
@@ -1105,6 +1119,7 @@
     </p>
 
     <div class="panelcorp-ia-fields">
+
       <div class="panelcorp-field">
         <label>Inicio</label>
         <input type="text" value="—" disabled />
@@ -1129,10 +1144,11 @@
         <label>Cierre</label>
         <input type="text" value="—" disabled />
       </div>
+
     </div>
   </div>
 
-  <!-- ESTADOS -->
+  <!-- ESTADOS ACTUALES -->
   <div class="panelcorp-ia-card">
     <h3>📌 Estados actuales</h3>
     <p class="panelcorp-ia-desc">
@@ -1159,17 +1175,148 @@
   <div class="panelcorp-ia-card">
     <p class="panelcorp-ia-desc">
       Las conversaciones se gestionan en WhatsApp y Email.
-      Este panel existe para análisis, decisiones y mejora del sistema.
+      Este panel existe para análisis, toma de decisiones y mejora continua del sistema.
     </p>
   </div>
 
 </section>
 
 
+
       <section id="corp-subscription" class="panelcorp-view">
-        <h1>Suscripción</h1>
-        <p>Plan, pagos y facturación</p>
-      </section>
+
+  <!-- HEADER -->
+  <header class="panelcorp-ia-header">
+    <h1>Suscripción</h1>
+    <p>
+      Información de tu plan activo, pagos y estado de la cuenta.
+    </p>
+  </header>
+
+  <!-- INFO GENERAL -->
+  <div class="panelcorp-ia-card">
+    <h3>ℹ️ ¿Para qué sirve este panel?</h3>
+    <p class="panelcorp-ia-desc">
+      Aquí puedes consultar el plan que tienes contratado, lo que incluye,
+      el estado de tus pagos y administrar tu suscripción.
+      No afecta la configuración de la IA ni los flujos.
+    </p>
+  </div>
+
+  <!-- PLAN ACTUAL -->
+  <div class="panelcorp-ia-card required">
+    <h3>📦 Plan activo</h3>
+    <p class="panelcorp-ia-desc">
+      Este es el plan actualmente activo en tu cuenta.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+
+      <div class="panelcorp-field">
+        <label>Plan</label>
+        <input type="text" value="Corporativo" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Precio mensual</label>
+        <input type="text" value="$6,000 MXN" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Estado</label>
+        <input type="text" value="Activo" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Renovación</label>
+        <input type="text" value="Automática" disabled />
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUE INCLUYE -->
+  <div class="panelcorp-ia-card">
+    <h3>✅ Qué incluye tu plan</h3>
+    <p class="panelcorp-ia-desc">
+      Funciones habilitadas actualmente.
+    </p>
+
+    <ul class="panelcorp-list">
+      <li>Atención automática por WhatsApp</li>
+      <li>Seguimiento por WhatsApp y Email</li>
+      <li>Cotizaciones automáticas</li>
+      <li>Escalamiento humano configurable</li>
+      <li>Analítica y métricas</li>
+      <li>Gestión de equipo</li>
+    </ul>
+  </div>
+
+  <!-- HISTORIAL DE PAGOS -->
+  <div class="panelcorp-ia-card">
+    <h3>💳 Historial de pagos</h3>
+    <p class="panelcorp-ia-desc">
+      Registro de tus últimos pagos.
+    </p>
+
+    <div class="panelcorp-table">
+
+      <div class="panelcorp-table-row header">
+        <span>Fecha</span>
+        <span>Concepto</span>
+        <span>Monto</span>
+        <span>Estado</span>
+      </div>
+
+      <div class="panelcorp-table-row">
+        <span>01/01/2026</span>
+        <span>Plan Corporativo</span>
+        <span>$5,999</span>
+        <span class="status active">Pagado</span>
+      </div>
+
+      <div class="panelcorp-table-row">
+        <span>01/12/2025</span>
+        <span>Plan Corporativo</span>
+        <span>$5,999 MXN</span>
+        <span class="status active">Pagado</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ACCIONES DE SUSCRIPCIÓN -->
+  <div class="panelcorp-ia-card">
+    <h3>⚙️ Administrar suscripción</h3>
+    <p class="panelcorp-ia-desc">
+      Cambios relacionados con tu plan y pagos.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+
+      <div class="panelcorp-field">
+        <button class="panelcorp-home-cta secondary">
+          Cambiar de plan
+        </button>
+      </div>
+
+      <div class="panelcorp-field">
+        <button class="panelcorp-home-cta secondary">
+          Actualizar método de pago
+        </button>
+      </div>
+
+      <div class="panelcorp-field">
+        <button class="panelcorp-home-cta danger">
+          Cancelar suscripción
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
 
       <section id="corp-settings" class="panelcorp-view">
         <h1>Configuración</h1>
