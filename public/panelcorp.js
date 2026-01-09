@@ -245,6 +245,50 @@ document.querySelectorAll(".modal-password-toggle").forEach((btn) => {
   });
 });
 
+// ===============================
+  // chart
+  // ===============================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const ctx = document.getElementById("conversationsChart");
+  if (!ctx) return;
+
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+      datasets: [{
+        label: "Conversaciones",
+        data: [12, 19, 8, 15, 22, 17, 10],
+        borderColor: "#22d3a9",
+        backgroundColor: "rgba(34, 211, 169, 0.15)",
+        tension: 0.4,
+        fill: true,
+        pointRadius: 4,
+        pointBackgroundColor: "#22d3a9"
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: "#9ff3d6" }
+        },
+        y: {
+          grid: { color: "rgba(255,255,255,0.05)" },
+          ticks: { color: "#9ff3d6" }
+        }
+      }
+    }
+  });
+});
+
 
   // ===============================
   // LOGOUT
