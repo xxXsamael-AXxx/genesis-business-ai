@@ -1338,12 +1338,6 @@
       </div>
 
       <div class="panelcorp-field">
-        <button class="panelcorp-home-cta secondary">
-          Contactar asesor corporativo
-        </button>
-      </div>
-
-      <div class="panelcorp-field">
         <button class="panelcorp-home-cta danger">
           Cancelar suscripción
         </button>
@@ -1353,12 +1347,192 @@
 
 </section>
 
+<section id="corp-settings" class="panelcorp-view">
 
+  <!-- HEADER -->
+  <header class="panelcorp-ia-header">
+    <h1>Configuración</h1>
+    <p>Seguridad, control global y acciones de cuenta.</p>
+  </header>
 
-      <section id="corp-settings" class="panelcorp-view">
-        <h1>Configuración</h1>
-        <p>Datos del negocio</p>
-      </section>
+  <!-- 1) ESTADO GLOBAL -->
+  <div class="panelcorp-ia-card required">
+    <h3>🟢 Estado general del sistema</h3>
+    <p class="panelcorp-ia-desc">
+      Pausa o reactiva Génesis completo sin borrar configuraciones. Al pausar, la IA deja de responder en todos los canales.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Estado de Génesis</label>
+        <select id="settings_system_enabled">
+          <option value="true">Activo</option>
+          <option value="false">Pausado</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Comportamiento al pausar</label>
+        <input
+          type="text"
+          value="La IA no responde. Configuraciones y conexiones se conservan."
+          disabled
+        />
+      </div>
+    </div>
+
+    <div class="panelcorp-ia-actions">
+      <button id="settings_system_save" class="panelcorp-home-cta">
+        Guardar estado
+      </button>
+      <span id="settings_system_status" class="panelcorp-ia-status"></span>
+    </div>
+  </div>
+
+  <!-- 2) SEGURIDAD -->
+  <div class="panelcorp-ia-card">
+    <h3>🔐 Seguridad</h3>
+    <p class="panelcorp-ia-desc">
+      Cambia tu contraseña para proteger el acceso al panel.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Contraseña actual</label>
+        <div class="panel-password-field">
+          <input id="settings_current_password" type="password" placeholder="••••••••" />
+          <button type="button" class="panel-password-toggle" data-target="settings_current_password" aria-label="Mostrar u ocultar contraseña">
+            <img src="/assets/img/eye-closed.svg" alt="Mostrar contraseña" />
+          </button>
+        </div>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Nueva contraseña</label>
+        <div class="panel-password-field">
+          <input id="settings_new_password" type="password" minlength="8" placeholder="Mínimo 8 caracteres" />
+          <button type="button" class="panel-password-toggle" data-target="settings_new_password" aria-label="Mostrar u ocultar contraseña">
+            <img src="/assets/img/eye-closed.svg" alt="Mostrar contraseña" />
+          </button>
+        </div>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Confirmar nueva contraseña</label>
+        <div class="panel-password-field">
+          <input id="settings_confirm_password" type="password" minlength="8" placeholder="Repite la nueva contraseña" />
+          <button type="button" class="panel-password-toggle" data-target="settings_confirm_password" aria-label="Mostrar u ocultar contraseña">
+            <img src="/assets/img/eye-closed.svg" alt="Mostrar contraseña" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panelcorp-ia-actions">
+      <button id="settings_change_password" class="panelcorp-home-cta">
+        Cambiar contraseña
+      </button>
+      <span id="settings_password_status" class="panelcorp-ia-status"></span>
+    </div>
+  </div>
+
+  <!-- 3) SESIONES -->
+  <div class="panelcorp-ia-card">
+    <h3>🧾 Sesiones</h3>
+    <p class="panelcorp-ia-desc">
+      Si crees que alguien más tiene acceso, cierra todas las sesiones activas.
+    </p>
+
+    <div class="panelcorp-ia-actions">
+      <!-- SOLO UN BOTÓN (como pediste) -->
+      <button id="settings_logout_all" class="panelcorp-home-cta secondary">
+        Cerrar sesión en todos los dispositivos
+      </button>
+      <span id="settings_logout_all_status" class="panelcorp-ia-status"></span>
+    </div>
+  </div>
+
+  <!-- 4) FALLBACKS / BLOQUEOS -->
+  <div class="panelcorp-ia-card">
+    <h3>🧩 Reglas de seguridad del sistema</h3>
+    <p class="panelcorp-ia-desc">
+      Define qué debe hacer Génesis cuando falte una conexión (WhatsApp o Email).
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Si WhatsApp NO está conectado</label>
+        <select id="settings_wa_disconnected_mode">
+          <option value="no_respond">No responder</option>
+          <option value="pause_system">Pausar Génesis automáticamente</option>
+          <option value="log_only">Solo registrar intentos</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Si Email NO está configurado</label>
+        <select id="settings_email_disconnected_mode">
+          <option value="no_send">No enviar emails</option>
+          <option value="pause_system">Pausar Génesis automáticamente</option>
+          <option value="log_only">Solo registrar intentos</option>
+        </select>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Si NO hay ningún canal disponible</label>
+        <select id="settings_no_channels_mode">
+          <option value="pause_system">Pausar Génesis automáticamente</option>
+          <option value="no_respond">No responder</option>
+          <option value="log_only">Solo registrar intentos</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="panelcorp-ia-actions">
+      <button id="settings_fallbacks_save" class="panelcorp-home-cta">
+        Guardar reglas
+      </button>
+      <span id="settings_fallbacks_status" class="panelcorp-ia-status"></span>
+    </div>
+  </div>
+
+  <!-- 5) ELIMINAR CUENTA -->
+  <div class="panelcorp-ia-card">
+    <h3>⚠️ Eliminar cuenta</h3>
+    <p class="panelcorp-ia-desc">
+      Esta acción elimina la cuenta y sus configuraciones. No es reversible. El mes pagado no se reembolsa.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+      <div class="panelcorp-field">
+        <label>Confirmación</label>
+        <input
+          id="settings_delete_confirm"
+          type="text"
+          placeholder='Escribe ELIMINAR para confirmar'
+        />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Contraseña</label>
+        <div class="panel-password-field">
+          <input id="settings_delete_password" type="password" placeholder="••••••••" />
+          <button type="button" class="panel-password-toggle" data-target="settings_delete_password" aria-label="Mostrar u ocultar contraseña">
+            <img src="/assets/img/eye-closed.svg" alt="Mostrar contraseña" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panelcorp-ia-actions">
+      <button id="settings_delete_account" class="panelcorp-home-cta danger">
+        Eliminar cuenta definitivamente
+      </button>
+      <span id="settings_delete_status" class="panelcorp-ia-status"></span>
+    </div>
+  </div>
+
+</section>
 
     </main>
   </div>
