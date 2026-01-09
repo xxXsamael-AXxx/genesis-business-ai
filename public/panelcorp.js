@@ -11,22 +11,88 @@ document.addEventListener("DOMContentLoaded", () => {
   const views = document.querySelectorAll(".panelcorp-view");
 
   function activateView(viewId) {
+    // ocultar todas
     views.forEach(v => v.classList.remove("active"));
 
+    // mostrar target
     const target = document.getElementById(viewId);
     if (target) target.classList.add("active");
 
+    // botones activos
     buttons.forEach(b => b.classList.remove("active"));
     const btn = document.querySelector(`[data-view="${viewId}"]`);
     if (btn) btn.classList.add("active");
+
+    // ✅ inicializar gráficas SOLO al entrar a Analítica
+    if (viewId === "corp-analytics") {
+      initAnalyticsCharts();
+    }
   }
 
+  // listeners sidebar
   buttons.forEach(btn => {
     btn.addEventListener("click", () => {
       const viewId = btn.dataset.view;
       if (viewId) activateView(viewId);
     });
   });
+
+  // ===============================
+  // CHARTS (ANALÍTICA) — SIEMPRE RENDER AUN EN 0
+  // ===============================
+  let chartConversations = null;
+  let chartStatus = null;
+
+  function initAnalyticsCharts() {
+    // 1) Line chart: evolución
+    const c1 = document.getElementById("chart-conversations");
+    if (c1 && !chartConversations) {
+      const ctx1 = c1.getContext("2d");
+
+      chartConversations = new Chart(ctx1, {
+        type: "line",
+        data: {
+          labels: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+          datasets: [{
+            label: "Conversaciones",
+            data: [0, 0, 0, 0, 0, 0, 0],
+            tension: 0.35,
+            fill: true,
+            pointRadius: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    }
+
+    // 2) Doughnut chart: estados
+    const c2 = document.getElementById("chart-status");
+    if (c2 && !chartStatus) {
+      const ctx2 = c2.getContext("2d");
+
+      chartStatus = new Chart(ctx2, {
+        type: "doughnut",
+        data: {
+          labels: ["Activo", "En seguimiento", "Escalado a humano", "Cerrado"],
+          datasets: [{
+            label: "Estados",
+            data: [0, 0, 0, 0]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+  }
+
 
   // ===============================
   // COLAPSO SIDEBAR
@@ -244,51 +310,6 @@ document.querySelectorAll(".modal-password-toggle").forEach((btn) => {
     }
   });
 });
-
-// ===============================
-  // chart
-  // ===============================
-
-document.addEventListener("DOMContentLoaded", () => {
-  const ctx = document.getElementById("conversationsChart");
-  if (!ctx) return;
-
-  new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
-      datasets: [{
-        label: "Conversaciones",
-        data: [12, 19, 8, 15, 22, 17, 10],
-        borderColor: "#22d3a9",
-        backgroundColor: "rgba(34, 211, 169, 0.15)",
-        tension: 0.4,
-        fill: true,
-        pointRadius: 4,
-        pointBackgroundColor: "#22d3a9"
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: { color: "#9ff3d6" }
-        },
-        y: {
-          grid: { color: "rgba(255,255,255,0.05)" },
-          ticks: { color: "#9ff3d6" }
-        }
-      }
-    }
-  });
-});
-
 
   // ===============================
   // LOGOUT
