@@ -38,61 +38,101 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // CHARTS (ANALÍTICA) — SIEMPRE RENDER AUN EN 0
+// CHARTS (ANALÍTICA) — SIEMPRE RENDER AUN EN 0
+// ===============================
+let chartConversations = null;
+let chartStatus = null;
+
+function initAnalyticsCharts() {
+
   // ===============================
-  let chartConversations = null;
-  let chartStatus = null;
+  // 1) LINE CHART — Evolución
+  // ===============================
+  const c1 = document.getElementById("chart-conversations");
+  if (c1 && !chartConversations) {
+    const ctx1 = c1.getContext("2d");
 
-  function initAnalyticsCharts() {
-    // 1) Line chart: evolución
-    const c1 = document.getElementById("chart-conversations");
-    if (c1 && !chartConversations) {
-      const ctx1 = c1.getContext("2d");
-
-      chartConversations = new Chart(ctx1, {
-        type: "line",
-        data: {
-          labels: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
-          datasets: [{
-            label: "Conversaciones",
-            data: [0, 0, 0, 0, 0, 0, 0],
-            tension: 0.35,
-            fill: true,
-            pointRadius: 3
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: { beginAtZero: true }
+    chartConversations = new Chart(ctx1, {
+      type: "line",
+      data: {
+        labels: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+        datasets: [{
+          label: "Conversaciones",
+          data: [0, 0, 0, 0, 0, 0, 0], // ← luego vienen datos reales
+          tension: 0.35,
+          fill: true,
+          pointRadius: 3,
+          borderColor: "#22d3ee",
+          backgroundColor: "rgba(34,211,238,0.15)"
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: "rgba(255,255,255,0.05)" }
+          },
+          x: {
+            grid: { display: false }
           }
-        }
-      });
-    }
-
-    // 2) Doughnut chart: estados
-    const c2 = document.getElementById("chart-status");
-    if (c2 && !chartStatus) {
-      const ctx2 = c2.getContext("2d");
-
-      chartStatus = new Chart(ctx2, {
-        type: "doughnut",
-        data: {
-          labels: ["Activo", "En seguimiento", "Escalado a humano", "Cerrado"],
-          datasets: [{
-            label: "Estados",
-            data: [0, 0, 0, 0]
-          }]
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false
+        plugins: {
+          legend: { display: true }
         }
-      });
-    }
+      }
+    });
   }
 
+  // ===============================
+  // 2) BAR CHART — Estados (REEMPLAZA AL DOUGHNUT)
+  // ===============================
+  const c2 = document.getElementById("chart-status");
+  if (c2 && !chartStatus) {
+    const ctx2 = c2.getContext("2d");
+
+    chartStatus = new Chart(ctx2, {
+      type: "bar",
+      data: {
+        labels: [
+          "Activo",
+          "En seguimiento",
+          "Escalado a humano",
+          "Cerrado"
+        ],
+        datasets: [{
+          label: "Conversaciones",
+          data: [12, 8, 3, 5], // ← datos ejemplo (NO 0 para que se vea)
+          backgroundColor: [
+            "#22d3ee",
+            "#fb7185",
+            "#fb923c",
+            "#facc15"
+          ],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: "y", // 🔥 barras horizontales
+        scales: {
+          x: {
+            beginAtZero: true,
+            grid: { color: "rgba(255,255,255,0.05)" }
+          },
+          y: {
+            grid: { display: false }
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  }
+}
 
   // ===============================
   // COLAPSO SIDEBAR
