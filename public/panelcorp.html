@@ -109,71 +109,213 @@
   </div>
 </header>
 
-     <section id="corp-home" class="panelcorp-view active">
+<section id="corp-home" class="panelcorp-view active">
 
-  <!-- TÍTULO -->
+  <!-- HEADER -->
   <header class="panelcorp-home-header">
     <h1>Panel Corporativo</h1>
-    <p>Estado general del sistema</p>
+    <p>Estado operativo, alertas y actividad reciente</p>
   </header>
 
-  <!-- ESTADO GENERAL -->
+  <!-- RESUMEN (KPIs / ESTADO) -->
   <div class="panelcorp-home-stats">
+
+    <div class="panelcorp-stat-card">
+      <span class="panelcorp-stat-icon">🟢</span>
+      <span class="panelcorp-stat-label">Génesis</span>
+      <span class="panelcorp-stat-value ok" id="home-system-status">Activo</span>
+    </div>
 
     <div class="panelcorp-stat-card">
       <span class="panelcorp-stat-icon">🤖</span>
       <span class="panelcorp-stat-label">IA</span>
-      <span class="panelcorp-stat-value pending">Pendiente</span>
+      <span class="panelcorp-stat-value pending" id="home-ia-status">Pendiente</span>
     </div>
 
     <div class="panelcorp-stat-card">
       <span class="panelcorp-stat-icon">💬</span>
-      <span class="panelcorp-stat-label">WhatsApp / Mail</span>
-      <span class="panelcorp-stat-value pending">No conectado</span>
+      <span class="panelcorp-stat-label">Canales</span>
+      <span class="panelcorp-stat-value pending" id="home-channels-status">Sin canales</span>
     </div>
 
     <div class="panelcorp-stat-card">
-      <span class="panelcorp-stat-icon">🧠</span>
-      <span class="panelcorp-stat-label">Flujos</span>
-      <span class="panelcorp-stat-value pending">0 activos</span>
-    </div>
-
-    <div class="panelcorp-stat-card">
-      <span class="panelcorp-stat-icon">👥</span>
-      <span class="panelcorp-stat-label">Equipo</span>
-      <span class="panelcorp-stat-value ok">1 usuario</span>
+      <span class="panelcorp-stat-icon">📈</span>
+      <span class="panelcorp-stat-label">Conversaciones (hoy)</span>
+      <span class="panelcorp-stat-value" id="home-conv-today">—</span>
     </div>
 
   </div>
 
-  <!-- PRIMEROS PASOS (ONBOARDING) -->
-  <div class="panelcorp-home-onboarding">
+  <!-- BLOQUE: ALERTAS / NOTIFICACIONES -->
+  <div class="panelcorp-ia-card required">
+    <h3>🔔 Alertas del sistema</h3>
+    <p class="panelcorp-ia-desc">
+      Avisos que requieren atención. Si Génesis está pausado o no hay canales, aquí te lo va a gritar.
+    </p>
 
-    <h3>Primeros pasos</h3>
+    <div class="panelcorp-ia-fields">
 
-    <ul class="panelcorp-onboarding-list">
-      <li class="pending">Conectar WhatsApp</li>
-      <li class="pending">Configurar IA</li>
-      <li class="pending">Crear primer flujo</li>
-      <li class="pending">Probar una conversación</li>
+      <!-- Estado general -->
+      <div class="panelcorp-field">
+        <label>Estado actual</label>
+        <div class="panelcorp-static-value" id="home-alert-system">
+          — 
+        </div>
+      </div>
+
+      <!-- Canales -->
+      <div class="panelcorp-field">
+        <label>Canales</label>
+        <div class="panelcorp-static-value warning" id="home-alert-channels">
+          Sin canales conectados: Génesis no puede responder hasta que conectes WhatsApp o Email.
+        </div>
+      </div>
+
+      <!-- Consumo -->
+      <div class="panelcorp-field">
+        <label>Consumo del plan</label>
+        <div class="panelcorp-static-value" id="home-alert-usage">
+          — 
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Lista rápida de notificaciones -->
+    <ul class="panelcorp-list" id="home-alert-list">
+      <li>—</li>
     </ul>
-
-    <button class="panelcorp-home-cta">
-      Ir a configuración inicial
-    </button>
-
   </div>
 
-  <!-- ESTADO FINAL (oculto por ahora)
-  <div class="panelcorp-home-complete">
-    <span class="panelcorp-complete-icon">✅</span>
-    <h3>Sistema operativo</h3>
-    <p>Todo está configurado y funcionando correctamente.</p>
+  <!-- BLOQUE: PLAN / CONSUMO (RESUMEN) -->
+  <div class="panelcorp-ia-card">
+    <h3>💳 Plan y consumo</h3>
+    <p class="panelcorp-ia-desc">
+      Vista rápida del plan (lo detallado está en Suscripción).
+    </p>
+
+    <div class="panelcorp-ia-fields panelcorp-kpis">
+
+      <div class="panelcorp-field">
+        <label>Plan</label>
+        <input id="home-plan-name" type="text" value="Corporativo" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Renovación</label>
+        <input id="home-plan-renewal" type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Incluidas</label>
+        <input id="home-plan-included" type="text" value="9,000 / mes" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Usadas</label>
+        <input id="home-plan-used" type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Disponibles</label>
+        <input id="home-plan-remaining" type="text" value="—" disabled />
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Estado</label>
+        <input id="home-plan-health" type="text" value="—" disabled />
+      </div>
+
+    </div>
+
+    <div class="panelcorp-ia-actions">
+      <button class="panelcorp-home-cta secondary" data-view-jump="corp-subscription">
+        Ver Suscripción
+      </button>
+    </div>
   </div>
-  -->
+
+  <!-- BLOQUE: ACTIVIDAD RECIENTE -->
+  <div class="panelcorp-ia-card">
+    <h3>🧾 Actividad reciente</h3>
+    <p class="panelcorp-ia-desc">
+      Registro de eventos del sistema (config, conexiones, intentos, respuestas y escalamiento).
+    </p>
+
+    <div class="panelcorp-table" id="home-activity-table">
+      <div class="panelcorp-table-row header">
+        <span>Hora</span>
+        <span>Evento</span>
+        <span>Detalle</span>
+        <span>Estado</span>
+      </div>
+
+      <!-- filas dinámicas -->
+      <div class="panelcorp-table-row">
+        <span>—</span>
+        <span>Sin actividad</span>
+        <span>Conecta un canal para empezar a registrar eventos reales</span>
+        <span class="status">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOQUE: ACCIONES RÁPIDAS -->
+  <div class="panelcorp-ia-card">
+    <h3>⚡ Acciones rápidas</h3>
+    <p class="panelcorp-ia-desc">
+      Atajos a lo importante para dejar el sistema operativo.
+    </p>
+
+    <div class="panelcorp-ia-fields">
+
+      <div class="panelcorp-field">
+        <label>Conectar canales</label>
+        <button class="panelcorp-home-cta" data-view-jump="corp-whatsapp">
+          Ir a WhatsApp / Mail
+        </button>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Configurar IA</label>
+        <button class="panelcorp-home-cta" data-view-jump="corp-ia">
+          Ir a IA / Automatización
+        </button>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Ver analítica</label>
+        <button class="panelcorp-home-cta secondary" data-view-jump="corp-analytics">
+          Ir a Analítica
+        </button>
+      </div>
+
+      <div class="panelcorp-field">
+        <label>Control global</label>
+        <button class="panelcorp-home-cta secondary" data-view-jump="corp-settings">
+          Ir a Configuración
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BLOQUE: ESTADO DE PREPARACIÓN (ONBOARDING PERO REAL) -->
+  <div class="panelcorp-ia-card">
+    <h3>✅ Estado de preparación</h3>
+    <p class="panelcorp-ia-desc">
+      Checklist automático (no “crear flujo” manual): se marca solo conforme completas lo necesario.
+    </p>
+
+    <ul class="panelcorp-onboarding-list" id="home-readiness-list">
+      <li class="pending" id="ready-channels">Canales conectados (WhatsApp o Email)</li>
+      <li class="pending" id="ready-ia">IA configurada y guardada</li>
+      <li class="pending" id="ready-active">Génesis activo (no pausado)</li>
+      <li class="pending" id="ready-test">Primer mensaje de prueba registrado</li>
+    </ul>
+  </div>
 
 </section>
-
 
       <section id="corp-ia" class="panelcorp-view">
 
@@ -1479,14 +1621,14 @@
       </div>
 
       <div class="panelcorp-field">
-        <label>Si NO hay ningún canal disponible</label>
-        <select id="settings_no_channels_mode">
-          <option value="pause_system">Pausar Génesis automáticamente</option>
-          <option value="no_respond">No responder</option>
-          <option value="log_only">Solo registrar intentos</option>
-        </select>
-      </div>
-    </div>
+  <label>Si NO hay ningún canal disponible</label>
+
+  <div class="panelcorp-static-value warning">
+    Génesis se pausa automáticamente hasta que se conecte al menos un canal
+    (WhatsApp o Email).
+  </div>
+</div>
+
 
     <div class="panelcorp-ia-actions">
       <button id="settings_fallbacks_save" class="panelcorp-home-cta">
