@@ -117,141 +117,134 @@
     <p>Estado operativo, alertas y actividad reciente</p>
   </header>
 
-  <!-- CONTEXTO (solo texto, sin “acciones rápidas”) -->
+  <!-- CONTEXTO GENERAL -->
   <div class="panelcorp-ia-card">
     <p class="panelcorp-ia-desc" id="home-welcome">
-      Aquí ves si Génesis puede operar, qué está bloqueando el sistema y qué ha pasado recientemente.
-      La configuración vive en sus secciones (IA, Canales, Suscripción, etc.).
+      Este panel muestra si Génesis puede operar, qué lo está bloqueando y qué ha ocurrido recientemente.
+      La configuración y gestión se realizan dentro de cada sección correspondiente.
     </p>
   </div>
 
-  <!-- ESTADO OPERATIVO (resumen real, NO repite vistas) -->
-  <div class="panelcorp-home-stats" aria-label="Estado operativo">
+  <!-- ESTADO OPERATIVO -->
+  <div class="panelcorp-home-stats" aria-label="Estado operativo del sistema">
 
     <div class="panelcorp-stat-card" id="home-stat-system">
       <span class="panelcorp-stat-icon">🟢</span>
-      <span class="panelcorp-stat-label">Génesis</span>
+      <span class="panelcorp-stat-label">Sistema</span>
       <span class="panelcorp-stat-value ok" id="home-system-status">Activo</span>
-      <small class="panelcorp-stat-sub" id="home-system-sub">Operativo</small>
+      <small class="panelcorp-stat-sub">Operativo</small>
     </div>
 
     <div class="panelcorp-stat-card" id="home-stat-ia">
       <span class="panelcorp-stat-icon">🤖</span>
       <span class="panelcorp-stat-label">IA</span>
       <span class="panelcorp-stat-value pending" id="home-ia-status">Pendiente</span>
-      <small class="panelcorp-stat-sub" id="home-ia-sub">Sin configuración guardada</small>
+      <small class="panelcorp-stat-sub">Sin configuración guardada</small>
     </div>
 
     <div class="panelcorp-stat-card" id="home-stat-channels">
       <span class="panelcorp-stat-icon">💬</span>
       <span class="panelcorp-stat-label">Canales</span>
-      <span class="panelcorp-stat-value pending" id="home-channels-status">Sin canales</span>
-      <small class="panelcorp-stat-sub" id="home-channels-sub">WhatsApp / Email no conectados</small>
+      <span class="panelcorp-stat-value pending" id="home-channels-status">No conectados</span>
+      <small class="panelcorp-stat-sub">WhatsApp / Email</small>
     </div>
 
     <div class="panelcorp-stat-card" id="home-stat-today">
       <span class="panelcorp-stat-icon">🧾</span>
-      <span class="panelcorp-stat-label">Conversaciones (hoy)</span>
+      <span class="panelcorp-stat-label">Conversaciones hoy</span>
       <span class="panelcorp-stat-value" id="home-today-count">—</span>
-      <small class="panelcorp-stat-sub" id="home-today-sub">Actividad del día</small>
+      <small class="panelcorp-stat-sub">Actividad diaria</small>
     </div>
 
   </div>
 
-  <!-- ALERTAS (solo avisos; NO “gestionar” aquí) -->
+  <!-- ALERTAS DEL SISTEMA -->
   <div class="panelcorp-ia-card" aria-label="Alertas del sistema">
     <h3>⚠️ Alertas del sistema</h3>
     <p class="panelcorp-ia-desc">
-      Avisos que requieren atención. Si algo impide operar (pausa, sin canales, consumo alto), aparece aquí.
+      Avisos relevantes que pueden afectar la operación de Génesis.
     </p>
 
-    <!-- Lista de alertas (placeholder para JS) -->
     <ul class="panelcorp-list" id="home-alerts-list">
-      <li class="pending">Sin alertas por ahora.</li>
+      <li class="ok">No hay alertas activas.</li>
     </ul>
-
-    <!-- “Sugerencia” contextual (sin botones) -->
-    <div class="panelcorp-static-value warning" id="home-alerts-hint" style="margin-top:12px;">
-      Consejo: conecta al menos un canal (WhatsApp o Email) para que Génesis pueda responder.
-    </div>
   </div>
 
-  <!-- ACTIVIDAD RECIENTE (registro de eventos; NO analítica) -->
+  <!-- ACTIVIDAD RECIENTE -->
   <div class="panelcorp-ia-card" aria-label="Actividad reciente">
     <h3>🧾 Actividad reciente</h3>
     <p class="panelcorp-ia-desc">
-      Registro breve de eventos del sistema (config, conexiones, intentos, respuestas y escalamiento).
+      Registro resumido de eventos del sistema.
     </p>
 
-    <!-- Encabezado tipo “mini tabla” -->
-    <div class="panelcorp-table" role="table" aria-label="Registro de actividad">
+    <div class="panelcorp-table" role="table">
       <div class="panelcorp-table-row header" role="row">
-        <span role="columnheader">Hora</span>
-        <span role="columnheader">Evento</span>
-        <span role="columnheader">Detalle</span>
-        <span role="columnheader">Estado</span>
+        <span>Hora</span>
+        <span>Evento</span>
+        <span>Detalle</span>
+        <span>Estado</span>
       </div>
 
-      <!-- Placeholder: JS inyecta filas reales -->
       <div class="panelcorp-table-row" role="row" id="home-activity-empty">
-        <span role="cell">—</span>
-        <span role="cell">Sin actividad</span>
-        <span role="cell">Conecta un canal para empezar a registrar eventos reales</span>
-        <span role="cell">—</span>
+        <span>—</span>
+        <span>Sin actividad</span>
+        <span>No hay eventos registrados</span>
+        <span>—</span>
       </div>
     </div>
   </div>
 
-  <!-- ESTADO DE PREPARACIÓN (checklist de requisitos, NO “flujos”) -->
+  <!-- ESTADO DE PREPARACIÓN -->
   <div class="panelcorp-ia-card" aria-label="Estado de preparación">
     <h3>✅ Estado de preparación</h3>
     <p class="panelcorp-ia-desc">
-      Checklist automático (no “crear flujo” manual): se marca conforme completas lo necesario.
+      Requisitos mínimos para que Génesis opere correctamente.
     </p>
 
     <ul class="panelcorp-onboarding-list" id="home-checklist">
-      <li class="pending" id="chk-channels">Canales conectados (WhatsApp o Email)</li>
-      <li class="pending" id="chk-ia">IA configurada y guardada</li>
-      <li class="pending" id="chk-system">Génesis activo (no pausado)</li>
-      <li class="pending" id="chk-first-msg">Primer mensaje de prueba registrado</li>
+      <li class="pending">Canales conectados</li>
+      <li class="pending">IA configurada</li>
+      <li class="pending">Sistema activo</li>
+      <li class="pending">Mensaje de prueba registrado</li>
     </ul>
 
-    <p class="panelcorp-ia-desc" style="margin-top:10px;">
-      Nota: Inicio solo orienta. La acción ocurre dentro de cada sección.
+    <p class="panelcorp-ia-desc">
+      Inicio solo muestra el estado. Las acciones se realizan en cada módulo.
     </p>
   </div>
 
-  <!-- CONTEXTO LIGERO DE CUENTA (SIN repetir Suscripción) -->
+  <!-- CONTEXTO DE CUENTA -->
   <div class="panelcorp-ia-card" aria-label="Contexto de cuenta">
     <h3>💳 Contexto de cuenta</h3>
     <p class="panelcorp-ia-desc">
-      Confirmación rápida para saber si algo raro viene del plan. El detalle vive en Suscripción.
+      Referencia rápida del estado del plan. El detalle completo se gestiona en Suscripción.
     </p>
 
     <div class="panelcorp-ia-fields">
       <div class="panelcorp-field">
         <label>Plan</label>
-        <input id="home-plan-name" type="text" value="—" disabled />
+        <input type="text" value="—" disabled />
       </div>
 
       <div class="panelcorp-field">
-        <label>Capacidad incluida</label>
-        <input id="home-plan-included" type="text" value="—" disabled />
+        <label>Capacidad</label>
+        <input type="text" value="—" disabled />
       </div>
 
       <div class="panelcorp-field">
         <label>Uso actual</label>
-        <input id="home-plan-used" type="text" value="—" disabled />
+        <input type="text" value="—" disabled />
       </div>
 
       <div class="panelcorp-field">
         <label>Estado</label>
-        <input id="home-plan-status" type="text" value="—" disabled />
+        <input type="text" value="—" disabled />
       </div>
     </div>
   </div>
 
 </section>
+
 
       <section id="corp-ia" class="panelcorp-view">
 
