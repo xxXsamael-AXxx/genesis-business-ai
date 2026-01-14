@@ -1483,3 +1483,45 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   border-color: rgba(34, 211, 153, 0.6);
   background: rgba(4, 30, 25, 0.9);
 }
+
+/* ===============================
+   FIX MOBILE — cards no se salen
+   =============================== */
+@media (max-width: 768px){
+
+  /* contenedor principal */
+  .panelcorp-content{
+    overflow-x: hidden;
+  }
+
+  /* cards generales */
+  .panelcorp-ia-card,
+  .panelcorp-home-onboarding,
+  .panelcorp-home-stats,
+  .panelcorp-stat-card{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* grids internos */
+  .panelcorp-ia-fields{
+    grid-template-columns: 1fr; /* una columna en móvil */
+    width: 100%;
+  }
+
+  /* inputs / selects / textareas */
+  .panelcorp-field input,
+  .panelcorp-field select,
+  .panelcorp-field textarea{
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* textos largos (evita desbordes raros) */
+  .panelcorp-ia-desc,
+  .panelcorp-field label{
+    word-break: break-word;
+  }
+}
