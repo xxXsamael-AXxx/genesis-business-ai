@@ -296,7 +296,7 @@ body {
 .panelcorp-sidebar.is-collapsed .panelcorp-nav .label{ display:none; }
 
 /* ==================================================
-   TOOLTIPS (colapsado) — estilo Génesis/Eclyssa
+   TOOLTIPS (colapsado)
    ================================================== */
 .panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label],
 .panelcorp-sidebar.is-collapsed .panelcorp-logout[data-label]{
@@ -328,15 +328,16 @@ body {
     0 0 10px rgba(34, 211, 153, 0.55),
     0 0 22px rgba(16, 185, 129, 0.35);
 
-  opacity:0;
-  pointer-events:none;
+  opacity: 0;
+  pointer-events: none;
   transition: opacity .14s ease, transform .14s ease;
   z-index: 99999;
 }
 
-.panelcorp-sidebar.is-collapsed .panelcorp-nav [data-label]:hover::after,
-.panelcorp-sidebar.is-collapsed .panelcorp-logout[data-label]:hover::after{
-  opacity:1;
+/* ✅ SOLO CON JS (.show-tip) */
+.panelcorp-sidebar.is-collapsed .panelcorp-nav .show-tip::after,
+.panelcorp-sidebar.is-collapsed .panelcorp-logout.show-tip::after{
+  opacity: 1;
   transform: translate(4px, -50%);
 }
 

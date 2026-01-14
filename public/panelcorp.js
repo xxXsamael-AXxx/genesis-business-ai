@@ -158,6 +158,33 @@ if (sidebar && toggleBtn) {
   });
 }
 
+// ===============================
+// MOBILE — tooltips 1s (no se quedan pegados)
+// ===============================
+if (isMobile && sidebar) {
+  const tipTargets = sidebar.querySelectorAll(".panelcorp-nav button[data-label], .panelcorp-logout[data-label]");
+
+  tipTargets.forEach((el) => {
+    let t = null;
+
+    const showForASecond = () => {
+      // solo si está colapsado
+      if (!sidebar.classList.contains("is-collapsed")) return;
+
+      el.classList.add("show-tip");
+      clearTimeout(t);
+      t = setTimeout(() => el.classList.remove("show-tip"), 1000);
+    };
+
+    // touch
+    el.addEventListener("touchstart", showForASecond, { passive: true });
+
+    // por si acaso (algunos navegadores disparan click)
+    el.addEventListener("click", showForASecond);
+  });
+}
+
+
   // ===============================
   // EMAIL DEL USUARIO (DESDE URL)
   // ===============================
@@ -239,28 +266,39 @@ function openPasswordModal() {
 }
 
 // ===============================
-// CHECK INICIAL — robusto mobile / desktop
+// CHECK INICIAL — robusto mobile / desktop (FIX)
 // ===============================
-async function checkPasswordAndToggleModal() {
 
-  // ⛔️ protección crítica (mobile fix)
+// safe storage (por si el navegador bloquea sessionStorage)
+function ssGet(key) {
+  try { return sessionStorage.getItem(key); } catch (e) { return null; }
+}
+function ssSet(key, val) {
+  try { sessionStorage.setItem(key, val); } catch (e) {}
+}
+
+async function checkPasswordAndToggleModal() {
+  // proteger todo
+  if (!modal) {
+    console.error("❌ [MODAL] no existe #create-password-modal en el HTML");
+    return;
+  }
+
   if (!email) {
-    console.warn("⚠️ [CHECK] email no disponible, se reintentará");
+    console.warn("⚠️ [CHECK] email no disponible aún, reintentando…");
     return;
   }
 
   try {
-    console.log("🔍 [CHECK] verificando si el usuario tiene contraseña…");
+    console.log("🔍 [CHECK] verificando si el usuario tiene contraseña…", email);
 
-    const res = await fetch(
-      `/api/user/has-password?email=${encodeURIComponent(email)}`
-    );
+    const res = await fetch(`/api/user/has-password?email=${encodeURIComponent(email)}`);
     const data = await res.json();
 
     console.log("📩 [CHECK] respuesta backend:", data);
 
     if (data.hasPassword) {
-      sessionStorage.setItem("passwordCreated", "true");
+      ssSet("passwordCreated", "true");
       closePasswordModal("backend-confirmed");
       return;
     }
@@ -268,26 +306,30 @@ async function checkPasswordAndToggleModal() {
     openPasswordModal();
 
   } catch (err) {
-    console.error("❌ [CHECK] error verificando contraseña:", err);
+    console.error("❌ [CHECK] falló verificación, abriendo modal por seguridad:", err);
+    // si el check falla en móvil, mejor abrir modal que bloquear el panel
+    openPasswordModal();
   }
 }
 
-// 🔒 ejecución controlada (evita falsos negativos en mobile)
-if (sessionStorage.getItem("passwordCreated") === "true") {
+// 🔒 ejecución controlada (con reintentos)
+if (ssGet("passwordCreated") === "true") {
   console.log("🟢 [SESSION] contraseña ya creada en esta sesión");
   closePasswordModal("session-flag");
 } else {
-
-  // 🔁 primer intento
+  // primer intento
   checkPasswordAndToggleModal();
 
-  // 🔁 reintento corto (Safari / WebView fix)
-  setTimeout(() => {
-    if (sessionStorage.getItem("passwordCreated") !== "true") {
-      checkPasswordAndToggleModal();
-    }
+  // reintentos cortos para móviles (params/DOM/listeners tardan)
+  let tries = 0;
+  const t = setInterval(() => {
+    tries++;
+    if (ssGet("passwordCreated") === "true") { clearInterval(t); return; }
+    checkPasswordAndToggleModal();
+    if (tries >= 10) clearInterval(t); // ~1.5s total
   }, 150);
 }
+
 
 // ===============================
 // SUBMIT — CREAR CONTRASEÑA
