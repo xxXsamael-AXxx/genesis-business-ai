@@ -162,7 +162,48 @@ body {
 }
 
 
+/* ================= NAVBAR RESPONSIVE ================= */
+@media (max-width: 768px) {
 
+  .nav-inner {
+    height: auto;                 /* ❌ quitamos altura fija */
+    padding: 14px 5vw;
+  }
+
+  .nav-brand {
+    margin-left: 0;               /* ❌ quitamos margen negativo */
+    gap: 10px;
+  }
+
+  .nav-brand img {
+    max-height: 48px;             /* logo pequeño y limpio */
+    top: 0;
+  }
+
+  .nav-brand span {
+    font-size: 18px;              /* texto compacto */
+  }
+
+  .nav-links {
+    display: none;                /* ya lo tenías, lo reforzamos */
+  }
+
+  .nav-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-login {
+    font-size: 13px;
+    padding: 6px 12px;
+    margin-right: 0;
+  }
+
+  .btn-whatsapp {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+}
 
 /* ================= HERO ================= */
 .hero {
