@@ -430,56 +430,22 @@ body {
 }
 
 /* ==================================================
-   MOBILE — Sidebar compacto + alturas reales
-   Solo afecta celular
+   MOBILE — alturas reales + spacing (SIN forzar compacto)
    ================================================== */
 @media (max-width: 768px){
 
-  /* Layout general: más apretado en mobile */
+  /* Layout general */
   .panelcorp-layout{
     padding: 12px;
     gap: 12px;
   }
 
-  /* ===== SIDEBAR =====
-     En mobile ARRANCA COLAPSADO */
+  /* Sidebar: solo corregimos ALTURA, no comportamiento */
   .panelcorp-sidebar{
-    flex: 0 0 74px;
-    width: 74px;
-    padding: 18px 12px;
-
-    /* altura real del viewport móvil */
     height: calc(100dvh - 24px);
   }
 
-  /* Forzamos estado compacto visual */
-  .panelcorp-sidebar .panelcorp-profile-info{
-    display: none;
-  }
-
-  .panelcorp-sidebar .panelcorp-nav .label{
-    display: none;
-  }
-
-  .panelcorp-sidebar .panelcorp-nav button{
-    justify-content: center;
-    padding: 10px 12px;
-  }
-
-  /* Logout compacto */
-  .panelcorp-sidebar .panelcorp-logout{
-    width: 44px;
-    height: 44px;
-    margin: 0 auto 6px;
-    padding: 0;
-  }
-
-  .panelcorp-sidebar .panelcorp-logout .label{
-    display: none;
-  }
-
-  /* ===== CONTENT =====
-     No invade barra inferior / input del sistema */
+  /* Content: no invade barra inferior / input del sistema */
   .panelcorp-content{
     height: calc(100dvh - 24px);
     padding: 18px;

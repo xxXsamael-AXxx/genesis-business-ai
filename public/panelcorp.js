@@ -134,19 +134,29 @@ function initAnalyticsCharts() {
   }
 }
 
-  // ===============================
-  // COLAPSO SIDEBAR
-  // ===============================
-  const sidebar = document.getElementById("panelcorp-sidebar");
-  const toggleBtn = document.getElementById("panelcorp-toggle-btn");
+// ===============================
+// SIDEBAR — estado inicial + toggle
+// ===============================
+const sidebar = document.getElementById("panelcorp-sidebar");
+const toggleBtn = document.getElementById("panelcorp-toggle-btn");
 
-  if (sidebar && toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-      const collapsed = sidebar.classList.toggle("is-collapsed");
-      toggleBtn.textContent = collapsed ? "❯" : "❮";
-      toggleBtn.blur();
-    });
-  }
+// Detectar mobile
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+// 📱 Estado inicial
+if (isMobile && sidebar) {
+  sidebar.classList.add("is-collapsed"); // mobile inicia cerrado
+  if (toggleBtn) toggleBtn.textContent = "❯";
+}
+
+// 🖱️ Toggle manual (funciona igual en mobile y desktop)
+if (sidebar && toggleBtn) {
+  toggleBtn.addEventListener("click", () => {
+    const collapsed = sidebar.classList.toggle("is-collapsed");
+    toggleBtn.textContent = collapsed ? "❯" : "❮";
+    toggleBtn.blur();
+  });
+}
 
   // ===============================
   // EMAIL DEL USUARIO (DESDE URL)
@@ -229,9 +239,16 @@ function openPasswordModal() {
 }
 
 // ===============================
-// CHECK INICIAL
+// CHECK INICIAL — robusto mobile / desktop
 // ===============================
 async function checkPasswordAndToggleModal() {
+
+  // ⛔️ protección crítica (mobile fix)
+  if (!email) {
+    console.warn("⚠️ [CHECK] email no disponible, se reintentará");
+    return;
+  }
+
   try {
     console.log("🔍 [CHECK] verificando si el usuario tiene contraseña…");
 
@@ -255,12 +272,21 @@ async function checkPasswordAndToggleModal() {
   }
 }
 
-// 🔒 si en esta sesión ya se creó la contraseña → no mostrar modal
+// 🔒 ejecución controlada (evita falsos negativos en mobile)
 if (sessionStorage.getItem("passwordCreated") === "true") {
   console.log("🟢 [SESSION] contraseña ya creada en esta sesión");
   closePasswordModal("session-flag");
 } else {
+
+  // 🔁 primer intento
   checkPasswordAndToggleModal();
+
+  // 🔁 reintento corto (Safari / WebView fix)
+  setTimeout(() => {
+    if (sessionStorage.getItem("passwordCreated") !== "true") {
+      checkPasswordAndToggleModal();
+    }
+  }, 150);
 }
 
 // ===============================
